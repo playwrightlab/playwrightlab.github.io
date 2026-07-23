@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlayLab — Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: var(--bg);
+      }
+
+      .login-wrapper {
+        width: 100%;
+        max-width: 440px;
+        position: relative;
+      }
+
+      .login-bg {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .login-bg .shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.3;
+      }
+
+      .login-bg .s1 {
+        width: 500px;
+        height: 500px;
+        background: #6366f1;
+        top: -150px;
+        right: -100px;
+      }
+      .login-bg .s2 {
+        width: 400px;
+        height: 400px;
+        background: #ec4899;
+        bottom: -100px;
+        left: -100px;
+      }
+
+      .login-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 40px;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        z-index: 1;
+        animation: modalIn 0.5s ease;
+      }
+
+      .login-logo {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .login-logo a {
+        font-size: 1.75rem;
+        font-weight: 800;
+        text-decoration: none;
+        color: var(--text);
+        letter-spacing: -0.03em;
+      }
+
+      .login-title {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .login-subtitle {
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.938rem;
+        margin-bottom: 32px;
+      }
+
+      .social-btns {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .social-btn {
+        flex: 1;
+        padding: 12px;
+        border: 2px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-family: var(--font);
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: var(--text);
+      }
+
+      .social-btn:hover {
+        border-color: var(--primary);
+        background: var(--primary-light);
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+        color: var(--text-muted);
+        font-size: 0.813rem;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        border-top: 1px solid var(--border);
+      }
+
+      .remember-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+
+      .remember-row a {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .remember-row a:hover {
+        text-decoration: underline;
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 1rem;
+      }
+
+      .login-footer {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      .login-footer a {
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .login-footer a:hover {
+        text-decoration: underline;
+      }
+
+      .login-success {
+        text-align: center;
+        padding: 40px 20px;
+      }
+
+      .login-success .success-icon {
+        font-size: 4rem;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      .login-success h2 {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      .login-success p {
+        color: var(--text-secondary);
+        margin-bottom: 24px;
+      }
+
+      .back-link {
+        position: fixed;
+        top: 24px;
+        left: 24px;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-bg">
+      <div class="shape s1"></div>
+      <div class="shape s2"></div>
+    </div>
+
+    <a href="index.html" class="btn btn-outline btn-sm back-link" data-testid="back-to-home">← Back to Home</a>
+
+    <div class="login-wrapper">
+      <div class="login-card" id="loginCard" data-testid="login-card">
+        <div class="login-logo">
+          <a href="index.html" data-testid="login-logo"><img src="images/logo.svg" alt="PlayLab" class="logo-img" /> Play<span class="logo-accent">Lab</span></a>
+        </div>
+        <h1 class="login-title" data-testid="login-title">Welcome back</h1>
+        <p class="login-subtitle" data-testid="login-subtitle">Sign in to your account to continue</p>
+
+        <div class="social-btns">
+          <button class="social-btn" data-testid="social-google"><ion-icon name="logo-google"></ion-icon> Google</button>
+          <button class="social-btn" data-testid="social-github"><ion-icon name="logo-github"></ion-icon> GitHub</button>
+          <button class="social-btn" data-testid="social-twitter"><ion-icon name="logo-twitter"></ion-icon> Twitter</button>
+        </div>
+
+        <div class="divider">or continue with email</div>
+
+        <form id="loginForm" data-testid="login-form" novalidate>
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" name="email" placeholder="you@example.com" required data-testid="login-email" autocomplete="email" />
+            <span class="error-msg" data-testid="login-email-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="input-with-icon">
+              <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required data-testid="login-password" autocomplete="current-password" />
+              <button type="button" class="toggle-password" data-testid="login-toggle-password" aria-label="Toggle password visibility"><ion-icon name="eye-outline"></ion-icon></button>
+            </div>
+            <span class="error-msg" data-testid="login-password-error"></span>
+          </div>
+
+          <div class="remember-row">
+            <label class="checkbox-label" style="padding: 0"> <input type="checkbox" id="remember" data-testid="remember-checkbox" /> Remember me </label>
+            <a href="#" data-testid="forgot-password">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary login-btn" data-testid="login-submit">Sign In</button>
+        </form>
+
+        <p class="login-footer">Don't have an account? <a href="#" data-testid="register-link">Sign up</a></p>
+      </div>
+
+      <!-- Success State -->
+      <div class="login-card hidden" id="loginSuccess" data-testid="login-success">
+        <div class="login-success">
+          <span class="success-icon"><ion-icon name="checkmark-circle" style="color: var(--success); font-size: 4rem"></ion-icon></span>
+          <h2 data-testid="welcome-message">Welcome back!</h2>
+          <p id="welcomeName" data-testid="welcome-name">You have successfully signed in.</p>
+          <a href="index.html" class="btn btn-primary" data-testid="go-to-dashboard">Go to Dashboard</a>
+          <button class="btn btn-outline" id="logoutBtn" data-testid="logout-btn" style="margin-top: 12px; width: 100%">Sign Out</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Password toggle
+      document.querySelector(".toggle-password").addEventListener("click", () => {
+        const pwd = document.getElementById("loginPassword");
+        pwd.type = pwd.type === "password" ? "text" : "password";
+      });
+
+      // Valid credentials for testing
+      const VALID_EMAIL = "test@playlab.com";
+      const VALID_PASSWORD = "Password123";
+
+      // Login form
+      document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("loginEmail");
+        const password = document.getElementById("loginPassword");
+        const emailError = document.querySelector('[data-testid="login-email-error"]');
+        const passwordError = document.querySelector('[data-testid="login-password-error"]');
+
+        // Clear errors
+        emailError.textContent = "";
+        passwordError.textContent = "";
+        email.classList.remove("error");
+        password.classList.remove("error");
+
+        let valid = true;
+
+        if (!email.value.trim()) {
+          emailError.textContent = "Email is required";
+          email.classList.add("error");
+          valid = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+          emailError.textContent = "Please enter a valid email";
+          email.classList.add("error");
+          valid = false;
+        }
+
+        if (!password.value) {
+          passwordError.textContent = "Password is required";
+          password.classList.add("error");
+          valid = false;
+        } else if (password.value.length < 6) {
+          passwordError.textContent = "Password must be at least 6 characters";
+          password.classList.add("error");
+          valid = false;
+        }
+
+        if (!valid) return;
+
+        // Check credentials
+        if (email.value === VALID_EMAIL && password.value === VALID_PASSWORD) {
+          document.getElementById("loginCard").classList.add("hidden");
+          document.getElementById("loginSuccess").classList.remove("hidden");
+          document.getElementById("welcomeName").textContent = `Signed in as ${email.value}`;
+          sessionStorage.setItem("playlab-auth", "true");
+          sessionStorage.setItem("playlab-user", email.value);
+        } else {
+          emailError.textContent = "Invalid credentials. Try: test@playlab.com / Password123";
+          email.classList.add("error");
+          password.classList.add("error");
+        }
+      });
+
+      // Logout
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        sessionStorage.removeItem("playlab-auth");
+        sessionStorage.removeItem("playlab-user");
+        document.getElementById("loginSuccess").classList.add("hidden");
+        document.getElementById("loginCard").classList.remove("hidden");
+        document.getElementById("loginForm").reset();
+      });
+
+      // Social buttons (mock)
+      document.querySelectorAll(".social-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          alert(`${btn.textContent.trim()} login is not implemented. Use email: test@playlab.com / Password123`);
+        });
+      });
+
+      // Check theme
+      const savedTheme = localStorage.getItem("playlab-theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
+  </body>
+</html>

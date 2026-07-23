@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iFrame Content — PlayLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        padding: 24px;
+        background: linear-gradient(135deg, #fafbff 0%, #eef2ff 100%);
+        min-height: 100%;
+        color: #0f172a;
+      }
+
+      h3 {
+        font-size: 1.125rem;
+        margin-bottom: 16px;
+        color: #6366f1;
+      }
+
+      .iframe-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      label {
+        font-size: 0.813rem;
+        font-weight: 600;
+        color: #475569;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 10px 14px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #6366f1;
+      }
+
+      button {
+        padding: 10px 20px;
+        background: #6366f1;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      button:hover {
+        background: #4f46e5;
+      }
+
+      .result {
+        margin-top: 12px;
+        padding: 12px;
+        background: #ecfdf5;
+        border: 1px solid #10b981;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        color: #059669;
+        display: none;
+      }
+
+      .result.visible {
+        display: block;
+      }
+
+      .checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .checkbox-row input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #6366f1;
+      }
+
+      .btn-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-outline {
+        background: white;
+        color: #6366f1;
+        border: 2px solid #6366f1;
+      }
+
+      .btn-outline:hover {
+        background: #eef2ff;
+      }
+    </style>
+  </head>
+  <body>
+    <h3 data-testid="iframe-title">iFrame Form</h3>
+    <p style="font-size: 0.813rem; color: #64748b; margin-bottom: 16px">This content is inside an iFrame. Practice locating and interacting with these elements.</p>
+
+    <form class="iframe-form" id="iframeForm" data-testid="iframe-form">
+      <div>
+        <label for="iframeName">Your Name</label>
+        <input type="text" id="iframeName" placeholder="Enter your name" data-testid="iframe-input-name" autocomplete="off" />
+      </div>
+      <div>
+        <label for="iframeMessage">Message</label>
+        <textarea id="iframeMessage" rows="3" placeholder="Write a message..." data-testid="iframe-textarea"></textarea>
+      </div>
+      <div>
+        <label for="iframePriority">Priority</label>
+        <select id="iframePriority" data-testid="iframe-select">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+          <option value="critical">Critical</option>
+        </select>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="iframeUrgent" data-testid="iframe-checkbox" />
+        <label for="iframeUrgent">Mark as urgent</label>
+      </div>
+      <div class="btn-row">
+        <button type="submit" data-testid="iframe-submit">Submit</button>
+        <button type="reset" class="btn-outline" data-testid="iframe-reset">Reset</button>
+      </div>
+    </form>
+
+    <div class="result" id="iframeResult" data-testid="iframe-result"></div>
+
+    <script>
+      document.getElementById("iframeForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const name = document.getElementById("iframeName").value || "Anonymous";
+        const message = document.getElementById("iframeMessage").value || "No message";
+        const priority = document.getElementById("iframePriority").value;
+        const urgent = document.getElementById("iframeUrgent").checked;
+
+        const result = document.getElementById("iframeResult");
+        result.textContent = `Submitted! Name: ${name}, Priority: ${priority}, Urgent: ${urgent}, Message: "${message}"`;
+        result.classList.add("visible");
+      });
+
+      document.getElementById("iframeForm").addEventListener("reset", function () {
+        document.getElementById("iframeResult").classList.remove("visible");
+      });
+    </script>
+  </body>
+</html>
