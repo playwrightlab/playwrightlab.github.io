@@ -441,7 +441,20 @@ ion-icon {
 
   /* --- Hero responsive --- */
   .hero {
-    padding: calc(var(--nav-height) + 20px) 16px 40px;
+    min-height: auto;
+    padding: calc(var(--nav-height) + 16px) 16px 32px;
+  }
+  .hero-badge {
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    margin-bottom: 12px;
+  }
+  .hero-subtitle {
+    margin: 0 auto 20px;
+  }
+  .hero-actions {
+    margin-bottom: 24px;
   }
   .hero-stats {
     gap: 24px;
@@ -3230,10 +3243,17 @@ code {
   .hero-actions {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
   }
   .hero-stats {
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: row;
+    gap: 20px;
+  }
+  .stat-number {
+    font-size: 1.5rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
   }
   .section-title {
     font-size: 1.5rem;
