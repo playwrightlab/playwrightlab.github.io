@@ -220,14 +220,14 @@
     </style>
   </head>
   <body>
-    <div class="login-bg">
-      <div class="shape s1"></div>
-      <div class="shape s2"></div>
+    <div class="login-bg" id="loginBg">
+      <div class="shape s1" id="loginShape1"></div>
+      <div class="shape s2" id="loginShape2"></div>
     </div>
 
-    <a href="index.html" class="btn btn-outline btn-sm back-link" data-testid="back-to-home">← Back to Home</a>
+    <a href="index.html" class="btn btn-outline btn-sm back-link" id="backToHome" data-testid="back-to-home">← Back to Home</a>
 
-    <div class="login-wrapper">
+    <div class="login-wrapper" id="loginWrapper">
       <div class="login-card" id="loginCard" data-testid="login-card">
         <div class="login-logo">
           <a href="index.html" data-testid="login-logo"><img src="images/logo.svg" alt="PlayLab" class="logo-img" /> Play<span class="logo-accent">Lab</span></a>
@@ -235,22 +235,22 @@
         <h1 class="login-title" data-testid="login-title">Welcome back</h1>
         <p class="login-subtitle" data-testid="login-subtitle">Sign in to your account to continue</p>
 
-        <div class="social-btns">
-          <button class="social-btn" data-testid="social-google"><ion-icon name="logo-google"></ion-icon> Google</button>
-          <button class="social-btn" data-testid="social-github"><ion-icon name="logo-github"></ion-icon> GitHub</button>
-          <button class="social-btn" data-testid="social-twitter"><ion-icon name="logo-twitter"></ion-icon> Twitter</button>
+        <div class="social-btns" id="socialBtns">
+          <button class="social-btn" id="googleLoginBtn" data-testid="social-google"><ion-icon name="logo-google"></ion-icon> Google</button>
+          <button class="social-btn" id="githubLoginBtn" data-testid="social-github"><ion-icon name="logo-github"></ion-icon> GitHub</button>
+          <button class="social-btn" id="twitterLoginBtn" data-testid="social-twitter"><ion-icon name="logo-twitter"></ion-icon> Twitter</button>
         </div>
 
-        <div class="divider">or continue with email</div>
+        <div class="divider" id="loginDivider">or continue with email</div>
 
         <form id="loginForm" data-testid="login-form" novalidate>
-          <div class="form-group">
-            <label for="loginEmail">Email Address</label>
+          <div class="form-group" id="loginEmailGroup">
+            <label class="field-label" for="loginEmail">Email Address</label>
             <input type="email" id="loginEmail" name="email" placeholder="you@example.com" required data-testid="login-email" autocomplete="email" />
             <span class="error-msg" data-testid="login-email-error"></span>
           </div>
-          <div class="form-group">
-            <label for="loginPassword">Password</label>
+          <div class="form-group" id="loginPasswordGroup">
+            <label class="field-label" for="loginPassword">Password</label>
             <div class="input-with-icon">
               <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required data-testid="login-password" autocomplete="current-password" />
               <button type="button" class="toggle-password" data-testid="login-toggle-password" aria-label="Toggle password visibility"><ion-icon name="eye-outline"></ion-icon></button>
@@ -258,24 +258,24 @@
             <span class="error-msg" data-testid="login-password-error"></span>
           </div>
 
-          <div class="remember-row">
+          <div class="remember-row" id="rememberRow">
             <label class="checkbox-label" style="padding: 0"> <input type="checkbox" id="remember" data-testid="remember-checkbox" /> Remember me </label>
-            <a href="#" data-testid="forgot-password">Forgot password?</a>
+            <a href="#" id="forgotPasswordLink" class="forgot-link" data-testid="forgot-password">Forgot password?</a>
           </div>
 
           <button type="submit" class="btn btn-primary login-btn" data-testid="login-submit">Sign In</button>
         </form>
 
-        <p class="login-footer">Don't have an account? <a href="#" data-testid="register-link">Sign up</a></p>
+        <p class="login-footer" id="loginFooterText">Don't have an account? <a href="#" id="registerLink" class="register-link" data-testid="register-link">Sign up</a></p>
       </div>
 
       <!-- Success State -->
       <div class="login-card hidden" id="loginSuccess" data-testid="login-success">
         <div class="login-success">
-          <span class="success-icon"><ion-icon name="checkmark-circle" style="color: var(--success); font-size: 4rem"></ion-icon></span>
-          <h2 data-testid="welcome-message">Welcome back!</h2>
+          <span class="success-icon" id="loginSuccessIcon"><ion-icon name="checkmark-circle" style="color: var(--success); font-size: 4rem"></ion-icon></span>
+          <h2 class="welcome-heading" id="welcomeTitle" data-testid="welcome-message">Welcome back!</h2>
           <p id="welcomeName" data-testid="welcome-name">You have successfully signed in.</p>
-          <a href="index.html" class="btn btn-primary" data-testid="go-to-dashboard">Go to Dashboard</a>
+          <a href="index.html" class="btn btn-primary" id="goToDashboard" data-testid="go-to-dashboard">Go to Dashboard</a>
           <button class="btn btn-outline" id="logoutBtn" data-testid="logout-btn" style="margin-top: 12px; width: 100%">Sign Out</button>
         </div>
       </div>

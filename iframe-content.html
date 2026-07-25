@@ -127,34 +127,36 @@
     </style>
   </head>
   <body>
-    <h3 data-testid="iframe-title">iFrame Form</h3>
-    <p style="font-size: 0.813rem; color: #64748b; margin-bottom: 16px">This content is inside an iFrame. Practice locating and interacting with these elements.</p>
+    <h3 class="iframe-heading" id="iframeTitle" data-testid="iframe-title">iFrame Form</h3>
+    <p class="iframe-description" id="iframeDescription" style="font-size: 0.813rem; color: #64748b; margin-bottom: 16px">
+      This content is inside an iFrame. Practice locating and interacting with these elements.
+    </p>
 
     <form class="iframe-form" id="iframeForm" data-testid="iframe-form">
-      <div>
-        <label for="iframeName">Your Name</label>
-        <input type="text" id="iframeName" placeholder="Enter your name" data-testid="iframe-input-name" autocomplete="off" />
+      <div class="form-field" id="iframeNameField">
+        <label class="field-label" for="iframeName">Your Name</label>
+        <input type="text" id="iframeName" class="field-input" placeholder="Enter your name" data-testid="iframe-input-name" autocomplete="off" />
       </div>
-      <div>
-        <label for="iframeMessage">Message</label>
-        <textarea id="iframeMessage" rows="3" placeholder="Write a message..." data-testid="iframe-textarea"></textarea>
+      <div class="form-field" id="iframeMessageField">
+        <label class="field-label" for="iframeMessage">Message</label>
+        <textarea id="iframeMessage" class="field-textarea" rows="3" placeholder="Write a message..." data-testid="iframe-textarea"></textarea>
       </div>
-      <div>
-        <label for="iframePriority">Priority</label>
-        <select id="iframePriority" data-testid="iframe-select">
-          <option value="low">Low</option>
-          <option value="medium" selected>Medium</option>
-          <option value="high">High</option>
-          <option value="critical">Critical</option>
+      <div class="form-field" id="iframePriorityField">
+        <label class="field-label" for="iframePriority">Priority</label>
+        <select id="iframePriority" class="field-select" data-testid="iframe-select">
+          <option value="low" class="priority-option" id="priorityLow">Low</option>
+          <option value="medium" class="priority-option" id="priorityMedium" selected>Medium</option>
+          <option value="high" class="priority-option" id="priorityHigh">High</option>
+          <option value="critical" class="priority-option" id="priorityCritical">Critical</option>
         </select>
       </div>
-      <div class="checkbox-row">
-        <input type="checkbox" id="iframeUrgent" data-testid="iframe-checkbox" />
-        <label for="iframeUrgent">Mark as urgent</label>
+      <div class="checkbox-row" id="iframeCheckboxRow">
+        <input type="checkbox" id="iframeUrgent" class="urgent-checkbox" data-testid="iframe-checkbox" />
+        <label class="checkbox-label" for="iframeUrgent">Mark as urgent</label>
       </div>
-      <div class="btn-row">
-        <button type="submit" data-testid="iframe-submit">Submit</button>
-        <button type="reset" class="btn-outline" data-testid="iframe-reset">Reset</button>
+      <div class="btn-row" id="iframeBtnRow">
+        <button type="submit" class="btn-submit" id="iframeSubmitBtn" data-testid="iframe-submit">Submit</button>
+        <button type="reset" class="btn-outline" id="iframeResetBtn" data-testid="iframe-reset">Reset</button>
       </div>
     </form>
 

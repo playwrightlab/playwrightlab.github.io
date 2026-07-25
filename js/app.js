@@ -1184,7 +1184,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!validateWizStep(wizStep)) return;
     if (wizStep === 4) {
       // Build review on step 3->4 transition already done, now submit
-      document.getElementById("wizardSuccess").classList.add("active");
+      document.getElementById("wizardSuccessPanel").classList.add("active");
       document.getElementById("wizardActions").classList.add("hidden");
       wizSteps.forEach((s) => {
         s.classList.remove("active");
@@ -1192,7 +1192,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       wizConnectors.forEach((c) => c.classList.add("active"));
       wizPanels.forEach((p) => p.classList.remove("active"));
-      document.getElementById("wizardSuccess").classList.add("active");
+      document.getElementById("wizardSuccessPanel").classList.add("active");
       return;
     }
     wizStep++;
