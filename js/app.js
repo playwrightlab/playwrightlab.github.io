@@ -214,42 +214,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===== AUTOCOMPLETE =====
+  // ===== AUTO-SUGGEST (suggestions removed from DOM on blur, needs "Emulate focused page" to inspect) =====
   const languages = ["JavaScript", "TypeScript", "Python", "Java", "C#", "C++", "Go", "Rust", "Ruby", "PHP", "Swift", "Kotlin", "Scala", "Dart", "R", "Perl", "Haskell", "Elixir", "Clojure", "Lua"];
   const searchInput = document.getElementById("searchInput");
   const autocompleteList = document.getElementById("autocompleteList");
   const selectedTags = document.getElementById("selectedTags");
   const selectedLangs = new Set();
 
-  searchInput.addEventListener("input", (e) => {
-    const query = e.target.value.toLowerCase();
+  function renderSuggestions() {
     autocompleteList.innerHTML = "";
-    if (!query) {
-      autocompleteList.classList.add("hidden");
-      return;
-    }
+    const query = searchInput.value.toLowerCase();
+    if (!query) return;
     const matches = languages.filter((l) => l.toLowerCase().includes(query) && !selectedLangs.has(l));
-    if (matches.length === 0) {
-      autocompleteList.classList.add("hidden");
-      return;
-    }
-    autocompleteList.classList.remove("hidden");
     matches.forEach((lang) => {
-      const li = document.createElement("li");
-      li.textContent = lang;
-      li.setAttribute("data-testid", `autocomplete-option-${lang.toLowerCase()}`);
-      li.addEventListener("click", () => {
+      const item = document.createElement("div");
+      item.className = "autocomplete-option";
+      item.setAttribute("role", "option");
+      item.setAttribute("data-testid", `autocomplete-option-${lang.toLowerCase()}`);
+      item.textContent = lang;
+      item.addEventListener("mousedown", (e) => {
+        e.preventDefault();
         selectedLangs.add(lang);
-        renderTags();
         searchInput.value = "";
-        autocompleteList.classList.add("hidden");
+        renderTags();
+        renderSuggestions();
       });
-      autocompleteList.appendChild(li);
+      autocompleteList.appendChild(item);
     });
+    if (matches.length === 0) {
+      const noRes = document.createElement("div");
+      noRes.className = "autocomplete-no-results";
+      noRes.textContent = "No results found";
+      autocompleteList.appendChild(noRes);
+    }
+  }
+
+  searchInput.addEventListener("focus", () => {
+    renderSuggestions();
+  });
+
+  searchInput.addEventListener("input", () => {
+    renderSuggestions();
   });
 
   searchInput.addEventListener("blur", () => {
-    setTimeout(() => autocompleteList.classList.add("hidden"), 200);
+    autocompleteList.innerHTML = "";
   });
 
   function renderTags() {

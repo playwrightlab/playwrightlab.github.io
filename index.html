@@ -221,13 +221,13 @@
             <!-- Autocomplete -->
             <div class="card" data-testid="autocomplete-card">
               <div class="card-header">
-                <h3><ion-icon name="search-outline"></ion-icon> Autocomplete Search</h3>
-                <span class="card-badge">Search</span>
+                <h3><ion-icon name="search-outline"></ion-icon> Auto-Suggest</h3>
+                <span class="card-badge">No DOM</span>
               </div>
               <div class="form-group autocomplete-wrapper" id="autocompleteGroup">
                 <label class="field-label" for="searchInput">Search Programming Languages</label>
                 <input type="text" id="searchInput" placeholder="Type to search..." data-testid="autocomplete-input" autocomplete="off" />
-                <ul class="autocomplete-list hidden" id="autocompleteList" data-testid="autocomplete-list"></ul>
+                <div class="autocomplete-list" id="autocompleteList" data-testid="autocomplete-list"></div>
               </div>
               <div class="selected-tags" id="selectedTags" data-testid="selected-tags"></div>
             </div>

@@ -1325,27 +1325,33 @@ input[type="color"] {
   left: 0;
   right: 0;
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  list-style: none;
   max-height: 200px;
   overflow-y: auto;
-  z-index: 100;
+  z-index: 60;
   margin-top: 4px;
 }
 
-.autocomplete-list li {
+.autocomplete-list:not(:empty) {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+.autocomplete-option {
   padding: 10px 16px;
   cursor: pointer;
   font-size: 0.875rem;
-  transition: var(--transition);
 }
 
-.autocomplete-list li:hover,
-.autocomplete-list li.highlighted {
+.autocomplete-option:hover {
   background: var(--primary-light);
   color: var(--primary);
+}
+
+.autocomplete-no-results {
+  padding: 10px 16px;
+  font-size: 0.813rem;
+  color: var(--text-muted);
 }
 
 .selected-tags {
