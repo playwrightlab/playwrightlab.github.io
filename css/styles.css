@@ -911,10 +911,6 @@ ion-icon {
   .grid-3 {
     grid-template-columns: 1fr;
   }
-  .dropdown-grid .form-group select {
-    padding: 10px 14px;
-    font-size: 0.875rem;
-  }
 }
 
 /* Subsection Header */
@@ -950,13 +946,6 @@ ion-icon {
 .dropdown-grid .card {
   align-self: start;
   overflow: visible;
-  position: relative;
-  z-index: 1;
-}
-
-.dropdown-grid .card:has(.open),
-.dropdown-grid .card:has(.oxd-select--open) {
-  z-index: 20;
 }
 
 #forms .container {
@@ -3775,10 +3764,6 @@ code {
     font-size: 0.813rem;
   }
   .searchable-dropdown-input {
-    padding: 10px 12px;
-    font-size: 0.813rem;
-  }
-  .dropdown-grid .form-group select {
     padding: 10px 12px;
     font-size: 0.813rem;
   }
