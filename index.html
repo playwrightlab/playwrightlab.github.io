@@ -256,6 +256,212 @@
             </div>
           </div>
         </div>
+
+        <!-- Dropdowns Sub-Section -->
+        <div class="subsection-header" id="dropdownsSubHeader">
+          <h3 class="subsection-title"><ion-icon name="chevron-down-circle-outline"></ion-icon> Dropdown Variants</h3>
+          <p class="subsection-desc">Different dropdown patterns for comprehensive automation practice.</p>
+        </div>
+
+        <div class="grid-2 dropdown-grid" id="dropdownsGrid">
+          <!-- Custom Dropdown (Click-to-open) -->
+          <div class="card" data-testid="custom-dropdown-card">
+            <div class="card-header">
+              <h3><ion-icon name="caret-down-outline"></ion-icon> Custom Dropdown</h3>
+              <span class="card-badge">Click</span>
+            </div>
+            <div class="form-group">
+              <label class="field-label">Select Priority</label>
+              <div class="custom-dropdown" id="customDropdown" data-testid="custom-dropdown">
+                <button type="button" class="custom-dropdown-trigger" id="customDropdownTrigger" data-testid="custom-dropdown-trigger">
+                  <span class="custom-dropdown-value" id="customDropdownValue">Choose priority...</span>
+                  <ion-icon name="chevron-down-outline" class="custom-dropdown-arrow"></ion-icon>
+                </button>
+                <ul class="custom-dropdown-menu" id="customDropdownMenu" data-testid="custom-dropdown-menu">
+                  <li data-value="low" data-testid="custom-opt-low"><span class="priority-dot priority-low"></span> Low</li>
+                  <li data-value="medium" data-testid="custom-opt-medium"><span class="priority-dot priority-medium"></span> Medium</li>
+                  <li data-value="high" data-testid="custom-opt-high"><span class="priority-dot priority-high"></span> High</li>
+                  <li data-value="critical" data-testid="custom-opt-critical"><span class="priority-dot priority-critical"></span> Critical</li>
+                </ul>
+              </div>
+            </div>
+            <div id="customDropdownResult" data-testid="custom-dropdown-result" class="result-display"></div>
+          </div>
+
+          <!-- Searchable Dropdown -->
+          <div class="card" data-testid="searchable-dropdown-card">
+            <div class="card-header">
+              <h3><ion-icon name="filter-outline"></ion-icon> Searchable Dropdown</h3>
+              <span class="card-badge">Filter</span>
+            </div>
+            <div class="form-group">
+              <label class="field-label">Select City</label>
+              <div class="searchable-dropdown" id="searchableDropdown" data-testid="searchable-dropdown">
+                <input type="text" class="searchable-dropdown-input" id="searchableDropdownInput" placeholder="Type to filter cities..." data-testid="searchable-dropdown-input" autocomplete="off" />
+                <ul class="searchable-dropdown-menu" id="searchableDropdownMenu" data-testid="searchable-dropdown-menu">
+                  <li data-value="new-york" data-testid="city-new-york">New York</li>
+                  <li data-value="london" data-testid="city-london">London</li>
+                  <li data-value="tokyo" data-testid="city-tokyo">Tokyo</li>
+                  <li data-value="paris" data-testid="city-paris">Paris</li>
+                  <li data-value="sydney" data-testid="city-sydney">Sydney</li>
+                  <li data-value="berlin" data-testid="city-berlin">Berlin</li>
+                  <li data-value="toronto" data-testid="city-toronto">Toronto</li>
+                  <li data-value="mumbai" data-testid="city-mumbai">Mumbai</li>
+                  <li data-value="dubai" data-testid="city-dubai">Dubai</li>
+                  <li data-value="singapore" data-testid="city-singapore">Singapore</li>
+                </ul>
+              </div>
+            </div>
+            <div id="searchableDropdownResult" data-testid="searchable-dropdown-result" class="result-display"></div>
+          </div>
+
+          <!-- Grouped Options Dropdown -->
+          <div class="card" data-testid="grouped-dropdown-card">
+            <div class="card-header">
+              <h3><ion-icon name="layers-outline"></ion-icon> Grouped Options</h3>
+              <span class="card-badge">OptGroup</span>
+            </div>
+            <div class="form-group">
+              <label class="field-label" for="groupedSelect">Select a Vehicle</label>
+              <select id="groupedSelect" data-testid="grouped-select">
+                <option value="">Choose vehicle...</option>
+                <optgroup label="Cars">
+                  <option value="sedan" data-testid="opt-sedan">Sedan</option>
+                  <option value="suv" data-testid="opt-suv">SUV</option>
+                  <option value="hatchback" data-testid="opt-hatchback">Hatchback</option>
+                  <option value="coupe" data-testid="opt-coupe">Coupe</option>
+                </optgroup>
+                <optgroup label="Trucks">
+                  <option value="pickup" data-testid="opt-pickup">Pickup</option>
+                  <option value="semi" data-testid="opt-semi">Semi Truck</option>
+                </optgroup>
+                <optgroup label="Two Wheelers">
+                  <option value="motorcycle" data-testid="opt-motorcycle">Motorcycle</option>
+                  <option value="scooter" data-testid="opt-scooter">Scooter</option>
+                  <option value="bicycle" data-testid="opt-bicycle">Bicycle</option>
+                </optgroup>
+              </select>
+            </div>
+            <div id="groupedSelectResult" data-testid="grouped-select-result" class="result-display"></div>
+          </div>
+
+          <!-- Cascading / Dependent Dropdowns -->
+          <div class="card" data-testid="cascading-dropdown-card">
+            <div class="card-header">
+              <h3><ion-icon name="git-branch-outline"></ion-icon> Cascading Dropdowns</h3>
+              <span class="card-badge">Dependent</span>
+            </div>
+            <div class="form-group">
+              <label class="field-label" for="cascadeContinent">Continent</label>
+              <select id="cascadeContinent" data-testid="cascade-continent">
+                <option value="">Select continent...</option>
+                <option value="asia" data-testid="continent-asia">Asia</option>
+                <option value="europe" data-testid="continent-europe">Europe</option>
+                <option value="americas" data-testid="continent-americas">Americas</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="field-label" for="cascadeCountry">Country</label>
+              <select id="cascadeCountry" data-testid="cascade-country" disabled>
+                <option value="">Select continent first...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="field-label" for="cascadeCity">City</label>
+              <select id="cascadeCity" data-testid="cascade-city" disabled>
+                <option value="">Select country first...</option>
+              </select>
+            </div>
+            <div id="cascadeResult" data-testid="cascade-result" class="result-display"></div>
+          </div>
+
+          <!-- Multi-Select with Checkboxes -->
+          <div class="card" data-testid="checkbox-dropdown-card">
+            <div class="card-header">
+              <h3><ion-icon name="checkbox-outline"></ion-icon> Multi-Select Checkboxes</h3>
+              <span class="card-badge">Multi</span>
+            </div>
+            <div class="form-group">
+              <label class="field-label">Select Toppings</label>
+              <div class="checkbox-dropdown" id="checkboxDropdown" data-testid="checkbox-dropdown">
+                <button type="button" class="checkbox-dropdown-trigger" id="checkboxDropdownTrigger" data-testid="checkbox-dropdown-trigger">
+                  <span class="checkbox-dropdown-value" id="checkboxDropdownValue">Select toppings...</span>
+                  <ion-icon name="chevron-down-outline" class="custom-dropdown-arrow"></ion-icon>
+                </button>
+                <div class="checkbox-dropdown-menu" id="checkboxDropdownMenu" data-testid="checkbox-dropdown-menu">
+                  <label class="checkbox-dropdown-item" data-testid="topping-cheese"><input type="checkbox" value="cheese" /> Cheese</label>
+                  <label class="checkbox-dropdown-item" data-testid="topping-pepperoni"><input type="checkbox" value="pepperoni" /> Pepperoni</label>
+                  <label class="checkbox-dropdown-item" data-testid="topping-mushrooms"><input type="checkbox" value="mushrooms" /> Mushrooms</label>
+                  <label class="checkbox-dropdown-item" data-testid="topping-onions"><input type="checkbox" value="onions" /> Onions</label>
+                  <label class="checkbox-dropdown-item" data-testid="topping-olives"><input type="checkbox" value="olives" /> Olives</label>
+                  <label class="checkbox-dropdown-item" data-testid="topping-peppers"><input type="checkbox" value="peppers" /> Bell Peppers</label>
+                </div>
+              </div>
+            </div>
+            <div id="checkboxDropdownResult" data-testid="checkbox-dropdown-result" class="result-display"></div>
+          </div>
+
+          <!-- Disabled Options Dropdown -->
+          <div class="card" data-testid="disabled-options-card">
+            <div class="card-header">
+              <h3><ion-icon name="ban-outline"></ion-icon> Disabled Options</h3>
+              <span class="card-badge">States</span>
+            </div>
+            <div class="form-group">
+              <label class="field-label" for="disabledOptSelect">Select Plan</label>
+              <select id="disabledOptSelect" data-testid="disabled-options-select">
+                <option value="">Choose a plan...</option>
+                <option value="free" data-testid="plan-free">Free</option>
+                <option value="starter" data-testid="plan-starter">Starter — $9/mo</option>
+                <option value="pro" data-testid="plan-pro" disabled>Pro — $29/mo (Sold Out)</option>
+                <option value="enterprise" data-testid="plan-enterprise">Enterprise — $99/mo</option>
+                <option value="custom" data-testid="plan-custom" disabled>Custom — Contact Us (Coming Soon)</option>
+              </select>
+            </div>
+            <div id="disabledOptResult" data-testid="disabled-options-result" class="result-display"></div>
+          </div>
+
+          <!-- Focus-Gated Dropdown (like OrangeHRM — options only in DOM when focused) -->
+          <div class="card" data-testid="focus-dropdown-card">
+            <div class="card-header">
+              <h3><ion-icon name="eye-off-outline"></ion-icon> Focus-Gated Dropdown</h3>
+              <span class="card-badge">No DOM</span>
+            </div>
+            <div class="form-group">
+              <p class="hint">Options disappear from DOM when element loses focus. Enable "Emulate a focused page" in DevTools to inspect.</p>
+              <label class="field-label">Job Title</label>
+              <div class="oxd-select-wrapper" id="focusDropdown" data-testid="focus-dropdown">
+                <div class="oxd-select-text" id="focusDropdownText" data-testid="focus-dropdown-text">
+                  <div class="oxd-select-text-input" id="focusDropdownInput" tabindex="0" data-testid="focus-dropdown-input">-- Select --</div>
+                  <div class="oxd-select-text--after">
+                    <ion-icon name="caret-down-fill" class="oxd-select-text--arrow"></ion-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="focusDropdownResult" data-testid="focus-dropdown-result" class="result-display"></div>
+          </div>
+
+          <!-- Delayed Dropdown (Appears after timeout) -->
+          <div class="card" data-testid="delayed-dropdown-card">
+            <div class="card-header">
+              <h3><ion-icon name="time-outline"></ion-icon> Delayed Dropdown</h3>
+              <span class="card-badge">Async</span>
+            </div>
+            <div class="form-group">
+              <p class="hint">Click to load options after a 2-second delay (simulates API fetch).</p>
+              <button type="button" class="btn btn-primary btn-sm" id="loadDelayedDropdownBtn" data-testid="load-delayed-dropdown-btn">Load Options</button>
+            </div>
+            <div class="form-group" id="delayedDropdownGroup" data-testid="delayed-dropdown-group">
+              <label class="field-label" for="delayedSelect">Select Category</label>
+              <select id="delayedSelect" data-testid="delayed-select" disabled>
+                <option value="">Click button to load...</option>
+              </select>
+              <span class="loading-hint hidden" id="delayedDropdownLoader" data-testid="delayed-dropdown-loader">Loading options...</span>
+            </div>
+            <div id="delayedDropdownResult" data-testid="delayed-dropdown-result" class="result-display"></div>
+          </div>
+        </div>
       </div>
     </section>
 

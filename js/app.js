@@ -273,6 +273,254 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("selectedFrameworks").textContent = selected.length ? `Selected: ${selected.join(", ")}` : "";
   });
 
+  // ===== CUSTOM DROPDOWN (Click-to-open) =====
+  const customDropdown = document.getElementById("customDropdown");
+  const customDropdownTrigger = document.getElementById("customDropdownTrigger");
+  const customDropdownValue = document.getElementById("customDropdownValue");
+  const customDropdownMenu = document.getElementById("customDropdownMenu");
+
+  customDropdownTrigger.addEventListener("click", () => {
+    customDropdown.classList.toggle("open");
+  });
+
+  customDropdownMenu.querySelectorAll("li").forEach((li) => {
+    li.addEventListener("click", () => {
+      customDropdownMenu.querySelectorAll("li").forEach((item) => item.classList.remove("selected"));
+      li.classList.add("selected");
+      customDropdownValue.textContent = li.textContent.trim();
+      customDropdown.classList.remove("open");
+      document.getElementById("customDropdownResult").textContent = `Selected: ${li.dataset.value}`;
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!customDropdown.contains(e.target)) customDropdown.classList.remove("open");
+  });
+
+  // ===== SEARCHABLE DROPDOWN =====
+  const searchableDropdown = document.getElementById("searchableDropdown");
+  const searchableInput = document.getElementById("searchableDropdownInput");
+  const searchableMenu = document.getElementById("searchableDropdownMenu");
+  const cityItems = searchableMenu.querySelectorAll("li");
+
+  searchableInput.addEventListener("focus", () => {
+    searchableDropdown.classList.add("open");
+  });
+
+  searchableInput.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase();
+    let hasVisible = false;
+    cityItems.forEach((li) => {
+      const match = li.textContent.toLowerCase().includes(query);
+      li.classList.toggle("hidden", !match);
+      if (match) hasVisible = true;
+    });
+    const existing = searchableMenu.querySelector(".no-results");
+    if (!hasVisible && !existing) {
+      const noRes = document.createElement("li");
+      noRes.className = "no-results";
+      noRes.textContent = "No results found";
+      searchableMenu.appendChild(noRes);
+    } else if (hasVisible && existing) {
+      existing.remove();
+    }
+    searchableDropdown.classList.add("open");
+  });
+
+  cityItems.forEach((li) => {
+    li.addEventListener("click", () => {
+      cityItems.forEach((item) => item.classList.remove("selected"));
+      li.classList.add("selected");
+      searchableInput.value = li.textContent;
+      searchableDropdown.classList.remove("open");
+      document.getElementById("searchableDropdownResult").textContent = `Selected: ${li.dataset.value}`;
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!searchableDropdown.contains(e.target)) searchableDropdown.classList.remove("open");
+  });
+
+  // ===== GROUPED OPTIONS DROPDOWN =====
+  document.getElementById("groupedSelect").addEventListener("change", (e) => {
+    const opt = e.target.selectedOptions[0];
+    const group = opt.parentElement.tagName === "OPTGROUP" ? opt.parentElement.label : "";
+    document.getElementById("groupedSelectResult").textContent = e.target.value ? `Selected: ${opt.text}${group ? ` (${group})` : ""}` : "";
+  });
+
+  // ===== CASCADING DROPDOWNS =====
+  const cascadeData = {
+    asia: {
+      countries: { japan: ["Tokyo", "Osaka", "Kyoto"], india: ["Mumbai", "Delhi", "Bangalore"], china: ["Beijing", "Shanghai", "Shenzhen"] },
+    },
+    europe: {
+      countries: { uk: ["London", "Manchester", "Edinburgh"], france: ["Paris", "Lyon", "Nice"], germany: ["Berlin", "Munich", "Hamburg"] },
+    },
+    americas: {
+      countries: { usa: ["New York", "Los Angeles", "Chicago"], canada: ["Toronto", "Vancouver", "Montreal"], brazil: ["São Paulo", "Rio de Janeiro", "Brasília"] },
+    },
+  };
+
+  const cascadeContinent = document.getElementById("cascadeContinent");
+  const cascadeCountry = document.getElementById("cascadeCountry");
+  const cascadeCity = document.getElementById("cascadeCity");
+
+  cascadeContinent.addEventListener("change", () => {
+    const continent = cascadeContinent.value;
+    cascadeCountry.innerHTML = '<option value="">Select country...</option>';
+    cascadeCity.innerHTML = '<option value="">Select country first...</option>';
+    cascadeCity.disabled = true;
+    cascadeCountry.disabled = !continent;
+    document.getElementById("cascadeResult").textContent = "";
+    if (continent && cascadeData[continent]) {
+      Object.keys(cascadeData[continent].countries).forEach((c) => {
+        const opt = document.createElement("option");
+        opt.value = c;
+        opt.textContent = c.charAt(0).toUpperCase() + c.slice(1);
+        opt.setAttribute("data-testid", `country-${c}`);
+        cascadeCountry.appendChild(opt);
+      });
+    }
+  });
+
+  cascadeCountry.addEventListener("change", () => {
+    const continent = cascadeContinent.value;
+    const country = cascadeCountry.value;
+    cascadeCity.innerHTML = '<option value="">Select city...</option>';
+    cascadeCity.disabled = !country;
+    document.getElementById("cascadeResult").textContent = "";
+    if (continent && country && cascadeData[continent].countries[country]) {
+      cascadeData[continent].countries[country].forEach((city) => {
+        const opt = document.createElement("option");
+        opt.value = city.toLowerCase().replace(/\s+/g, "-");
+        opt.textContent = city;
+        opt.setAttribute("data-testid", `city-${opt.value}`);
+        cascadeCity.appendChild(opt);
+      });
+    }
+  });
+
+  cascadeCity.addEventListener("change", () => {
+    if (cascadeCity.value) {
+      document.getElementById("cascadeResult").textContent =
+        `Selected: ${cascadeContinent.selectedOptions[0].text} → ${cascadeCountry.selectedOptions[0].text} → ${cascadeCity.selectedOptions[0].text}`;
+    }
+  });
+
+  // ===== CHECKBOX DROPDOWN (Multi-select with checkboxes) =====
+  const checkboxDropdown = document.getElementById("checkboxDropdown");
+  const checkboxDropdownTrigger = document.getElementById("checkboxDropdownTrigger");
+  const checkboxDropdownValue = document.getElementById("checkboxDropdownValue");
+  const checkboxDropdownMenu = document.getElementById("checkboxDropdownMenu");
+
+  checkboxDropdownTrigger.addEventListener("click", () => {
+    checkboxDropdown.classList.toggle("open");
+  });
+
+  checkboxDropdownMenu.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+    cb.addEventListener("change", () => {
+      const checked = Array.from(checkboxDropdownMenu.querySelectorAll('input[type="checkbox"]:checked')).map((c) => c.value);
+      checkboxDropdownValue.textContent = checked.length ? checked.join(", ") : "Select toppings...";
+      document.getElementById("checkboxDropdownResult").textContent = checked.length ? `Selected: ${checked.join(", ")}` : "";
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!checkboxDropdown.contains(e.target)) checkboxDropdown.classList.remove("open");
+  });
+
+  // ===== DISABLED OPTIONS DROPDOWN =====
+  document.getElementById("disabledOptSelect").addEventListener("change", (e) => {
+    document.getElementById("disabledOptResult").textContent = e.target.value ? `Selected: ${e.target.selectedOptions[0].text}` : "";
+  });
+
+  // ===== FOCUS-GATED DROPDOWN (OrangeHRM-style: options in DOM only while focused) =====
+  const focusInput = document.getElementById("focusDropdownInput");
+  const focusWrapper = document.getElementById("focusDropdown");
+  const focusOptions = ["Software Engineer", "QA Lead", "DevOps Engineer", "Product Manager", "UI/UX Designer", "Data Analyst", "Scrum Master", "CTO"];
+  let focusListOpen = false;
+
+  function openFocusList() {
+    if (focusListOpen) return;
+    focusListOpen = true;
+    const listEl = document.createElement("div");
+    listEl.className = "oxd-select-dropdown";
+    listEl.setAttribute("role", "listbox");
+    listEl.setAttribute("data-testid", "focus-dropdown-list");
+    focusOptions.forEach((label) => {
+      const item = document.createElement("div");
+      item.className = "oxd-select-option";
+      item.setAttribute("role", "option");
+      item.setAttribute("data-testid", "focus-opt-" + label.toLowerCase().replace(/[\s\/]+/g, "-"));
+      item.textContent = label;
+      item.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        focusInput.textContent = label;
+        document.getElementById("focusDropdownResult").textContent = "Selected: " + label;
+        closeFocusList();
+        focusInput.blur();
+      });
+      listEl.appendChild(item);
+    });
+    focusWrapper.appendChild(listEl);
+    focusWrapper.classList.add("oxd-select--open");
+  }
+
+  function closeFocusList() {
+    focusListOpen = false;
+    const listEl = focusWrapper.querySelector(".oxd-select-dropdown");
+    if (listEl) listEl.remove();
+    focusWrapper.classList.remove("oxd-select--open");
+  }
+
+  focusInput.addEventListener("focus", () => {
+    openFocusList();
+  });
+
+  focusInput.addEventListener("blur", () => {
+    closeFocusList();
+  });
+
+  focusInput.addEventListener("click", () => {
+    if (!focusListOpen) {
+      focusInput.focus();
+    }
+  });
+
+  // ===== DELAYED DROPDOWN =====
+  document.getElementById("loadDelayedDropdownBtn").addEventListener("click", () => {
+    const btn = document.getElementById("loadDelayedDropdownBtn");
+    const loader = document.getElementById("delayedDropdownLoader");
+    const select = document.getElementById("delayedSelect");
+    btn.disabled = true;
+    btn.textContent = "Loading...";
+    loader.classList.remove("hidden");
+    setTimeout(() => {
+      const options = [
+        { value: "electronics", text: "Electronics" },
+        { value: "clothing", text: "Clothing" },
+        { value: "books", text: "Books" },
+        { value: "sports", text: "Sports & Outdoors" },
+        { value: "home", text: "Home & Garden" },
+      ];
+      select.innerHTML = '<option value="">Select a category...</option>';
+      options.forEach((opt) => {
+        const o = document.createElement("option");
+        o.value = opt.value;
+        o.textContent = opt.text;
+        o.setAttribute("data-testid", `delayed-opt-${opt.value}`);
+        select.appendChild(o);
+      });
+      select.disabled = false;
+      loader.classList.add("hidden");
+      btn.textContent = "Options Loaded";
+    }, 2000);
+  });
+
+  document.getElementById("delayedSelect").addEventListener("change", (e) => {
+    document.getElementById("delayedDropdownResult").textContent = e.target.value ? `Selected: ${e.target.selectedOptions[0].text}` : "";
+  });
+
   // ===== DATA TABLE =====
   const tableData = [
     { id: 1, name: "Alice Johnson", email: "alice@example.com", role: "admin", status: "active" },
