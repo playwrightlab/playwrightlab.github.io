@@ -446,6 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== FOCUS-GATED DROPDOWN (OrangeHRM-style: options in DOM only while focused) =====
   const focusInput = document.getElementById("focusDropdownInput");
   const focusWrapper = document.getElementById("focusDropdown");
+  const focusText = document.getElementById("focusDropdownText");
   const focusOptions = ["Software Engineer", "QA Lead", "DevOps Engineer", "Product Manager", "UI/UX Designer", "Data Analyst", "Scrum Master", "CTO"];
   let focusListOpen = false;
 
@@ -462,12 +463,11 @@ document.addEventListener("DOMContentLoaded", () => {
       item.setAttribute("role", "option");
       item.setAttribute("data-testid", "focus-opt-" + label.toLowerCase().replace(/[\s\/]+/g, "-"));
       item.textContent = label;
-      item.addEventListener("mousedown", (e) => {
-        e.preventDefault();
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
         focusInput.textContent = label;
         document.getElementById("focusDropdownResult").textContent = "Selected: " + label;
         closeFocusList();
-        focusInput.blur();
       });
       listEl.appendChild(item);
     });
@@ -482,17 +482,17 @@ document.addEventListener("DOMContentLoaded", () => {
     focusWrapper.classList.remove("oxd-select--open");
   }
 
-  focusInput.addEventListener("focus", () => {
-    openFocusList();
+  focusText.addEventListener("click", () => {
+    if (focusListOpen) {
+      closeFocusList();
+    } else {
+      openFocusList();
+    }
   });
 
-  focusInput.addEventListener("blur", () => {
-    closeFocusList();
-  });
-
-  focusInput.addEventListener("click", () => {
-    if (!focusListOpen) {
-      focusInput.focus();
+  document.addEventListener("click", (e) => {
+    if (focusListOpen && !focusWrapper.contains(e.target)) {
+      closeFocusList();
     }
   });
 

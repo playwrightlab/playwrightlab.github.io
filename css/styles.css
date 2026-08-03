@@ -1409,8 +1409,8 @@ input[type="color"] {
 }
 
 .custom-dropdown-arrow {
-  font-size: 1rem;
-  color: var(--text-muted);
+  font-size: 0.75rem;
+  color: var(--text);
 }
 
 .custom-dropdown.open .custom-dropdown-arrow {
@@ -1519,7 +1519,7 @@ input[type="color"] {
 
 .oxd-select-text--arrow {
   font-size: 0.7rem;
-  color: var(--text-muted);
+  color: var(--text);
 }
 
 .oxd-select-dropdown {
