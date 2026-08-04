@@ -47,6 +47,7 @@
               <li><a href="#media" data-testid="nav-media">Media Player</a></li>
               <li><a href="#a11y" data-testid="nav-a11y">Accessibility</a></li>
               <li><a href="#responsive" data-testid="nav-responsive">Responsive</a></li>
+              <li><a href="#shopping" data-testid="nav-shopping">Shopping</a></li>
             </ul>
           </li>
           <li><a href="login.html" data-testid="nav-login" class="nav-btn">Login</a></li>
@@ -1661,6 +1662,206 @@
                 <p><strong>Access Level:</strong> Premium</p>
               </div>
               <button class="btn btn-outline btn-sm" id="protectedLogout" data-testid="protected-logout" style="margin-top: 1rem">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SHOPPING SECTION ==================== -->
+    <section class="section" id="shopping">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">19</span>
+          <h2 class="section-title">Shopping</h2>
+          <p class="section-desc">A complete e-commerce workflow — browse products, add to cart, apply coupons, and checkout.</p>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="shop-products" id="shopProducts" data-testid="shop-products">
+          <div class="shop-card" data-testid="product-lamborghini">
+            <div class="shop-card-img">
+              <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&h=300&fit=crop" alt="Lamborghini Huracán" />
+              <span class="shop-badge">Luxury</span>
+            </div>
+            <div class="shop-card-body">
+              <h4 class="shop-card-title">Lamborghini Huracán</h4>
+              <p class="shop-card-desc">V10 engine, 630 HP, 0-100 in 2.9s</p>
+              <div class="shop-card-price">₹3,21,00,000</div>
+              <div class="shop-card-actions">
+                <button class="btn btn-primary btn-sm shop-add-cart" data-product="lamborghini" data-price="32100000" data-testid="add-cart-lamborghini">Add to Cart</button>
+                <button class="btn btn-outline btn-sm shop-buy-now" data-product="lamborghini" data-price="32100000" data-testid="buy-now-lamborghini">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-testid="product-triumph">
+            <div class="shop-card-img">
+              <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400&h=300&fit=crop" alt="Triumph Speed Triple" />
+              <span class="shop-badge">Sport</span>
+            </div>
+            <div class="shop-card-body">
+              <h4 class="shop-card-title">Triumph Speed Triple 1200</h4>
+              <p class="shop-card-desc">1160cc triple engine, 180 HP, Öhlins suspension</p>
+              <div class="shop-card-price">₹16,95,000</div>
+              <div class="shop-card-actions">
+                <button class="btn btn-primary btn-sm shop-add-cart" data-product="triumph" data-price="1695000" data-testid="add-cart-triumph">Add to Cart</button>
+                <button class="btn btn-outline btn-sm shop-buy-now" data-product="triumph" data-price="1695000" data-testid="buy-now-triumph">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-testid="product-seiko">
+            <div class="shop-card-img">
+              <img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=400&h=300&fit=crop" alt="Seiko Presage" />
+              <span class="shop-badge">Classic</span>
+            </div>
+            <div class="shop-card-body">
+              <h4 class="shop-card-title">Seiko Presage Cocktail Time</h4>
+              <p class="shop-card-desc">Automatic movement, sapphire crystal, 50m WR</p>
+              <div class="shop-card-price">₹32,500</div>
+              <div class="shop-card-actions">
+                <button class="btn btn-primary btn-sm shop-add-cart" data-product="seiko" data-price="32500" data-testid="add-cart-seiko">Add to Cart</button>
+                <button class="btn btn-outline btn-sm shop-buy-now" data-product="seiko" data-price="32500" data-testid="buy-now-seiko">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-testid="product-rifle">
+            <div class="shop-card-img">
+              <img src="https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=400&h=300&fit=crop" alt="Hunting Rifle" />
+              <span class="shop-badge">Precision</span>
+            </div>
+            <div class="shop-card-body">
+              <h4 class="shop-card-title">Bolt Action Sporting Rifle</h4>
+              <p class="shop-card-desc">.308 Winchester, walnut stock, 24" barrel</p>
+              <div class="shop-card-price">₹1,85,000</div>
+              <div class="shop-card-actions">
+                <button class="btn btn-primary btn-sm shop-add-cart" data-product="rifle" data-price="185000" data-testid="add-cart-rifle">Add to Cart</button>
+                <button class="btn btn-outline btn-sm shop-buy-now" data-product="rifle" data-price="185000" data-testid="buy-now-rifle">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Available Coupons -->
+        <div class="shop-coupons-display" data-testid="shop-coupons-display">
+          <h4><ion-icon name="pricetag-outline"></ion-icon> Available Offers</h4>
+          <div class="shop-coupon-list">
+            <div class="shop-coupon-chip" data-testid="coupon-chip-FLAT10"><span class="coupon-code">FLAT10</span> — 10% off on orders above ₹50,000</div>
+            <div class="shop-coupon-chip" data-testid="coupon-chip-SPEED20"><span class="coupon-code">SPEED20</span> — 20% off on automobiles</div>
+            <div class="shop-coupon-chip" data-testid="coupon-chip-FIRST500"><span class="coupon-code">FIRST500</span> — ₹500 off on your first order</div>
+          </div>
+        </div>
+
+        <!-- Cart Panel -->
+        <div class="shop-cart-panel" id="shopCartPanel" data-testid="shop-cart-panel">
+          <h4><ion-icon name="cart-outline"></ion-icon> Shopping Cart <span class="shop-cart-count" id="shopCartCount" data-testid="shop-cart-count">0</span></h4>
+          <div class="shop-cart-items" id="shopCartItems" data-testid="shop-cart-items">
+            <p class="shop-cart-empty" id="shopCartEmpty">Your cart is empty.</p>
+          </div>
+          <div class="shop-cart-summary hidden" id="shopCartSummary" data-testid="shop-cart-summary">
+            <div class="shop-coupon-row">
+              <input type="text" id="shopCouponInput" placeholder="Enter coupon code" class="form-input" data-testid="shop-coupon-input" />
+              <button class="btn btn-outline btn-sm" id="shopApplyCoupon" data-testid="shop-apply-coupon">Apply</button>
+            </div>
+            <div class="shop-coupon-msg hidden" id="shopCouponMsg" data-testid="shop-coupon-msg"></div>
+            <div class="shop-totals" id="shopTotals" data-testid="shop-totals">
+              <div class="shop-total-row"><span>Subtotal</span><span id="shopSubtotal" data-testid="shop-subtotal">₹0</span></div>
+              <div class="shop-total-row shop-discount-row hidden" id="shopDiscountRow"><span>Discount</span><span id="shopDiscount" data-testid="shop-discount">-₹0</span></div>
+              <div class="shop-total-row shop-total-final"><span>Total</span><span id="shopTotal" data-testid="shop-total">₹0</span></div>
+            </div>
+            <button class="btn btn-primary" id="shopCheckoutBtn" data-testid="shop-checkout-btn">Proceed to Checkout</button>
+          </div>
+        </div>
+
+        <!-- Checkout Modal -->
+        <div class="shop-checkout-overlay hidden" id="shopCheckoutOverlay" data-testid="shop-checkout-overlay">
+          <div class="shop-checkout-modal" data-testid="shop-checkout-modal">
+            <div class="shop-checkout-header">
+              <h3>Checkout</h3>
+              <button class="shop-checkout-close" id="shopCheckoutClose" data-testid="shop-checkout-close">&times;</button>
+            </div>
+
+            <!-- Step 1: Address -->
+            <div class="shop-step" id="shopStepAddress" data-testid="shop-step-address">
+              <h4>Shipping Address</h4>
+              <div class="form-group">
+                <label class="field-label" for="shopFullName">Full Name</label>
+                <input type="text" id="shopFullName" class="form-input" data-testid="shop-fullname" placeholder="John Doe" />
+              </div>
+              <div class="form-group">
+                <label class="field-label" for="shopAddress">Address</label>
+                <textarea id="shopAddress" class="form-input" rows="2" data-testid="shop-address" placeholder="123 Main Street, Apt 4B"></textarea>
+              </div>
+              <div class="shop-form-row">
+                <div class="form-group">
+                  <label class="field-label" for="shopCity">City</label>
+                  <input type="text" id="shopCity" class="form-input" data-testid="shop-city" placeholder="Mumbai" />
+                </div>
+                <div class="form-group">
+                  <label class="field-label" for="shopPincode">Pincode</label>
+                  <input type="text" id="shopPincode" class="form-input" data-testid="shop-pincode" placeholder="400001" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="field-label" for="shopPhone">Phone</label>
+                <input type="tel" id="shopPhone" class="form-input" data-testid="shop-phone" placeholder="+91 98765 43210" />
+              </div>
+              <button class="btn btn-primary" id="shopToPayment" data-testid="shop-to-payment">Continue to Payment</button>
+            </div>
+
+            <!-- Step 2: Payment -->
+            <div class="shop-step hidden" id="shopStepPayment" data-testid="shop-step-payment">
+              <h4>Payment Method</h4>
+              <div class="shop-payment-options">
+                <label class="shop-payment-option" data-testid="pay-option-card">
+                  <input type="radio" name="paymentMethod" value="card" checked /> Credit / Debit Card
+                </label>
+                <label class="shop-payment-option" data-testid="pay-option-upi">
+                  <input type="radio" name="paymentMethod" value="upi" /> UPI
+                </label>
+                <label class="shop-payment-option" data-testid="pay-option-cod">
+                  <input type="radio" name="paymentMethod" value="cod" /> Cash on Delivery
+                </label>
+              </div>
+              <div id="shopCardFields" data-testid="shop-card-fields">
+                <div class="form-group">
+                  <label class="field-label" for="shopCardNumber">Card Number</label>
+                  <input type="text" id="shopCardNumber" class="form-input" data-testid="shop-card-number" placeholder="4111 1111 1111 1111" maxlength="19" />
+                </div>
+                <div class="shop-form-row">
+                  <div class="form-group">
+                    <label class="field-label" for="shopCardExpiry">Expiry</label>
+                    <input type="text" id="shopCardExpiry" class="form-input" data-testid="shop-card-expiry" placeholder="MM/YY" maxlength="5" />
+                  </div>
+                  <div class="form-group">
+                    <label class="field-label" for="shopCardCvv">CVV</label>
+                    <input type="text" id="shopCardCvv" class="form-input" data-testid="shop-card-cvv" placeholder="123" maxlength="3" />
+                  </div>
+                </div>
+              </div>
+              <div id="shopUpiField" class="hidden" data-testid="shop-upi-field">
+                <div class="form-group">
+                  <label class="field-label" for="shopUpiId">UPI ID</label>
+                  <input type="text" id="shopUpiId" class="form-input" data-testid="shop-upi-id" placeholder="yourname@upi" />
+                </div>
+              </div>
+              <div class="shop-step-actions">
+                <button class="btn btn-outline" id="shopBackToAddress" data-testid="shop-back-address">Back</button>
+                <button class="btn btn-primary" id="shopPlaceOrder" data-testid="shop-place-order">Place Order</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Confirmation -->
+            <div class="shop-step hidden" id="shopStepConfirmation" data-testid="shop-step-confirmation">
+              <div class="shop-confirmation">
+                <ion-icon name="checkmark-circle" class="shop-confirm-icon"></ion-icon>
+                <h4>Order Placed Successfully!</h4>
+                <p class="shop-order-id" data-testid="shop-order-id"></p>
+                <p>Thank you for your purchase. Your order will be shipped within 3-5 business days.</p>
+                <button class="btn btn-primary" id="shopContinueShopping" data-testid="shop-continue-shopping">Continue Shopping</button>
+              </div>
             </div>
           </div>
         </div>

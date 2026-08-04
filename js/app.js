@@ -1909,4 +1909,193 @@ document.addEventListener("DOMContentLoaded", () => {
     div.textContent = str;
     return div.innerHTML;
   }
+
+  // ===== SHOPPING SECTION =====
+  const shopCart = [];
+  let appliedCoupon = null;
+
+  const coupons = {
+    FLAT10: { type: "percent", value: 10, minOrder: 50000, label: "10% off" },
+    SPEED20: { type: "percent", value: 20, minOrder: 0, categories: ["lamborghini", "triumph"], label: "20% off automobiles" },
+    FIRST500: { type: "fixed", value: 500, minOrder: 0, label: "₹500 off" },
+  };
+
+  const productNames = {
+    lamborghini: "Lamborghini Huracán",
+    triumph: "Triumph Speed Triple 1200",
+    seiko: "Seiko Presage Cocktail Time",
+    rifle: "Bolt Action Sporting Rifle",
+  };
+
+  function formatINR(num) {
+    return "₹" + num.toLocaleString("en-IN");
+  }
+
+  function renderCart() {
+    const itemsEl = document.getElementById("shopCartItems");
+    const emptyEl = document.getElementById("shopCartEmpty");
+    const summaryEl = document.getElementById("shopCartSummary");
+    const countEl = document.getElementById("shopCartCount");
+
+    countEl.textContent = shopCart.length;
+
+    if (shopCart.length === 0) {
+      itemsEl.innerHTML = '<p class="shop-cart-empty" id="shopCartEmpty">Your cart is empty.</p>';
+      summaryEl.classList.add("hidden");
+      return;
+    }
+
+    summaryEl.classList.remove("hidden");
+    itemsEl.innerHTML = shopCart
+      .map(
+        (item, idx) =>
+          `<div class="shop-cart-item" data-testid="cart-item-${item.product}">
+        <div class="shop-cart-item-info">
+          <span class="shop-cart-item-name">${productNames[item.product]}</span>
+          <span class="shop-cart-item-price">${formatINR(item.price)}</span>
+        </div>
+        <button class="shop-cart-item-remove" data-idx="${idx}" data-testid="remove-${item.product}">&times;</button>
+      </div>`,
+      )
+      .join("");
+
+    itemsEl.querySelectorAll(".shop-cart-item-remove").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        shopCart.splice(parseInt(btn.dataset.idx), 1);
+        appliedCoupon = null;
+        resetCouponUI();
+        renderCart();
+      });
+    });
+
+    updateTotals();
+  }
+
+  function updateTotals() {
+    const subtotal = shopCart.reduce((sum, item) => sum + item.price, 0);
+    let discount = 0;
+
+    if (appliedCoupon) {
+      const c = coupons[appliedCoupon];
+      if (c.type === "percent") {
+        const eligible = c.categories ? shopCart.filter((i) => c.categories.includes(i.product)).reduce((s, i) => s + i.price, 0) : subtotal;
+        discount = Math.round((eligible * c.value) / 100);
+      } else {
+        discount = c.value;
+      }
+    }
+
+    document.getElementById("shopSubtotal").textContent = formatINR(subtotal);
+    document.getElementById("shopDiscount").textContent = "-" + formatINR(discount);
+    document.getElementById("shopTotal").textContent = formatINR(subtotal - discount);
+
+    const discountRow = document.getElementById("shopDiscountRow");
+    if (discount > 0) {
+      discountRow.classList.remove("hidden");
+    } else {
+      discountRow.classList.add("hidden");
+    }
+  }
+
+  function resetCouponUI() {
+    const msg = document.getElementById("shopCouponMsg");
+    msg.classList.add("hidden");
+    msg.classList.remove("success", "error");
+    document.getElementById("shopCouponInput").value = "";
+    appliedCoupon = null;
+  }
+
+  document.querySelectorAll(".shop-add-cart").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      shopCart.push({ product: btn.dataset.product, price: parseInt(btn.dataset.price) });
+      renderCart();
+    });
+  });
+
+  document.querySelectorAll(".shop-buy-now").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      shopCart.length = 0;
+      shopCart.push({ product: btn.dataset.product, price: parseInt(btn.dataset.price) });
+      appliedCoupon = null;
+      resetCouponUI();
+      renderCart();
+      openCheckout();
+    });
+  });
+
+  document.getElementById("shopApplyCoupon").addEventListener("click", () => {
+    const code = document.getElementById("shopCouponInput").value.trim().toUpperCase();
+    const msg = document.getElementById("shopCouponMsg");
+    msg.classList.remove("hidden", "success", "error");
+
+    if (!coupons[code]) {
+      msg.textContent = "Invalid coupon code.";
+      msg.classList.add("error");
+      appliedCoupon = null;
+    } else {
+      const c = coupons[code];
+      const subtotal = shopCart.reduce((sum, item) => sum + item.price, 0);
+      if (c.minOrder && subtotal < c.minOrder) {
+        msg.textContent = `Minimum order of ${formatINR(c.minOrder)} required.`;
+        msg.classList.add("error");
+        appliedCoupon = null;
+      } else {
+        msg.textContent = `Coupon "${code}" applied! ${c.label}`;
+        msg.classList.add("success");
+        appliedCoupon = code;
+      }
+    }
+    updateTotals();
+  });
+
+  function openCheckout() {
+    document.getElementById("shopCheckoutOverlay").classList.remove("hidden");
+    document.getElementById("shopStepAddress").classList.remove("hidden");
+    document.getElementById("shopStepPayment").classList.add("hidden");
+    document.getElementById("shopStepConfirmation").classList.add("hidden");
+  }
+
+  document.getElementById("shopCheckoutBtn").addEventListener("click", openCheckout);
+
+  document.getElementById("shopCheckoutClose").addEventListener("click", () => {
+    document.getElementById("shopCheckoutOverlay").classList.add("hidden");
+  });
+
+  document.getElementById("shopCheckoutOverlay").addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) {
+      document.getElementById("shopCheckoutOverlay").classList.add("hidden");
+    }
+  });
+
+  document.getElementById("shopToPayment").addEventListener("click", () => {
+    document.getElementById("shopStepAddress").classList.add("hidden");
+    document.getElementById("shopStepPayment").classList.remove("hidden");
+  });
+
+  document.getElementById("shopBackToAddress").addEventListener("click", () => {
+    document.getElementById("shopStepPayment").classList.add("hidden");
+    document.getElementById("shopStepAddress").classList.remove("hidden");
+  });
+
+  document.querySelectorAll('input[name="paymentMethod"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      document.getElementById("shopCardFields").classList.toggle("hidden", radio.value !== "card");
+      document.getElementById("shopUpiField").classList.toggle("hidden", radio.value !== "upi");
+    });
+  });
+
+  document.getElementById("shopPlaceOrder").addEventListener("click", () => {
+    const orderId = "ORD-" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2, 6).toUpperCase();
+    document.querySelector(".shop-order-id").textContent = "Order ID: " + orderId;
+    document.getElementById("shopStepPayment").classList.add("hidden");
+    document.getElementById("shopStepConfirmation").classList.remove("hidden");
+    shopCart.length = 0;
+    appliedCoupon = null;
+    resetCouponUI();
+    renderCart();
+  });
+
+  document.getElementById("shopContinueShopping").addEventListener("click", () => {
+    document.getElementById("shopCheckoutOverlay").classList.add("hidden");
+  });
 });
