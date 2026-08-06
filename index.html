@@ -72,8 +72,7 @@
           A beautifully crafted practice arena with every UI pattern you need to become a Playwright expert. Forms, tables, modals, drag & drop, shadow DOM, iframes, and much more.
         </p>
         <div class="hero-actions" id="heroActions">
-          <a href="#forms" class="btn btn-primary btn-lg" data-testid="get-started-btn">Get Started</a>
-          <a href="#interactions" class="btn btn-outline btn-lg" data-testid="explore-btn">Explore</a>
+          <button class="btn btn-primary btn-lg" id="exploreTourBtn" data-testid="explore-tour-btn"><ion-icon name="rocket-outline"></ion-icon> Explore</button>
         </div>
         <div class="hero-stats" id="heroStats">
           <div class="stat" data-testid="stat-sections"><span class="stat-number" id="statSections">0</span><span class="stat-label">Sections</span></div>
@@ -554,6 +553,23 @@
                   <td id="grandTotal" data-testid="grand-total" style="font-weight: 700">$5,446</td>
                 </tr>
               </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <!-- Dynamic Table (columns & rows shuffle on reload) -->
+        <div class="card full-width" data-testid="dynamic-table-card" style="margin-top: 2rem">
+          <div class="card-header">
+            <h3><ion-icon name="refresh-outline"></ion-icon> Dynamic Table</h3>
+            <span class="card-badge">Randomized</span>
+          </div>
+          <p class="hint" style="padding: 0 1.5rem">Columns and rows change position on every page reload. Cell values are random.</p>
+          <div class="table-wrapper" style="padding: 1.5rem">
+            <table class="data-table" id="dynamicFruitTable" data-testid="dynamic-fruit-table">
+              <thead>
+                <tr id="dynamicFruitHead" data-testid="dynamic-fruit-head"></tr>
+              </thead>
+              <tbody id="dynamicFruitBody" data-testid="dynamic-fruit-body"></tbody>
             </table>
           </div>
         </div>

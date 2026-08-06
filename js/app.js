@@ -31,12 +31,55 @@ document.addEventListener("DOMContentLoaded", () => {
     hamburger.classList.toggle("active");
   });
 
-  // Close mobile nav on link click
-  navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
+  // Smooth scroll for nav links
+  document.querySelectorAll('.nav-links a[href^="#"], .dropdown-menu a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const targetId = link.getAttribute("href");
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth" });
+      }
       navLinks.classList.remove("active");
       hamburger.classList.remove("active");
     });
+  });
+
+  // Explore tour — scrolls through each section every 3 seconds
+  let tourInterval = null;
+  const exploreTourBtn = document.getElementById("exploreTourBtn");
+
+  function stopTour() {
+    if (tourInterval) {
+      clearInterval(tourInterval);
+      tourInterval = null;
+      exploreTourBtn.innerHTML = '<ion-icon name="rocket-outline"></ion-icon> Explore';
+    }
+  }
+
+  exploreTourBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const sections = document.querySelectorAll("section.section");
+    let idx = 0;
+    if (tourInterval) {
+      stopTour();
+      return;
+    }
+    exploreTourBtn.innerHTML = '<ion-icon name="stop"></ion-icon> Stop Tour';
+    sections[idx].scrollIntoView({ behavior: "smooth" });
+    idx++;
+    tourInterval = setInterval(() => {
+      if (idx >= sections.length) {
+        stopTour();
+        return;
+      }
+      sections[idx].scrollIntoView({ behavior: "smooth" });
+      idx++;
+    }, 3000);
+  });
+
+  document.addEventListener("click", () => {
+    stopTour();
   });
 
   // ===== THEME TOGGLE =====
@@ -71,9 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        animateCounter(document.getElementById("statSections"), 12);
-        animateCounter(document.getElementById("statElements"), 80);
-        animateCounter(document.getElementById("statPatterns"), 50);
+        animateCounter(document.getElementById("statSections"), 19);
+        animateCounter(document.getElementById("statElements"), 200);
+        animateCounter(document.getElementById("statPatterns"), 65);
         statsObserver.disconnect();
       }
     });
@@ -732,6 +775,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.getElementById("grandTotal").textContent = `$${total.toLocaleString()}`;
   }
+
+  // ===== DYNAMIC FRUIT TABLE (shuffled columns & rows on each reload) =====
+  (function () {
+    const columns = ["Fruit", "Color", "Weight (g)", "Price (₹/kg)", "Season", "Stock"];
+    const fruits = ["Mango", "Apple", "Banana", "Grapes", "Orange", "Pineapple", "Strawberry", "Watermelon"];
+    const colors = ["Yellow", "Red", "Green", "Purple", "Orange", "Golden", "Pink", "Crimson"];
+    const seasons = ["Summer", "Winter", "All Year", "Monsoon", "Spring", "Autumn"];
+
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function randInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    const shuffledCols = shuffle(columns);
+    const shuffledFruits = shuffle(fruits).slice(0, 5);
+
+    const headRow = document.getElementById("dynamicFruitHead");
+    shuffledCols.forEach((col) => {
+      const th = document.createElement("th");
+      th.textContent = col;
+      th.setAttribute("data-testid", "dyn-col-" + col.toLowerCase().replace(/[\s()\/]+/g, "-"));
+      headRow.appendChild(th);
+    });
+
+    const tbody = document.getElementById("dynamicFruitBody");
+    shuffledFruits.forEach((fruit, idx) => {
+      const rowData = {
+        Fruit: fruit,
+        Color: colors[randInt(0, colors.length - 1)],
+        "Weight (g)": randInt(50, 900),
+        "Price (₹/kg)": randInt(40, 500),
+        Season: seasons[randInt(0, seasons.length - 1)],
+        Stock: randInt(0, 200),
+      };
+      const tr = document.createElement("tr");
+      tr.setAttribute("data-testid", "dyn-row-" + idx);
+      shuffledCols.forEach((col) => {
+        const td = document.createElement("td");
+        td.textContent = rowData[col];
+        td.setAttribute("data-testid", "dyn-cell-" + idx + "-" + col.toLowerCase().replace(/[\s()\/]+/g, "-"));
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+  })();
 
   // ===== DRAG & DROP =====
   const dndList = document.getElementById("dndList");
