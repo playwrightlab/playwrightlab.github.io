@@ -828,7 +828,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Fruit: fruit,
         Color: colors[randInt(0, colors.length - 1)],
         "Weight (g)": randInt(50, 900),
-        "Price (₹/kg)": randInt(40, 500),
+        "Price (₹/kg)": "₹" + randInt(40, 500),
         Season: seasons[randInt(0, seasons.length - 1)],
         Stock: randInt(0, 200),
       };
