@@ -810,7 +810,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    const shuffledCols = shuffle(columns);
+    const otherCols = columns.filter((c) => c !== "Fruit");
+    const shuffledCols = ["Fruit", ...shuffle(otherCols)];
     const shuffledFruits = shuffle(fruits).slice(0, 5);
 
     const headRow = document.getElementById("dynamicFruitHead");
