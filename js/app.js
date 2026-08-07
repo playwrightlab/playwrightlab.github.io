@@ -793,9 +793,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== DYNAMIC FRUIT TABLE (shuffled columns & rows on each reload) =====
   (function () {
     const columns = ["Fruit", "Color", "Weight (g)", "Price (₹/kg)", "Season", "Stock"];
-    const fruits = ["Mango", "Apple", "Banana", "Grapes", "Orange"];
-    const colors = ["Yellow", "Red", "Green", "Purple", "Orange"];
-    const seasons = ["Summer", "Winter", "All Year", "Monsoon", "Spring"];
+    const fruitData = {
+      Mango: { color: "Yellow", season: "Summer" },
+      Apple: { color: "Red", season: "Winter" },
+      Banana: { color: "Green", season: "All Year" },
+      Grapes: { color: "Purple", season: "Monsoon" },
+      Orange: { color: "Orange", season: "Winter" },
+    };
+    const fruits = Object.keys(fruitData);
 
     function shuffle(arr) {
       const a = arr.slice();
@@ -826,10 +831,10 @@ document.addEventListener("DOMContentLoaded", () => {
     shuffledFruits.forEach((fruit, idx) => {
       const rowData = {
         Fruit: fruit,
-        Color: colors[randInt(0, colors.length - 1)],
+        Color: fruitData[fruit].color,
         "Weight (g)": randInt(50, 900),
         "Price (₹/kg)": "₹" + randInt(40, 500),
-        Season: seasons[randInt(0, seasons.length - 1)],
+        Season: fruitData[fruit].season,
         Stock: randInt(0, 200),
       };
       const tr = document.createElement("tr");
