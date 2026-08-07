@@ -81,6 +81,20 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", () => {
     stopTour();
   });
+  window.addEventListener(
+    "wheel",
+    () => {
+      stopTour();
+    },
+    { passive: true },
+  );
+  window.addEventListener(
+    "touchmove",
+    () => {
+      stopTour();
+    },
+    { passive: true },
+  );
 
   // ===== THEME TOGGLE =====
   const themeToggle = document.getElementById("themeToggle");
