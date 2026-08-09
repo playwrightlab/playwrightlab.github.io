@@ -646,7 +646,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${row.id}</td>
                 <td>${sanitize(row.name)}</td>
                 <td>${sanitize(row.email)}</td>
-                <td><span class="status-badge status-${row.role === "admin" ? "active" : row.role === "editor" ? "pending" : "inactive"}">${sanitize(row.role)}</span></td>
+                <td><span class="status-badge role-${row.role}">${sanitize(row.role)}</span></td>
                 <td><span class="status-badge status-${row.status}">${sanitize(row.status)}</span></td>
                 <td class="row-actions">
                     <button data-testid="edit-${row.id}" title="Edit"><ion-icon name="create-outline"></ion-icon></button>

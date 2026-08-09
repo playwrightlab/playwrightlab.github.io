@@ -1870,6 +1870,19 @@ input[type="color"] {
   color: var(--warning);
 }
 
+.role-admin {
+  background: var(--success-light);
+  color: var(--success);
+}
+.role-editor {
+  background: #eef2ff;
+  color: #6366f1;
+}
+.role-viewer {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
 .table-footer {
   display: flex;
   align-items: center;
