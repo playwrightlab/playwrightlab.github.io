@@ -478,12 +478,12 @@
         <div class="card full-width" data-testid="table-card">
           <div class="card-header">
             <h3><ion-icon name="people-outline"></ion-icon> User Management</h3>
-            <div class="table-controls">
+            <div class="table-controls" id="tableControls" data-testid="table-controls">
               <input type="text" id="tableSearch" placeholder="Search users..." data-testid="table-search" class="table-search-input" autocomplete="off" />
               <select id="rowsPerPage" data-testid="rows-per-page" class="table-filter-select">
-                <option value="5" selected>5 per page</option>
-                <option value="10">10 per page</option>
-                <option value="15">15 per page</option>
+                <option value="5" id="perPage5" data-testid="per-page-5" selected>5 per page</option>
+                <option value="10" id="perPage10" data-testid="per-page-10">10 per page</option>
+                <option value="15" id="perPage15" data-testid="per-page-15">15 per page</option>
               </select>
               <select id="tableFilter" data-testid="table-filter" class="table-filter-select">
                 <option value="all" class="filter-option" id="filterAll">All Roles</option>
