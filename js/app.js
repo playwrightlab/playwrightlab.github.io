@@ -607,7 +607,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let currentPage = 1;
-  const rowsPerPage = 5;
+  let rowsPerPage = 5;
   let sortCol = null;
   let sortDir = "asc";
   let filteredData = [...tableData];
@@ -693,6 +693,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("tableInfo").textContent = `Showing ${start + 1}-${Math.min(start + rowsPerPage, filteredData.length)} of ${filteredData.length} entries`;
     const paginationEl = document.getElementById("pagination");
     paginationEl.innerHTML = "";
+
+    const prevBtn = document.createElement("button");
+    prevBtn.className = "page-btn page-arrow";
+    prevBtn.innerHTML = '<ion-icon name="chevron-back-outline"></ion-icon>';
+    prevBtn.setAttribute("data-testid", "page-prev");
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+      }
+    });
+    paginationEl.appendChild(prevBtn);
+
     for (let i = 1; i <= totalPages; i++) {
       const btn = document.createElement("button");
       btn.className = `page-btn ${i === currentPage ? "active" : ""}`;
@@ -704,7 +718,26 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       paginationEl.appendChild(btn);
     }
+
+    const nextBtn = document.createElement("button");
+    nextBtn.className = "page-btn page-arrow";
+    nextBtn.innerHTML = '<ion-icon name="chevron-forward-outline"></ion-icon>';
+    nextBtn.setAttribute("data-testid", "page-next");
+    nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable();
+      }
+    });
+    paginationEl.appendChild(nextBtn);
   }
+
+  document.getElementById("rowsPerPage").addEventListener("change", (e) => {
+    rowsPerPage = parseInt(e.target.value);
+    currentPage = 1;
+    renderTable();
+  });
 
   document.getElementById("tableSearch").addEventListener("input", () => {
     currentPage = 1;
