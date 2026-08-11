@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="css/styles.css" />
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1870433298475747"
+     crossorigin="anonymous"></script>
   </head>
   <body>
     <!-- ==================== NAVBAR ==================== -->
@@ -31,6 +33,7 @@
           <li><a href="#forms" data-testid="nav-forms">Forms</a></li>
           <li><a href="#tables" data-testid="nav-tables">Tables</a></li>
           <li><a href="#interactions" data-testid="nav-interactions">Interactions</a></li>
+          <li><a href="#shopping" data-testid="nav-shopping">Shopping</a></li>
           <li class="nav-dropdown">
             <a href="#" class="dropdown-trigger" data-testid="nav-more">More ▾</a>
             <ul class="dropdown-menu" data-testid="dropdown-menu">
@@ -47,7 +50,6 @@
               <li><a href="#media" data-testid="nav-media">Media Player</a></li>
               <li><a href="#a11y" data-testid="nav-a11y">Accessibility</a></li>
               <li><a href="#responsive" data-testid="nav-responsive">Responsive</a></li>
-              <li><a href="#shopping" data-testid="nav-shopping">Shopping</a></li>
             </ul>
           </li>
           <li><a href="login.html" data-testid="nav-login" class="nav-btn">Login</a></li>
@@ -683,1030 +685,24 @@
       </div>
     </section>
 
-    <!-- ==================== DYNAMIC CONTENT ==================== -->
-    <section class="section section-alt" id="dynamic">
-      <div class="container">
-        <div class="section-header" id="dynamicHeader">
-          <span class="section-tag" id="dynamicTag">04</span>
-          <h2 class="section-title" id="dynamicTitle">Dynamic Content</h2>
-          <p class="section-desc" id="dynamicDesc">Practice waiting for elements, handling loading states, and dynamic DOM changes.</p>
-        </div>
-
-        <div class="grid-2" id="dynamicGrid">
-          <div class="card" data-testid="delayed-card">
-            <div class="card-header" id="delayedCardHeader">
-              <h3 class="card-title" id="delayedTitle"><ion-icon name="hourglass-outline"></ion-icon> Delayed Loading</h3>
-              <span class="card-badge">Wait</span>
-            </div>
-            <div class="delay-controls" id="delayControls">
-              <label class="field-label" for="delayTime">Delay (seconds):</label>
-              <select id="delayTime" class="delay-select" data-testid="delay-select">
-                <option value="1" class="delay-option" id="delay1s">1 second</option>
-                <option value="2" class="delay-option" id="delay2s">2 seconds</option>
-                <option value="3" class="delay-option" id="delay3s" selected>3 seconds</option>
-                <option value="5" class="delay-option" id="delay5s">5 seconds</option>
-              </select>
-            </div>
-            <button class="btn btn-primary" id="loadDelayedBtn" data-testid="load-delayed-btn">Load Content</button>
-            <div id="delayedContent" data-testid="delayed-content" class="delayed-content">
-              <div class="placeholder-content">Content will appear here...</div>
-            </div>
-          </div>
-
-          <!-- Element Visibility -->
-          <div class="card" data-testid="visibility-card">
-            <div class="card-header" id="visibilityCardHeader">
-              <h3 class="card-title" id="visibilityTitle"><ion-icon name="eye-outline"></ion-icon> Visibility Controls</h3>
-              <span class="card-badge">DOM</span>
-            </div>
-            <div class="btn-group" id="visibilityBtnGroup">
-              <button class="btn btn-outline" data-testid="show-btn" id="showBtn">Show Element</button>
-              <button class="btn btn-outline" data-testid="hide-btn" id="hideBtn">Hide Element</button>
-              <button class="btn btn-outline" data-testid="toggle-vis-btn" id="toggleVisBtn">Toggle</button>
-            </div>
-            <div class="visibility-element-wrapper visible-box" id="visibleElement" data-testid="visible-element">
-              <p class="visible-text" id="visibleText"><ion-icon name="happy-outline"></ion-icon> I'm visible!</p>
-            </div>
-            <div class="btn-group" id="addRemoveBtnGroup" style="margin-top: 1rem">
-              <button class="btn btn-outline" data-testid="add-element-btn" id="addElementBtn">Add Element</button>
-              <button class="btn btn-outline" data-testid="remove-element-btn" id="removeElementBtn">Remove Element</button>
-            </div>
-            <div id="dynamicElements" data-testid="dynamic-elements" class="dynamic-elements-container"></div>
-            <div class="disable-enable-group" id="disableEnableGroup" style="margin-top: 1rem">
-              <button class="btn btn-outline" data-testid="disable-btn" id="disableBtn">Disable Input</button>
-              <button class="btn btn-outline" data-testid="enable-btn" id="enableBtn">Enable Input</button>
-              <input type="text" id="toggleInput" data-testid="toggle-input" placeholder="Type here..." style="margin-top: 0.5rem" autocomplete="off" />
-            </div>
-            <div class="start-stop-group" id="startStopGroup" style="margin-top: 1rem">
-              <h4 class="sub-heading" id="startStopHeading" style="margin-bottom: 0.5rem">Start / Stop Toggle</h4>
-              <button class="btn btn-primary" data-testid="start-stop-btn" id="startStopBtn">Start</button>
-              <span id="startStopStatus" data-testid="start-stop-status" class="result-text">Status: Stopped</span>
-            </div>
-          </div>
-
-          <!-- Counter & Timer -->
-          <div class="card" data-testid="counter-card">
-            <div class="card-header" id="counterCardHeader">
-              <h3 class="card-title" id="counterTitle"><ion-icon name="calculator-outline"></ion-icon> Counter & Timer</h3>
-              <span class="card-badge">State</span>
-            </div>
-            <div class="counter-display" id="counterDisplay">
-              <button class="btn btn-icon" data-testid="decrement-btn" id="decrementBtn">−</button>
-              <span class="counter-value" id="counterValue" data-testid="counter-value">0</span>
-              <button class="btn btn-icon" data-testid="increment-btn" id="incrementBtn">+</button>
-            </div>
-            <button class="btn btn-outline btn-sm" data-testid="reset-counter-btn" id="resetCounterBtn">Reset</button>
-            <hr class="section-divider" id="counterDivider" />
-            <h4 class="sub-heading" id="timerHeading">Auto-updating Timer</h4>
-            <div class="timer-display" id="timerDisplay" data-testid="timer-display">00:00</div>
-            <div class="btn-group" id="timerBtnGroup">
-              <button class="btn btn-primary btn-sm" id="startTimerBtn" data-testid="start-timer-btn">Start</button>
-              <button class="btn btn-outline btn-sm" id="stopTimerBtn" data-testid="stop-timer-btn">Stop</button>
-              <button class="btn btn-outline btn-sm" id="resetTimerBtn" data-testid="reset-timer-btn">Reset</button>
-            </div>
-          </div>
-
-          <!-- Progress & Loading -->
-          <div class="card" data-testid="progress-card">
-            <div class="card-header" id="progressCardHeader">
-              <h3 class="card-title" id="progressTitle"><ion-icon name="bar-chart-outline"></ion-icon> Progress Indicators</h3>
-              <span class="card-badge">Progress</span>
-            </div>
-            <div class="form-group" id="downloadProgressGroup">
-              <label class="field-label" id="downloadProgressLabel">Download Progress</label>
-              <div class="progress-bar-container" id="progressBarContainer">
-                <div class="progress-bar" id="progressBar" data-testid="progress-bar" style="width: 0%">0%</div>
-              </div>
-            </div>
-            <button class="btn btn-primary btn-sm" id="startProgressBtn" data-testid="start-progress-btn">Simulate Download</button>
-            <div class="form-group" id="circularProgressGroup" style="margin-top: 1.5rem">
-              <label class="field-label" id="circularProgressLabel">Circular Progress</label>
-              <div class="spinner-container" id="spinnerContainer">
-                <div class="spinner hidden" id="spinner" data-testid="spinner"></div>
-                <span id="spinnerStatus" data-testid="spinner-status">Click to load</span>
-              </div>
-              <button class="btn btn-outline btn-sm" id="toggleSpinnerBtn" data-testid="toggle-spinner-btn" style="margin-top: 0.5rem">Toggle Spinner</button>
-            </div>
-            <div class="form-group" id="skeletonGroup" style="margin-top: 1rem">
-              <label class="field-label" id="skeletonLabel">Skeleton Loading</label>
-              <button class="btn btn-outline btn-sm" id="toggleSkeletonBtn" data-testid="toggle-skeleton-btn">Toggle Skeleton</button>
-              <div id="skeletonArea" data-testid="skeleton-area" class="skeleton-area">
-                <div class="skeleton-card">
-                  <div class="skeleton skeleton-avatar"></div>
-                  <div class="skeleton-info">
-                    <div class="skeleton skeleton-title"></div>
-                    <div class="skeleton skeleton-text"></div>
-                    <div class="skeleton skeleton-text short"></div>
-                  </div>
-                </div>
-              </div>
-              <div id="loadedContent" data-testid="loaded-content" class="hidden loaded-card">
-                <img
-                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%236366f1'/%3E%3Ctext x='25' y='31' text-anchor='middle' fill='white' font-size='20'%3EJ%3C/text%3E%3C/svg%3E"
-                  alt="Avatar"
-                  class="loaded-avatar"
-                />
-                <div>
-                  <h4>Jane Cooper</h4>
-                  <p>Senior Developer at TechCorp</p>
-                  <small>Joined March 2024</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== MODALS & ALERTS ==================== -->
-    <section class="section" id="modals">
-      <div class="container">
-        <div class="section-header" id="modalsHeader">
-          <span class="section-tag" id="modalsTag">05</span>
-          <h2 class="section-title" id="modalsTitle">Modals & Alerts</h2>
-          <p class="section-desc" id="modalsDesc">Dialog boxes, confirmation prompts, toast notifications, and alerts.</p>
-        </div>
-
-        <div class="grid-2" id="modalsGrid">
-          <!-- Modals -->
-          <div class="card" data-testid="modals-card">
-            <div class="card-header" id="modalsCardHeader">
-              <h3 class="card-title" id="modalDialogsTitle"><ion-icon name="albums-outline"></ion-icon> Modal Dialogs</h3>
-              <span class="card-badge">Modal</span>
-            </div>
-            <div class="btn-stack" id="modalBtnStack">
-              <button class="btn btn-primary" data-testid="open-modal-btn" id="openModalBtn">Open Modal</button>
-              <button class="btn btn-outline" data-testid="open-confirm-btn" id="openConfirmBtn">Confirm Dialog</button>
-              <button class="btn btn-outline" data-testid="open-prompt-btn" id="openPromptBtn">Prompt Dialog</button>
-              <button class="btn btn-outline" data-testid="open-nested-btn" id="openNestedBtn">Nested Modal</button>
-            </div>
-            <div id="dialogResult" data-testid="dialog-result" class="result-display" style="margin-top: 1rem"></div>
-          </div>
-
-          <!-- Toasts & Alerts -->
-          <div class="card" data-testid="toasts-card">
-            <div class="card-header" id="toastsCardHeader">
-              <h3 class="card-title" id="notificationsTitle"><ion-icon name="notifications-outline"></ion-icon> Notifications</h3>
-              <span class="card-badge">Toast</span>
-            </div>
-            <div class="btn-stack" id="toastBtnStack">
-              <button class="btn btn-success" data-testid="toast-success" id="toastSuccess">Success Toast</button>
-              <button class="btn btn-danger" data-testid="toast-error" id="toastError">Error Toast</button>
-              <button class="btn btn-warning" data-testid="toast-warning" id="toastWarning">Warning Toast</button>
-              <button class="btn btn-info" data-testid="toast-info" id="toastInfo">Info Toast</button>
-            </div>
-            <hr class="section-divider" id="toastDivider1" />
-            <h4 class="sub-heading" id="nativeDialogsHeading">Native Dialogs</h4>
-            <div class="btn-stack" id="nativeBtnStack">
-              <button class="btn btn-outline" data-testid="native-alert" id="nativeAlert">window.alert()</button>
-              <button class="btn btn-outline" data-testid="native-confirm" id="nativeConfirm">window.confirm()</button>
-              <button class="btn btn-outline" data-testid="native-prompt" id="nativePrompt">window.prompt()</button>
-            </div>
-            <div id="nativeResult" data-testid="native-result" class="result-display" style="margin-top: 1rem"></div>
-            <hr class="section-divider" id="toastDivider2" />
-            <h4 class="sub-heading" id="inlineAlertsHeading">Inline Alerts</h4>
-            <div class="alert alert-success" id="alertSuccess" data-testid="alert-success"><ion-icon name="checkmark-circle"></ion-icon> Success! Operation completed.</div>
-            <div class="alert alert-error" id="alertError" data-testid="alert-error"><ion-icon name="close-circle"></ion-icon> Error! Something went wrong.</div>
-            <div class="alert alert-warning" id="alertWarning" data-testid="alert-warning"><ion-icon name="warning"></ion-icon> Warning! Please check your input.</div>
-            <div class="alert alert-info" id="alertInfo" data-testid="alert-info"><ion-icon name="information-circle"></ion-icon> Info: System will restart at midnight.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== TABS & ACCORDION ==================== -->
-    <section class="section section-alt" id="tabsAccordion">
-      <div class="container">
-        <div class="section-header" id="tabsAccordionHeader">
-          <span class="section-tag" id="tabsAccordionTag">06</span>
-          <h2 class="section-title" id="tabsAccordionTitle">Tabs & Accordion</h2>
-          <p class="section-desc" id="tabsAccordionDesc">Tabbed interfaces and collapsible content panels.</p>
-        </div>
-        <div class="grid-2" id="tabsAccordionGrid">
-          <!-- Tabs -->
-          <div class="card" data-testid="tabs-card">
-            <div class="card-header" id="tabsCardHeader">
-              <h3 class="card-title" id="tabsCardTitle"><ion-icon name="tab-button-outline"></ion-icon> Tabs</h3>
-            </div>
-            <div class="tabs" data-testid="tabs">
-              <div class="tab-nav" id="tabNav">
-                <button class="tab-btn active" data-tab="tab1" data-testid="tab-btn-1">Overview</button>
-                <button class="tab-btn" data-tab="tab2" data-testid="tab-btn-2">Features</button>
-                <button class="tab-btn" data-tab="tab3" data-testid="tab-btn-3">Pricing</button>
-                <button class="tab-btn" data-tab="tab4" data-testid="tab-btn-4" disabled>Disabled</button>
-              </div>
-              <div class="tab-content active" id="tab1" data-testid="tab-content-1">
-                <h4>Overview</h4>
-                <p>PlayLab is a comprehensive test automation practice website designed for learning Playwright, Selenium, Cypress, and other browser automation tools.</p>
-              </div>
-              <div class="tab-content" id="tab2" data-testid="tab-content-2">
-                <h4>Features</h4>
-                <ul>
-                  <li><ion-icon name="locate-outline"></ion-icon> 50+ interactive UI elements</li>
-                  <li><ion-icon name="sync-outline"></ion-icon> Dynamic content loading</li>
-                  <li><ion-icon name="phone-portrait-outline"></ion-icon> Responsive design testing</li>
-                  <li><ion-icon name="color-palette-outline"></ion-icon> Theme switching (dark/light)</li>
-                  <li><ion-icon name="lock-closed-outline"></ion-icon> Authentication flows</li>
-                </ul>
-              </div>
-              <div class="tab-content" id="tab3" data-testid="tab-content-3">
-                <h4>Pricing</h4>
-                <p><strong>Free!</strong> This practice site is completely open-source and free to use for learning automation testing.</p>
-              </div>
-              <div class="tab-content" id="tab4" data-testid="tab-content-4">
-                <p>This tab is disabled.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Accordion -->
-          <div class="card" data-testid="accordion-card">
-            <div class="card-header" id="accordionCardHeader">
-              <h3 class="card-title" id="accordionCardTitle"><ion-icon name="chevron-collapse-outline"></ion-icon> Accordion</h3>
-            </div>
-            <div class="accordion" data-testid="accordion">
-              <div class="accordion-item" data-testid="accordion-item-1">
-                <button class="accordion-header active" data-testid="accordion-header-1">
-                  <span>What is Playwright?</span>
-                  <span class="accordion-icon">▼</span>
-                </button>
-                <div class="accordion-body open" data-testid="accordion-body-1">
-                  <p>Playwright is a modern end-to-end testing framework created by Microsoft. It supports Chromium, Firefox, and WebKit browsers with a single API.</p>
-                </div>
-              </div>
-              <div class="accordion-item" data-testid="accordion-item-2">
-                <button class="accordion-header" data-testid="accordion-header-2">
-                  <span>Why use this practice site?</span>
-                  <span class="accordion-icon">▼</span>
-                </button>
-                <div class="accordion-body" data-testid="accordion-body-2">
-                  <p>This site provides a safe environment to practice various automation scenarios without affecting real applications. It covers forms, tables, modals, drag & drop, and more.</p>
-                </div>
-              </div>
-              <div class="accordion-item" data-testid="accordion-item-3">
-                <button class="accordion-header" data-testid="accordion-header-3">
-                  <span>How to get started?</span>
-                  <span class="accordion-icon">▼</span>
-                </button>
-                <div class="accordion-body" data-testid="accordion-body-3">
-                  <p>Install Playwright with <code>npm init playwright@latest</code>, then write your tests targeting this site's elements using the provided data-testid attributes.</p>
-                </div>
-              </div>
-              <div class="accordion-item" data-testid="accordion-item-4">
-                <button class="accordion-header" data-testid="accordion-header-4">
-                  <span>Can I contribute?</span>
-                  <span class="accordion-icon">▼</span>
-                </button>
-                <div class="accordion-body" data-testid="accordion-body-4">
-                  <p>Absolutely! Fork the repository, add new practice sections, and submit a pull request. All contributions are welcome.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== FRAMES & SHADOW DOM ==================== -->
-    <section class="section" id="frames">
-      <div class="container">
-        <div class="section-header" id="framesHeader">
-          <span class="section-tag" id="framesTag">07</span>
-          <h2 class="section-title" id="framesTitle">Frames & Windows</h2>
-          <p class="section-desc" id="framesDesc">Practice with iframes, new windows, and cross-frame interactions.</p>
-        </div>
-
-        <div class="grid-2" id="framesGrid">
-          <div class="card" data-testid="iframe-card">
-            <div class="card-header" id="iframeCardHeader">
-              <h3 class="card-title" id="iframeCardTitle"><ion-icon name="browsers-outline"></ion-icon> iFrame</h3>
-              <span class="card-badge">Frame</span>
-            </div>
-            <iframe src="iframe-content.html" id="practiceFrame" data-testid="practice-iframe" title="Practice iFrame" class="practice-iframe"></iframe>
-          </div>
-
-          <div class="card" data-testid="window-card">
-            <div class="card-header" id="windowCardHeader">
-              <h3 class="card-title" id="windowCardTitle"><ion-icon name="open-outline"></ion-icon> Window Handling</h3>
-              <span class="card-badge">Window</span>
-            </div>
-            <div class="btn-stack" id="windowBtnStack">
-              <button class="btn btn-primary" data-testid="new-tab-btn" id="newTabBtn">Open New Tab</button>
-              <button class="btn btn-outline" data-testid="popup-btn" id="popupBtn">Open Popup Window</button>
-              <button class="btn btn-outline" data-testid="print-btn" id="printBtn">Print Dialog</button>
-            </div>
-            <div class="download-section" id="downloadSection" style="margin-top: 1.5rem">
-              <h4 class="sub-heading" id="downloadHeading">Download Testing</h4>
-              <a href="data:text/plain;charset=utf-8,Hello%20Playwright!" download="test-file.txt" class="btn btn-outline" id="downloadTxt" data-testid="download-link">Download Text File</a>
-              <a
-                href="data:text/csv;charset=utf-8,Name,Email,Age%0AJohn,john@test.com,30%0AJane,jane@test.com,25"
-                download="test-data.csv"
-                class="btn btn-outline"
-                id="downloadCsv"
-                data-testid="download-csv"
-                style="margin-top: 0.5rem"
-                >Download CSV</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== SHADOW DOM ==================== -->
-    <section class="section section-alt" id="shadow">
-      <div class="container">
-        <div class="section-header" id="shadowHeader">
-          <span class="section-tag" id="shadowTag">08</span>
-          <h2 class="section-title" id="shadowTitle">Shadow DOM</h2>
-          <p class="section-desc" id="shadowDesc">Elements encapsulated within Shadow DOM for advanced testing.</p>
-        </div>
-        <div class="grid-2" id="shadowGrid">
-          <div class="card" data-testid="shadow-dom-card">
-            <div class="card-header" id="shadowDomCardHeader">
-              <h3 class="card-title" id="shadowDomTitle"><ion-icon name="prism-outline"></ion-icon> Shadow DOM Elements</h3>
-            </div>
-            <div id="shadowHost" data-testid="shadow-host"></div>
-          </div>
-          <div class="card" data-testid="web-component-card">
-            <div class="card-header" id="nestedShadowCardHeader">
-              <h3 class="card-title" id="nestedShadowTitle"><ion-icon name="extension-puzzle-outline"></ion-icon> Nested Shadow DOM</h3>
-            </div>
-            <div id="nestedShadowHost" data-testid="nested-shadow-host"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== ADVANCED ==================== -->
-    <section class="section" id="advanced">
-      <div class="container">
-        <div class="section-header" id="advancedHeader">
-          <span class="section-tag" id="advancedTag">09</span>
-          <h2 class="section-title" id="advancedTitle">Advanced Scenarios</h2>
-          <p class="section-desc" id="advancedDesc">Complex patterns for advanced automation practice.</p>
-        </div>
-
-        <div class="grid-3" id="advancedGrid">
-          <!-- Infinite Scroll -->
-          <div class="card" data-testid="scroll-card">
-            <div class="card-header" id="scrollCardHeader">
-              <h3 class="card-title" id="scrollTitle"><ion-icon name="infinite-outline"></ion-icon> Infinite Scroll</h3>
-              <span class="card-badge">Scroll</span>
-            </div>
-            <div class="scroll-container" id="scrollContainer" data-testid="scroll-container"></div>
-            <div class="scroll-loader hidden" id="scrollLoader" data-testid="scroll-loader">Loading more items...</div>
-          </div>
-
-          <!-- Clipboard -->
-          <div class="card" data-testid="clipboard-card">
-            <div class="card-header" id="clipboardCardHeader">
-              <h3 class="card-title" id="clipboardTitle"><ion-icon name="attach-outline"></ion-icon> Clipboard & Keys</h3>
-              <span class="card-badge">Keyboard</span>
-            </div>
-            <div class="form-group" id="copyGroup">
-              <label class="field-label" id="copyLabel">Copy to clipboard</label>
-              <div class="copy-field" id="copyField">
-                <input type="text" id="copyInput" value="Hello Playwright!" readonly data-testid="copy-input" />
-                <button class="btn btn-sm btn-primary" id="copyBtn" data-testid="copy-btn">Copy</button>
-              </div>
-              <span id="copyStatus" data-testid="copy-status" class="result-text"></span>
-            </div>
-            <div class="form-group" id="keyboardGroup">
-              <label class="field-label" id="keyboardLabel">Keyboard Events</label>
-              <input type="text" id="keyboardInput" placeholder="Type and watch events..." data-testid="keyboard-input" autocomplete="off" />
-              <div class="key-display" id="keyDisplay" data-testid="key-display">Press any key...</div>
-            </div>
-            <div class="form-group" id="pasteGroup">
-              <label class="field-label" id="pasteLabel">Paste Area</label>
-              <textarea id="pasteArea" placeholder="Paste something here..." rows="2" data-testid="paste-area"></textarea>
-            </div>
-          </div>
-
-          <!-- Geolocation & Permissions -->
-          <div class="card" data-testid="geo-card">
-            <div class="card-header" id="geoCardHeader">
-              <h3 class="card-title" id="apiNetworkTitle"><ion-icon name="globe-outline"></ion-icon> API & Network</h3>
-              <span class="card-badge">API</span>
-            </div>
-            <button class="btn btn-primary btn-sm" id="fetchDataBtn" data-testid="fetch-data-btn">Fetch API Data</button>
-            <div id="apiResult" data-testid="api-result" class="result-display" style="margin-top: 1rem">
-              <span class="placeholder-text">Click to fetch data...</span>
-            </div>
-            <hr class="section-divider" id="apiDivider" />
-            <h4 class="sub-heading" id="localStorageHeading">Local Storage</h4>
-            <div class="form-group" id="storageGroup">
-              <div class="form-row" id="storageInputRow">
-                <input type="text" id="storageKey" placeholder="Key" data-testid="storage-key" autocomplete="off" />
-                <input type="text" id="storageValue" placeholder="Value" data-testid="storage-value" autocomplete="off" />
-              </div>
-              <div class="btn-group" id="storageBtnGroup" style="margin-top: 0.5rem">
-                <button class="btn btn-sm btn-primary" id="setStorageBtn" data-testid="set-storage-btn">Set</button>
-                <button class="btn btn-sm btn-outline" id="getStorageBtn" data-testid="get-storage-btn">Get</button>
-                <button class="btn btn-sm btn-outline" id="clearStorageBtn" data-testid="clear-storage-btn">Clear All</button>
-              </div>
-              <div id="storageResult" data-testid="storage-result" class="result-display" style="margin-top: 0.5rem"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sortable Grid -->
-        <div class="card full-width" style="margin-top: 2rem" data-testid="gallery-card">
-          <div class="card-header" id="galleryCardHeader">
-            <h3 class="card-title" id="galleryTitle"><ion-icon name="images-outline"></ion-icon> Image Gallery with Lightbox</h3>
-            <span class="card-badge">Gallery</span>
-          </div>
-          <div class="gallery-grid" id="galleryGrid" data-testid="gallery-grid">
-            <div class="gallery-item" data-testid="gallery-item-1" data-color="#6366f1">
-              <div class="gallery-img">
-                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop" alt="Mountains" loading="lazy" />
-              </div>
-              <p>Mountains</p>
-            </div>
-            <div class="gallery-item" data-testid="gallery-item-2" data-color="#ec4899">
-              <div class="gallery-img">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&h=300&fit=crop" alt="Ocean" loading="lazy" />
-              </div>
-              <p>Ocean</p>
-            </div>
-            <div class="gallery-item" data-testid="gallery-item-3" data-color="#10b981">
-              <div class="gallery-img">
-                <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=300&h=300&fit=crop" alt="Forest" loading="lazy" />
-              </div>
-              <p>Forest</p>
-            </div>
-            <div class="gallery-item" data-testid="gallery-item-4" data-color="#f59e0b">
-              <div class="gallery-img">
-                <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=300&h=300&fit=crop" alt="Desert" loading="lazy" />
-              </div>
-              <p>Desert</p>
-            </div>
-            <div class="gallery-item" data-testid="gallery-item-5" data-color="#06b6d4">
-              <div class="gallery-img">
-                <img src="https://images.unsplash.com/photo-1477346611705-65d1883cee1e?w=300&h=300&fit=crop" alt="Arctic" loading="lazy" />
-              </div>
-              <p>Arctic</p>
-            </div>
-            <div class="gallery-item" data-testid="gallery-item-6" data-color="#8b5cf6">
-              <div class="gallery-img">
-                <img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=300&h=300&fit=crop" alt="Spring" loading="lazy" />
-              </div>
-              <p>Spring</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== MULTI-STEP WIZARD ==================== -->
-    <section class="section section-alt" id="wizard">
-      <div class="container">
-        <div class="section-header" id="wizardHeader">
-          <span class="section-tag" id="wizardTag">10</span>
-          <h2 class="section-title" id="wizardTitle">Multi-Step Wizard</h2>
-          <p class="section-desc" id="wizardDesc">Navigate through a multi-step form with validation at each step.</p>
-        </div>
-        <div class="card full-width" data-testid="wizard-card">
-          <div class="wizard-progress" data-testid="wizard-progress">
-            <div class="wizard-step active" data-testid="wizard-step-1"><span class="step-number">1</span><span class="step-label">Personal</span></div>
-            <div class="wizard-connector"></div>
-            <div class="wizard-step" data-testid="wizard-step-2"><span class="step-number">2</span><span class="step-label">Address</span></div>
-            <div class="wizard-connector"></div>
-            <div class="wizard-step" data-testid="wizard-step-3"><span class="step-number">3</span><span class="step-label">Payment</span></div>
-            <div class="wizard-connector"></div>
-            <div class="wizard-step" data-testid="wizard-step-4"><span class="step-number">4</span><span class="step-label">Review</span></div>
-          </div>
-          <div class="wizard-body" id="wizardBody">
-            <!-- Step 1 -->
-            <div class="wizard-panel active" id="wizardStep1" data-testid="wizard-panel-1">
-              <h3 class="wizard-step-heading" id="wizStep1Heading">Personal Information</h3>
-              <div class="form-row" id="wizNameRow">
-                <div class="form-group" id="wizFirstNameGroup"><label class="field-label" id="wizFirstNameLabel">First Name *</label><input type="text" id="wizFirstName" class="wiz-input" data-testid="wiz-firstname" placeholder="John" autocomplete="off" /></div>
-                <div class="form-group" id="wizLastNameGroup"><label class="field-label" id="wizLastNameLabel">Last Name *</label><input type="text" id="wizLastName" class="wiz-input" data-testid="wiz-lastname" placeholder="Doe" autocomplete="off" /></div>
-              </div>
-              <div class="form-group" id="wizEmailGroup"><label class="field-label" id="wizEmailLabel">Email *</label><input type="email" id="wizEmail" class="wiz-input" data-testid="wiz-email" placeholder="john@example.com" autocomplete="off" /></div>
-              <span class="error-msg" id="wizError1" data-testid="wiz-error-1"></span>
-            </div>
-            <!-- Step 2 -->
-            <div class="wizard-panel" id="wizardStep2" data-testid="wizard-panel-2">
-              <h3 class="wizard-step-heading" id="wizStep2Heading">Address Details</h3>
-              <div class="form-group" id="wizStreetGroup"><label class="field-label" id="wizStreetLabel">Street Address *</label><input type="text" id="wizStreet" class="wiz-input" data-testid="wiz-street" placeholder="123 Main St" autocomplete="off" /></div>
-              <div class="form-row" id="wizCityZipRow">
-                <div class="form-group" id="wizCityGroup"><label class="field-label" id="wizCityLabel">City *</label><input type="text" id="wizCity" class="wiz-input" data-testid="wiz-city" placeholder="New York" autocomplete="off" /></div>
-                <div class="form-group" id="wizZipGroup"><label class="field-label" id="wizZipLabel">ZIP Code *</label><input type="text" id="wizZip" class="wiz-input" data-testid="wiz-zip" placeholder="10001" autocomplete="off" /></div>
-              </div>
-              <span class="error-msg" id="wizError2" data-testid="wiz-error-2"></span>
-            </div>
-            <!-- Step 3 -->
-            <div class="wizard-panel" id="wizardStep3" data-testid="wizard-panel-3">
-              <h3 class="wizard-step-heading" id="wizStep3Heading">Payment Method</h3>
-              <div class="form-group" id="wizCardTypeGroup">
-                <label class="field-label" id="wizCardTypeLabel">Card Type</label>
-                <div class="radio-group" data-testid="wiz-card-type">
-                  <label class="radio-label"><input type="radio" name="cardType" value="visa" data-testid="wiz-visa" checked /> Visa</label>
-                  <label class="radio-label"><input type="radio" name="cardType" value="mastercard" data-testid="wiz-mastercard" /> Mastercard</label>
-                  <label class="radio-label"><input type="radio" name="cardType" value="amex" data-testid="wiz-amex" /> Amex</label>
-                </div>
-              </div>
-              <div class="form-group" id="wizCardNumGroup">
-                <label class="field-label" id="wizCardNumLabel">Card Number *</label><input type="text" id="wizCardNum" class="wiz-input" data-testid="wiz-cardnum" placeholder="4111 1111 1111 1111" autocomplete="off" maxlength="19" />
-              </div>
-              <div class="form-row" id="wizExpiryRow">
-                <div class="form-group" id="wizExpiryGroup"><label class="field-label" id="wizExpiryLabel">Expiry *</label><input type="text" id="wizExpiry" class="wiz-input" data-testid="wiz-expiry" placeholder="MM/YY" autocomplete="off" maxlength="5" /></div>
-                <div class="form-group" id="wizCvvGroup"><label class="field-label" id="wizCvvLabel">CVV *</label><input type="text" id="wizCvv" class="wiz-input" data-testid="wiz-cvv" placeholder="123" autocomplete="off" maxlength="4" /></div>
-              </div>
-              <span class="error-msg" id="wizError3" data-testid="wiz-error-3"></span>
-            </div>
-            <!-- Step 4 -->
-            <div class="wizard-panel" id="wizardStep4" data-testid="wizard-panel-4">
-              <h3 class="wizard-step-heading" id="wizStep4Heading">Review & Submit</h3>
-              <div class="review-summary" id="wizReview" data-testid="wiz-review"></div>
-              <div class="form-group" id="wizAgreeGroup">
-                <label class="checkbox-label" id="wizAgreeLabel"><input type="checkbox" id="wizAgree" data-testid="wiz-agree" /> I confirm the information is correct</label>
-              </div>
-              <span class="error-msg" id="wizError4" data-testid="wiz-error-4"></span>
-            </div>
-            <!-- Success -->
-            <div class="wizard-panel" id="wizardSuccessPanel" data-testid="wizard-success">
-              <div class="wizard-done" id="wizardDone">
-                <ion-icon name="checkmark-circle" style="font-size: 3rem; color: var(--success)"></ion-icon>
-                <h3>Order Submitted!</h3>
-                <p>Your order has been placed successfully.</p>
-                <button class="btn btn-outline" id="wizRestart" data-testid="wiz-restart">Start Over</button>
-              </div>
-            </div>
-          </div>
-          <div class="wizard-actions" id="wizardActions" data-testid="wizard-actions">
-            <button class="btn btn-outline" id="wizPrev" data-testid="wiz-prev" disabled>Back</button>
-            <button class="btn btn-primary" id="wizNext" data-testid="wiz-next">Next</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== COOKIE CONSENT ==================== -->
-    <div class="cookie-banner" id="cookieBanner" data-testid="cookie-banner">
-      <div class="cookie-content">
-        <ion-icon name="lock-closed-outline"></ion-icon>
-        <div>
-          <strong>Cookie Consent</strong>
-          <p>We use cookies to enhance your experience. By continuing, you agree to our cookie policy.</p>
-        </div>
-      </div>
-      <div class="cookie-actions">
-        <button class="btn btn-sm btn-outline" id="cookieSettings" data-testid="cookie-settings">Settings</button>
-        <button class="btn btn-sm btn-outline" id="cookieReject" data-testid="cookie-reject">Reject All</button>
-        <button class="btn btn-sm btn-primary" id="cookieAccept" data-testid="cookie-accept">Accept All</button>
-      </div>
-    </div>
-
-    <!-- ==================== CAROUSEL ==================== -->
-    <section class="section" id="carousel">
-      <div class="container">
-        <div class="section-header" id="carouselHeader">
-          <span class="section-tag" id="carouselTag">11</span>
-          <h2 class="section-title" id="carouselTitle">Carousel / Slider</h2>
-          <p class="section-desc" id="carouselDesc">Image carousel with navigation, autoplay, and indicator dots.</p>
-        </div>
-        <div class="card full-width" data-testid="carousel-card">
-          <div class="carousel" data-testid="carousel">
-            <div class="carousel-track" id="carouselTrack" data-testid="carousel-track">
-              <div class="carousel-slide active" data-testid="carousel-slide-1" style="background: linear-gradient(135deg, #6366f1, #8b5cf6)">
-                <h2>Welcome to PlayLab</h2>
-                <p>Your ultimate Playwright practice arena</p>
-              </div>
-              <div class="carousel-slide" data-testid="carousel-slide-2" style="background: linear-gradient(135deg, #ec4899, #f43f5e)">
-                <h2>50+ UI Elements</h2>
-                <p>Forms, tables, modals, and much more</p>
-              </div>
-              <div class="carousel-slide" data-testid="carousel-slide-3" style="background: linear-gradient(135deg, #10b981, #059669)">
-                <h2>Real-World Patterns</h2>
-                <p>Practice with patterns you'll find in production</p>
-              </div>
-              <div class="carousel-slide" data-testid="carousel-slide-4" style="background: linear-gradient(135deg, #f59e0b, #d97706)">
-                <h2>Completely Free</h2>
-                <p>Open source and free to use for learning</p>
-              </div>
-            </div>
-            <button class="carousel-btn carousel-prev" id="carouselPrev" data-testid="carousel-prev"><ion-icon name="chevron-back"></ion-icon></button>
-            <button class="carousel-btn carousel-next" id="carouselNext" data-testid="carousel-next"><ion-icon name="chevron-forward"></ion-icon></button>
-            <div class="carousel-dots" id="carouselDots" data-testid="carousel-dots"></div>
-          </div>
-          <div class="carousel-controls" id="carouselControls" style="margin-top: 1rem">
-            <label class="checkbox-label"><input type="checkbox" id="carouselAutoplay" data-testid="carousel-autoplay" checked /> Autoplay</label>
-            <span class="result-text" id="carouselStatus" data-testid="carousel-status">Slide 1 of 4</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== NETWORK INTERCEPTION ==================== -->
-    <section class="section section-alt" id="network">
-      <div class="container">
-        <div class="section-header" id="networkHeader">
-          <span class="section-tag" id="networkTag">12</span>
-          <h2 class="section-title" id="networkTitle">Network & API</h2>
-          <p class="section-desc" id="networkDesc">Practice intercepting network requests, mocking APIs, and handling responses.</p>
-        </div>
-        <div class="grid-2" id="networkGrid">
-            <div class="card-header" id="apiUsersCardHeader">
-              <h3 class="card-title" id="fetchUsersTitle"><ion-icon name="cloud-download-outline"></ion-icon> Fetch Users API</h3>
-              <span class="card-badge">GET</span>
-            </div>
-            <p class="card-desc mb-1" id="fetchUsersDesc">Fetches from <code>https://jsonplaceholder.typicode.com/users</code></p>
-            <button class="btn btn-primary btn-sm" id="fetchUsersBtn" data-testid="fetch-users-btn">Fetch Users</button>
-            <div class="api-status" id="fetchUsersStatus" data-testid="fetch-users-status" style="margin-top: 0.5rem"></div>
-            <div class="result-display" id="fetchUsersResult" data-testid="fetch-users-result" style="margin-top: 0.5rem; max-height: 200px; overflow-y: auto">
-              <span class="placeholder-text">Click to fetch...</span>
-            </div>
-          </div>
-          <div class="card" data-testid="api-post-card">
-            <div class="card-header" id="apiPostCardHeader">
-              <h3 class="card-title" id="submitDataTitle"><ion-icon name="cloud-upload-outline"></ion-icon> Submit Data API</h3>
-              <span class="card-badge">POST</span>
-            </div>
-            <div class="form-group" id="postTitleGroup"><label class="field-label" id="postTitleLabel">Title</label><input type="text" id="postTitle" data-testid="post-title" placeholder="My Post Title" autocomplete="off" /></div>
-            <div class="form-group" id="postBodyGroup"><label class="field-label" id="postBodyLabel">Body</label><textarea id="postBody" data-testid="post-body" rows="2" placeholder="Post content..."></textarea></div>
-            <button class="btn btn-primary btn-sm" id="submitPostBtn" data-testid="submit-post-btn">Submit POST</button>
-            <div class="api-status" id="postStatus" data-testid="post-status" style="margin-top: 0.5rem"></div>
-            <div class="result-display" id="postResult" data-testid="post-result" style="margin-top: 0.5rem">
-              <span class="placeholder-text">Submit to see response...</span>
-            </div>
-          </div>
-          <div class="card" data-testid="api-delay-card">
-            <div class="card-header" id="apiDelayCardHeader">
-              <h3 class="card-title" id="slowApiTitle"><ion-icon name="time-outline"></ion-icon> Slow API (Timeout)</h3>
-              <span class="card-badge">Delay</span>
-            </div>
-            <p class="card-desc mb-1" id="slowApiDesc">Simulates a slow API response for testing timeouts.</p>
-            <div class="form-group" id="apiDelayGroup">
-              <label class="field-label" id="apiDelayLabel">Response Delay</label>
-              <select id="apiDelay" class="api-delay-select" data-testid="api-delay-select">
-                <option value="2" class="delay-option" id="apiDelay2s">2 seconds</option>
-                <option value="5" class="delay-option" id="apiDelay5s" selected>5 seconds</option>
-                <option value="10" class="delay-option" id="apiDelay10s">10 seconds</option>
-              </select>
-            </div>
-            <button class="btn btn-primary btn-sm" id="slowApiBtn" data-testid="slow-api-btn">Call Slow API</button>
-            <div class="result-display" id="slowApiResult" data-testid="slow-api-result" style="margin-top: 0.5rem">
-              <span class="placeholder-text">Waiting...</span>
-            </div>
-          </div>
-          <div class="card" data-testid="api-error-card">
-            <div class="card-header" id="apiErrorCardHeader">
-              <h3 class="card-title" id="errorResponsesTitle"><ion-icon name="alert-circle-outline"></ion-icon> Error Responses</h3>
-              <span class="card-badge">Errors</span>
-            </div>
-            <p class="card-desc mb-1" id="errorApiDesc">Trigger different HTTP error responses:</p>
-            <div class="btn-group" id="errorBtnGroup" style="flex-wrap: wrap">
-              <button class="btn btn-sm btn-outline" data-error="400" data-testid="api-error-400">400 Bad Request</button>
-              <button class="btn btn-sm btn-outline" data-error="401" data-testid="api-error-401">401 Unauthorized</button>
-              <button class="btn btn-sm btn-outline" data-error="403" data-testid="api-error-403">403 Forbidden</button>
-              <button class="btn btn-sm btn-outline" data-error="404" data-testid="api-error-404">404 Not Found</button>
-              <button class="btn btn-sm btn-outline" data-error="500" data-testid="api-error-500">500 Server Error</button>
-            </div>
-            <div class="result-display" id="errorApiResult" data-testid="error-api-result" style="margin-top: 0.5rem">
-              <span class="placeholder-text">Click an error code...</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== FLAKY / RETRY ELEMENTS ==================== -->
-    <section class="section" id="flaky">
-      <div class="container">
-        <div class="section-header" id="flakyHeader">
-          <span class="section-tag" id="flakyTag">13</span>
-          <h2 class="section-title" id="flakyTitle">Flaky & Retry Elements</h2>
-          <p class="section-desc" id="flakyDesc">Elements that randomly appear, disappear, or change — great for practicing waitFor and retry logic.</p>
-        </div>
-        <div class="grid-3" id="flakyGrid">
-          <div class="card" data-testid="random-appear-card">
-            <div class="card-header" id="randomAppearCardHeader">
-              <h3 class="card-title" id="randomAppearTitle"><ion-icon name="dice-outline"></ion-icon> Random Appear</h3>
-              <span class="card-badge">Flaky</span>
-            </div>
-            <p class="card-desc mb-1" id="randomAppearDesc">This element randomly appears/disappears every 2 seconds:</p>
-            <div class="flaky-box" id="randomAppearBox" data-testid="random-appear-box">
-              <span data-testid="random-appear-text">Now you see me!</span>
-            </div>
-            <div style="margin-top: 1rem">
-              <span class="result-text" id="randomAppearLog" data-testid="random-appear-log">Visible</span>
-            </div>
-          </div>
-          <div class="card" data-testid="delayed-button-card">
-            <div class="card-header" id="delayedButtonCardHeader">
-              <h3 class="card-title" id="delayedButtonTitle"><ion-icon name="timer-outline"></ion-icon> Delayed Button</h3>
-              <span class="card-badge">Wait</span>
-            </div>
-            <p class="card-desc mb-1" id="delayedBtnDesc">Button appears after a random delay (1-5s):</p>
-            <button class="btn btn-primary btn-sm" id="spawnDelayedBtn" data-testid="spawn-delayed-btn">Spawn Button</button>
-            <div id="delayedBtnContainer" data-testid="delayed-btn-container" style="margin-top: 1rem; min-height: 50px"></div>
-          </div>
-          <div class="card" data-testid="changing-text-card">
-            <div class="card-header" id="changingTextCardHeader">
-              <h3 class="card-title" id="changingTextTitle"><ion-icon name="text-outline"></ion-icon> Changing Text</h3>
-              <span class="card-badge">Flaky</span>
-            </div>
-            <p class="card-desc mb-1" id="changingTextDesc">Text changes every 3 seconds — wait for the right one:</p>
-            <div class="changing-text-box" id="changingTextBox" data-testid="changing-text-box">Loading...</div>
-            <p class="hint" id="changingTextHint">Try waiting for: "Success! Click now"</p>
-            <button class="btn btn-outline btn-sm hidden" id="changingTextAction" data-testid="changing-text-action">Grab It!</button>
-            <span class="result-text" id="changingTextResult" data-testid="changing-text-result"></span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== CUSTOM DATE PICKER ==================== -->
-    <section class="section section-alt" id="datepicker">
-      <div class="container">
-        <div class="section-header" id="datepickerHeader">
-          <span class="section-tag" id="datepickerTag">14</span>
-          <h2 class="section-title" id="datepickerTitle">Custom Date Picker</h2>
-          <p class="section-desc" id="datepickerDesc">A custom calendar widget — more realistic than native date inputs.</p>
-        </div>
-        <div class="grid-2" id="datepickerGrid">
-          <div class="card" data-testid="datepicker-card">
-            <div class="card-header" id="datepickerCardHeader">
-              <h3 class="card-title" id="calendarPickerTitle"><ion-icon name="calendar-outline"></ion-icon> Calendar Picker</h3>
-            </div>
-            <div class="form-group" id="dateSelectGroup">
-              <label class="field-label" id="dateSelectLabel">Select a Date</label>
-              <div class="datepicker-input-wrap" id="datepickerInputWrap">
-                <input type="text" id="datePickerInput" data-testid="datepicker-input" placeholder="Click to select date..." readonly />
-                <ion-icon name="calendar-outline" class="datepicker-icon"></ion-icon>
-              </div>
-            </div>
-            <div class="datepicker-calendar hidden" id="datePickerCal" data-testid="datepicker-calendar">
-              <div class="datepicker-header" id="datepickerNavHeader">
-                <button class="btn btn-icon btn-sm" id="dpPrevMonth" data-testid="dp-prev-month"><ion-icon name="chevron-back"></ion-icon></button>
-                <span id="dpMonthYear" data-testid="dp-month-year"></span>
-                <button class="btn btn-icon btn-sm" id="dpNextMonth" data-testid="dp-next-month"><ion-icon name="chevron-forward"></ion-icon></button>
-              </div>
-              <div class="datepicker-weekdays" id="datepickerWeekdays"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
-              <div class="datepicker-days" id="dpDays" data-testid="dp-days"></div>
-              <div class="datepicker-footer" id="datepickerFooter">
-                <button class="btn btn-sm btn-outline" id="dpToday" data-testid="dp-today">Today</button>
-                <button class="btn btn-sm btn-outline" id="dpClear" data-testid="dp-clear">Clear</button>
-              </div>
-            </div>
-            <div class="result-display" id="datePickerResult" data-testid="datepicker-result" style="margin-top: 1rem"></div>
-          </div>
-          <div class="card" data-testid="daterange-card">
-            <div class="card-header" id="daterangeCardHeader">
-              <h3 class="card-title" id="dateRangeTitle"><ion-icon name="calendar-number-outline"></ion-icon> Date Range</h3>
-            </div>
-            <div class="form-row" id="dateRangeRow">
-              <div class="form-group" id="rangeStartGroup"><label class="field-label" id="rangeStartLabel">Start Date</label><input type="date" id="rangeStart" data-testid="range-start" /></div>
-              <div class="form-group" id="rangeEndGroup"><label class="field-label" id="rangeEndLabel">End Date</label><input type="date" id="rangeEnd" data-testid="range-end" /></div>
-            </div>
-            <button class="btn btn-primary btn-sm" id="calcRangeBtn" data-testid="calc-range-btn">Calculate Duration</button>
-            <div class="result-display" id="rangeResult" data-testid="range-result" style="margin-top: 1rem"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== MEDIA PLAYER ==================== -->
-    <section class="section" id="media">
-      <div class="container">
-        <div class="section-header" id="mediaHeader">
-          <span class="section-tag" id="mediaTag">15</span>
-          <h2 class="section-title" id="mediaTitle">Media Player</h2>
-          <p class="section-desc" id="mediaDesc">Audio and video controls for testing media interactions.</p>
-        </div>
-        <div class="grid-2" id="mediaGrid">
-          <div class="card" data-testid="video-card">
-            <div class="card-header" id="videoCardHeader">
-              <h3 class="card-title" id="videoPlayerTitle"><ion-icon name="videocam-outline"></ion-icon> Video Player</h3>
-            </div>
-            <video id="videoPlayer" data-testid="video-player" class="media-player">
-              <source src="video/cars.mp4" type="video/mp4" />
-              Your browser does not support video.
-            </video>
-            <div class="media-controls" data-testid="video-controls">
-              <button class="btn btn-sm btn-primary" id="videoPlay" data-testid="video-play"><ion-icon name="play"></ion-icon></button>
-              <button class="btn btn-sm btn-outline" id="videoPause" data-testid="video-pause"><ion-icon name="pause"></ion-icon></button>
-              <button class="btn btn-sm btn-outline" id="videoStop" data-testid="video-stop"><ion-icon name="stop"></ion-icon></button>
-              <button class="btn btn-sm btn-outline" id="videoMute" data-testid="video-mute"><ion-icon name="volume-mute"></ion-icon></button>
-              <input type="range" id="videoVolume" data-testid="video-volume" min="0" max="1" step="0.1" value="1" style="width: 80px" />
-              <span class="result-text" id="videoTime" data-testid="video-time">0:00</span>
-            </div>
-            <div class="form-group" id="videoSeekGroup" style="margin-top: 0.5rem">
-              <label class="field-label" id="videoSeekLabel">Seek</label>
-              <input type="range" id="videoSeek" data-testid="video-seek" min="0" max="100" value="0" style="width: 100%" />
-            </div>
-          </div>
-          <div class="card" data-testid="audio-card">
-            <div class="card-header" id="audioCardHeader">
-              <h3 class="card-title" id="audioPlayerTitle"><ion-icon name="musical-notes-outline"></ion-icon> Audio Player</h3>
-            </div>
-            <div class="audio-visual" id="audioVisual" data-testid="audio-visual">
-              <div class="audio-art" id="audioArt"><ion-icon name="musical-notes" style="font-size: 3rem; color: var(--primary)"></ion-icon></div>
-              <div class="audio-info" id="audioInfo">
-                <h4 class="audio-track-title" id="audioTrackTitle">Sample Audio Track</h4>
-                <p class="audio-track-artist" id="audioTrackArtist" style="color: var(--text-muted); font-size: 0.813rem">PlayLab Demo Audio</p>
-              </div>
-            </div>
-            <audio id="audioPlayer" data-testid="audio-player">
-              <source src="audio/godmode.mp3" type="audio/mpeg" />
-            </audio>
-            <div class="media-controls" data-testid="audio-controls">
-              <button class="btn btn-sm btn-primary" id="audioPlay" data-testid="audio-play"><ion-icon name="play"></ion-icon></button>
-              <button class="btn btn-sm btn-outline" id="audioPause" data-testid="audio-pause"><ion-icon name="pause"></ion-icon></button>
-              <button class="btn btn-sm btn-outline" id="audioStop" data-testid="audio-stop"><ion-icon name="stop"></ion-icon></button>
-              <input type="range" id="audioVolume" data-testid="audio-volume" min="0" max="1" step="0.1" value="1" style="width: 80px" />
-              <span class="result-text" id="audioTime" data-testid="audio-time">0:00</span>
-            </div>
-            <input type="range" id="audioSeek" data-testid="audio-seek" min="0" max="100" value="0" style="width: 100%; margin-top: 0.5rem" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== ACCESSIBILITY ==================== -->
-    <section class="section section-alt" id="a11y">
-      <div class="container">
-        <div class="section-header" id="a11yHeader">
-          <span class="section-tag" id="a11yTag">16</span>
-          <h2 class="section-title" id="a11yTitle">Accessibility (a11y)</h2>
-          <p class="section-desc" id="a11yDesc">Test ARIA attributes, keyboard navigation, focus management, and screen reader support.</p>
-        </div>
-        <div class="grid-2" id="a11yGrid">
-          <div class="card" data-testid="keyboard-nav-card">
-            <div class="card-header" id="keyboardNavCardHeader">
-              <h3 class="card-title" id="keyboardNavTitle"><ion-icon name="keypad-outline"></ion-icon> Keyboard Navigation</h3>
-            </div>
-            <p class="card-desc mb-1" id="a11yKeyNavDesc">Use Tab / Shift+Tab to navigate, Enter/Space to activate:</p>
-            <div class="a11y-buttons" data-testid="a11y-buttons">
-              <button class="btn btn-outline btn-sm" data-testid="a11y-btn-1" aria-label="First action button">Button 1</button>
-              <button class="btn btn-outline btn-sm" data-testid="a11y-btn-2" aria-label="Second action button">Button 2</button>
-              <button class="btn btn-outline btn-sm" data-testid="a11y-btn-3" aria-label="Third action button">Button 3</button>
-            </div>
-            <div class="result-display" id="a11yKeyResult" data-testid="a11y-key-result" style="margin-top: 1rem" aria-live="polite"></div>
-            <hr class="section-divider" id="skipLinkDivider" />
-            <h4 class="sub-heading" id="skipLinkHeading">Skip Link</h4>
-            <a href="#a11y-target" class="skip-link" data-testid="skip-link">Skip to content</a>
-            <div style="height: 80px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; margin-top: 0.5rem">
-              <p>Scroll content area...</p>
-              <p>More content...</p>
-              <p>Even more content...</p>
-              <div id="a11y-target" tabindex="-1" data-testid="a11y-target" style="padding: 8px; background: var(--primary-light); border-radius: var(--radius-sm)">Target content reached!</div>
-            </div>
-          </div>
-          <div class="card" data-testid="aria-card">
-            <div class="card-header" id="ariaCardHeader">
-              <h3 class="card-title" id="ariaTitle"><ion-icon name="accessibility-outline"></ion-icon> ARIA Attributes</h3>
-            </div>
-            <div class="form-group" id="ariaSearchGroup">
-              <input
-                type="search"
-                id="a11ySearch"
-                data-testid="a11y-search"
-                placeholder="Type to search..."
-                autocomplete="off"
-                role="searchbox"
-                aria-labelledby="searchLabel"
-                aria-describedby="searchHint"
-              />
-              <span id="searchHint" class="hint">Search results update as you type</span>
-            </div>
-            <div role="status" aria-live="polite" id="a11yLiveRegion" data-testid="a11y-live-region" class="result-display" style="margin-top: 0.5rem"></div>
-            <hr class="section-divider" id="ariaExpandedDivider" />
-            <h4 class="sub-heading" id="ariaExpandedHeading">ARIA Expanded / Controls</h4>
-            <button class="btn btn-outline btn-sm" id="a11yExpandBtn" data-testid="a11y-expand-btn" aria-expanded="false" aria-controls="a11yExpandContent">Toggle Panel</button>
-            <div
-              id="a11yExpandContent"
-              data-testid="a11y-expand-content"
-              class="hidden"
-              role="region"
-              aria-label="Expandable panel"
-              style="margin-top: 0.5rem; padding: 16px; background: var(--bg-alt); border-radius: var(--radius)"
-            >
-              <p>This panel is controlled by the button above. Check <code>aria-expanded</code> state.</p>
-            </div>
-            <hr class="section-divider" id="focusTrapDivider" />
-            <h4 class="sub-heading" id="focusTrapHeading">Focus Trap (Modal-like)</h4>
-            <button class="btn btn-primary btn-sm" id="focusTrapOpen" data-testid="focus-trap-open">Open Focus Trap</button>
-            <div class="focus-trap-area hidden" id="focusTrapArea" data-testid="focus-trap-area" role="dialog" aria-modal="true" aria-label="Focus trap dialog">
-              <p><strong>Focus is trapped here!</strong> Tab cycles only within this area.</p>
-              <input type="text" class="focus-trap-field" id="focusTrapInput" data-testid="focus-trap-input" placeholder="Trapped input" autocomplete="off" />
-              <button class="btn btn-outline btn-sm" id="focusTrapAction" data-testid="focus-trap-action">Action</button>
-              <button class="btn btn-primary btn-sm" id="focusTrapClose" data-testid="focus-trap-close">Close Trap</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== RESPONSIVE TESTING ==================== -->
-    <section class="section" id="responsive">
-      <div class="container">
-        <div class="section-header" id="responsiveHeader">
-          <span class="section-tag" id="responsiveTag">17</span>
-          <h2 class="section-title" id="responsiveTitle">Responsive Testing</h2>
-          <p class="section-desc" id="responsiveDesc">Elements that change behavior and visibility based on viewport size.</p>
-        </div>
-        <div class="card full-width" data-testid="responsive-card">
-          <div class="card-header">
-            <h3><ion-icon name="resize-outline"></ion-icon> Viewport-Aware Elements</h3>
-          </div>
-          <div class="responsive-grid" data-testid="responsive-grid">
-            <div class="responsive-box desktop-only" data-testid="desktop-only">
-              <ion-icon name="desktop-outline"></ion-icon>
-              <span>Desktop Only</span>
-              <small>Visible at &gt; 768px</small>
-            </div>
-            <div class="responsive-box tablet-only" data-testid="tablet-only">
-              <ion-icon name="tablet-portrait-outline"></ion-icon>
-              <span>Tablet Only</span>
-              <small>Visible at 481–768px</small>
-            </div>
-            <div class="responsive-box mobile-only" data-testid="mobile-only">
-              <ion-icon name="phone-portrait-outline"></ion-icon>
-              <span>Mobile Only</span>
-              <small>Visible at ≤ 480px</small>
-            </div>
-            <div class="responsive-box always-visible" data-testid="always-visible">
-              <ion-icon name="globe-outline"></ion-icon>
-              <span>Always Visible</span>
-              <small>Visible at all sizes</small>
-            </div>
-          </div>
-          <div class="viewport-info" data-testid="viewport-info" style="margin-top: 1.5rem">
-            <p>Current viewport: <strong id="viewportWidth" data-testid="viewport-width">—</strong> × <strong id="viewportHeight" data-testid="viewport-height">—</strong></p>
-            <p>Breakpoint: <span class="card-badge" id="breakpointLabel" data-testid="breakpoint-label">—</span></p>
-          </div>
-          <hr class="section-divider" id="responsiveLayoutDivider" />
-          <h4 class="sub-heading" id="responsiveLayoutHeading">Responsive Layout Change</h4>
-          <p class="hint" id="responsiveLayoutHint">These cards stack on mobile but display side-by-side on desktop.</p>
-          <div class="responsive-demo-grid" data-testid="responsive-demo-grid">
-            <div class="responsive-demo-item" data-testid="resp-item-1">Card A</div>
-            <div class="responsive-demo-item" data-testid="resp-item-2">Card B</div>
-            <div class="responsive-demo-item" data-testid="resp-item-3">Card C</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== PROTECTED ROUTE ==================== -->
-    <section class="section section-alt" id="protected">
-      <div class="container">
-        <div class="section-header" id="protectedHeader">
-          <span class="section-tag" id="protectedTag">18</span>
-          <h2 class="section-title" id="protectedTitle">Protected Content</h2>
-          <p class="section-desc" id="protectedDesc">Content that requires authentication — practice testing auth guards.</p>
-        </div>
-        <div class="card full-width" data-testid="protected-card">
-          <div class="card-header" id="protectedCardHeader">
-            <h3 class="card-title" id="protectedAreaTitle"><ion-icon name="shield-checkmark-outline"></ion-icon> Protected Area</h3>
-          </div>
-          <div id="protectedLocked" data-testid="protected-locked">
-            <div class="protected-lock" id="protectedLockContent">
-              <ion-icon name="lock-closed" style="font-size: 3rem; color: var(--text-muted)"></ion-icon>
-              <h4 class="auth-heading" id="authRequiredHeading">Authentication Required</h4>
-              <p class="auth-message" id="authRequiredMessage">You must be logged in to view this content.</p>
-              <p class="hint" id="authCredentialsHint">Login with: <code>test@playlab.com</code> / <code>Password123</code></p>
-              <a href="login.html" class="btn btn-primary" id="protectedLoginBtn" data-testid="protected-login-btn">Login to Access</a>
-            </div>
-          </div>
-          <div id="protectedContent" data-testid="protected-content" class="hidden">
-            <div class="protected-unlocked" id="protectedUnlockedContent">
-              <ion-icon name="shield-checkmark" style="font-size: 2rem; color: var(--success)"></ion-icon>
-              <h4>Welcome, <span id="protectedUser" data-testid="protected-user"></span>!</h4>
-              <p>This secret content is only visible to authenticated users.</p>
-              <div class="result-display" style="margin-top: 1rem">
-                <p><strong>Secret Data:</strong> The answer to everything is 42.</p>
-                <p><strong>API Key:</strong> pk_test_XXXX_redacted</p>
-                <p><strong>Access Level:</strong> Premium</p>
-              </div>
-              <button class="btn btn-outline btn-sm" id="protectedLogout" data-testid="protected-logout" style="margin-top: 1rem">Logout</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ==================== SHOPPING SECTION ==================== -->
-    <section class="section" id="shopping">
+    <section class="section section-alt" id="shopping">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">19</span>
-          <h2 class="section-title">Shopping</h2>
-          <p class="section-desc">A complete e-commerce workflow — browse products, add to cart, apply coupons, and checkout.</p>
+        <div class="section-header" id="shoppingHeader">
+          <span class="section-tag" id="shoppingTag" data-testid="shopping-tag">04</span>
+          <h2 class="section-title" id="shoppingTitle">Shopping</h2>
+          <p class="section-desc" id="shoppingDesc">A complete e-commerce workflow — browse products, add to cart, apply coupons, and checkout.</p>
         </div>
 
         <!-- Product Grid -->
         <div class="shop-products" id="shopProducts" data-testid="shop-products">
           <div class="shop-card" data-testid="product-lamborghini">
             <div class="shop-card-img">
-              <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&h=300&fit=crop" alt="Lamborghini Huracán" />
+              <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&h=300&fit=crop" alt="Lamborghini Huracan" />
               <span class="shop-badge">Luxury</span>
             </div>
             <div class="shop-card-body">
-              <h4 class="shop-card-title">Lamborghini Huracán</h4>
+              <h4 class="shop-card-title">Lamborghini Huracan</h4>
               <p class="shop-card-desc">V10 engine, 630 HP, 0-100 in 2.9s</p>
               <div class="shop-card-price">₹3,21,00,000</div>
               <div class="shop-card-actions">
@@ -1723,7 +719,7 @@
             </div>
             <div class="shop-card-body">
               <h4 class="shop-card-title">Triumph Speed Triple 1200</h4>
-              <p class="shop-card-desc">1160cc triple engine, 180 HP, Öhlins suspension</p>
+              <p class="shop-card-desc">1160cc triple engine, 180 HP, Ohlins suspension</p>
               <div class="shop-card-price">₹16,95,000</div>
               <div class="shop-card-actions">
                 <button class="btn btn-primary btn-sm shop-add-cart" data-product="triumph" data-price="1695000" data-testid="add-cart-triumph">Add to Cart</button>
@@ -1883,6 +879,1012 @@
                 <p>Thank you for your purchase. Your order will be shipped within 3-5 business days.</p>
                 <button class="btn btn-primary" id="shopContinueShopping" data-testid="shop-continue-shopping">Continue Shopping</button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== DYNAMIC CONTENT ==================== -->
+    <section class="section" id="dynamic">
+      <div class="container">
+        <div class="section-header" id="dynamicHeader">
+          <span class="section-tag" id="dynamicTag">05</span>
+          <h2 class="section-title" id="dynamicTitle">Dynamic Content</h2>
+          <p class="section-desc" id="dynamicDesc">Practice waiting for elements, handling loading states, and dynamic DOM changes.</p>
+        </div>
+
+        <div class="grid-2" id="dynamicGrid">
+          <div class="card" data-testid="delayed-card">
+            <div class="card-header" id="delayedCardHeader">
+              <h3 class="card-title" id="delayedTitle"><ion-icon name="hourglass-outline"></ion-icon> Delayed Loading</h3>
+              <span class="card-badge">Wait</span>
+            </div>
+            <div class="delay-controls" id="delayControls">
+              <label class="field-label" for="delayTime">Delay (seconds):</label>
+              <select id="delayTime" class="delay-select" data-testid="delay-select">
+                <option value="1" class="delay-option" id="delay1s">1 second</option>
+                <option value="2" class="delay-option" id="delay2s">2 seconds</option>
+                <option value="3" class="delay-option" id="delay3s" selected>3 seconds</option>
+                <option value="5" class="delay-option" id="delay5s">5 seconds</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="loadDelayedBtn" data-testid="load-delayed-btn">Load Content</button>
+            <div id="delayedContent" data-testid="delayed-content" class="delayed-content">
+              <div class="placeholder-content">Content will appear here...</div>
+            </div>
+          </div>
+
+          <!-- Element Visibility -->
+          <div class="card" data-testid="visibility-card">
+            <div class="card-header" id="visibilityCardHeader">
+              <h3 class="card-title" id="visibilityTitle"><ion-icon name="eye-outline"></ion-icon> Visibility Controls</h3>
+              <span class="card-badge">DOM</span>
+            </div>
+            <div class="btn-group" id="visibilityBtnGroup">
+              <button class="btn btn-outline" data-testid="show-btn" id="showBtn">Show Element</button>
+              <button class="btn btn-outline" data-testid="hide-btn" id="hideBtn">Hide Element</button>
+              <button class="btn btn-outline" data-testid="toggle-vis-btn" id="toggleVisBtn">Toggle</button>
+            </div>
+            <div class="visibility-element-wrapper visible-box" id="visibleElement" data-testid="visible-element">
+              <p class="visible-text" id="visibleText"><ion-icon name="happy-outline"></ion-icon> I'm visible!</p>
+            </div>
+            <div class="btn-group" id="addRemoveBtnGroup" style="margin-top: 1rem">
+              <button class="btn btn-outline" data-testid="add-element-btn" id="addElementBtn">Add Element</button>
+              <button class="btn btn-outline" data-testid="remove-element-btn" id="removeElementBtn">Remove Element</button>
+            </div>
+            <div id="dynamicElements" data-testid="dynamic-elements" class="dynamic-elements-container"></div>
+            <div class="disable-enable-group" id="disableEnableGroup" style="margin-top: 1rem">
+              <button class="btn btn-outline" data-testid="disable-btn" id="disableBtn">Disable Input</button>
+              <button class="btn btn-outline" data-testid="enable-btn" id="enableBtn">Enable Input</button>
+              <input type="text" id="toggleInput" data-testid="toggle-input" placeholder="Type here..." style="margin-top: 0.5rem" autocomplete="off" />
+            </div>
+            <div class="start-stop-group" id="startStopGroup" style="margin-top: 1rem">
+              <h4 class="sub-heading" id="startStopHeading" style="margin-bottom: 0.5rem">Start / Stop Toggle</h4>
+              <button class="btn btn-primary" data-testid="start-stop-btn" id="startStopBtn">Start</button>
+              <span id="startStopStatus" data-testid="start-stop-status" class="result-text">Status: Stopped</span>
+            </div>
+          </div>
+
+          <!-- Counter & Timer -->
+          <div class="card" data-testid="counter-card">
+            <div class="card-header" id="counterCardHeader">
+              <h3 class="card-title" id="counterTitle"><ion-icon name="calculator-outline"></ion-icon> Counter & Timer</h3>
+              <span class="card-badge">State</span>
+            </div>
+            <div class="counter-display" id="counterDisplay">
+              <button class="btn btn-icon" data-testid="decrement-btn" id="decrementBtn">−</button>
+              <span class="counter-value" id="counterValue" data-testid="counter-value">0</span>
+              <button class="btn btn-icon" data-testid="increment-btn" id="incrementBtn">+</button>
+            </div>
+            <button class="btn btn-outline btn-sm" data-testid="reset-counter-btn" id="resetCounterBtn">Reset</button>
+            <hr class="section-divider" id="counterDivider" />
+            <h4 class="sub-heading" id="timerHeading">Auto-updating Timer</h4>
+            <div class="timer-display" id="timerDisplay" data-testid="timer-display">00:00</div>
+            <div class="btn-group" id="timerBtnGroup">
+              <button class="btn btn-primary btn-sm" id="startTimerBtn" data-testid="start-timer-btn">Start</button>
+              <button class="btn btn-outline btn-sm" id="stopTimerBtn" data-testid="stop-timer-btn">Stop</button>
+              <button class="btn btn-outline btn-sm" id="resetTimerBtn" data-testid="reset-timer-btn">Reset</button>
+            </div>
+          </div>
+
+          <!-- Progress & Loading -->
+          <div class="card" data-testid="progress-card">
+            <div class="card-header" id="progressCardHeader">
+              <h3 class="card-title" id="progressTitle"><ion-icon name="bar-chart-outline"></ion-icon> Progress Indicators</h3>
+              <span class="card-badge">Progress</span>
+            </div>
+            <div class="form-group" id="downloadProgressGroup">
+              <label class="field-label" id="downloadProgressLabel">Download Progress</label>
+              <div class="progress-bar-container" id="progressBarContainer">
+                <div class="progress-bar" id="progressBar" data-testid="progress-bar" style="width: 0%">0%</div>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm" id="startProgressBtn" data-testid="start-progress-btn">Simulate Download</button>
+            <div class="form-group" id="circularProgressGroup" style="margin-top: 1.5rem">
+              <label class="field-label" id="circularProgressLabel">Circular Progress</label>
+              <div class="spinner-container" id="spinnerContainer">
+                <div class="spinner hidden" id="spinner" data-testid="spinner"></div>
+                <span id="spinnerStatus" data-testid="spinner-status">Click to load</span>
+              </div>
+              <button class="btn btn-outline btn-sm" id="toggleSpinnerBtn" data-testid="toggle-spinner-btn" style="margin-top: 0.5rem">Toggle Spinner</button>
+            </div>
+            <div class="form-group" id="skeletonGroup" style="margin-top: 1rem">
+              <label class="field-label" id="skeletonLabel">Skeleton Loading</label>
+              <button class="btn btn-outline btn-sm" id="toggleSkeletonBtn" data-testid="toggle-skeleton-btn">Toggle Skeleton</button>
+              <div id="skeletonArea" data-testid="skeleton-area" class="skeleton-area">
+                <div class="skeleton-card">
+                  <div class="skeleton skeleton-avatar"></div>
+                  <div class="skeleton-info">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                  </div>
+                </div>
+              </div>
+              <div id="loadedContent" data-testid="loaded-content" class="hidden loaded-card">
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%236366f1'/%3E%3Ctext x='25' y='31' text-anchor='middle' fill='white' font-size='20'%3EJ%3C/text%3E%3C/svg%3E"
+                  alt="Avatar"
+                  class="loaded-avatar"
+                />
+                <div>
+                  <h4>Jane Cooper</h4>
+                  <p>Senior Developer at TechCorp</p>
+                  <small>Joined March 2024</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MODALS & ALERTS ==================== -->
+    <section class="section section-alt" id="modals">
+      <div class="container">
+        <div class="section-header" id="modalsHeader">
+          <span class="section-tag" id="modalsTag">06</span>
+          <h2 class="section-title" id="modalsTitle">Modals & Alerts</h2>
+          <p class="section-desc" id="modalsDesc">Dialog boxes, confirmation prompts, toast notifications, and alerts.</p>
+        </div>
+
+        <div class="grid-2" id="modalsGrid">
+          <!-- Modals -->
+          <div class="card" data-testid="modals-card">
+            <div class="card-header" id="modalsCardHeader">
+              <h3 class="card-title" id="modalDialogsTitle"><ion-icon name="albums-outline"></ion-icon> Modal Dialogs</h3>
+              <span class="card-badge">Modal</span>
+            </div>
+            <div class="btn-stack" id="modalBtnStack">
+              <button class="btn btn-primary" data-testid="open-modal-btn" id="openModalBtn">Open Modal</button>
+              <button class="btn btn-outline" data-testid="open-confirm-btn" id="openConfirmBtn">Confirm Dialog</button>
+              <button class="btn btn-outline" data-testid="open-prompt-btn" id="openPromptBtn">Prompt Dialog</button>
+              <button class="btn btn-outline" data-testid="open-nested-btn" id="openNestedBtn">Nested Modal</button>
+            </div>
+            <div id="dialogResult" data-testid="dialog-result" class="result-display" style="margin-top: 1rem"></div>
+          </div>
+
+          <!-- Toasts & Alerts -->
+          <div class="card" data-testid="toasts-card">
+            <div class="card-header" id="toastsCardHeader">
+              <h3 class="card-title" id="notificationsTitle"><ion-icon name="notifications-outline"></ion-icon> Notifications</h3>
+              <span class="card-badge">Toast</span>
+            </div>
+            <div class="btn-stack" id="toastBtnStack">
+              <button class="btn btn-success" data-testid="toast-success" id="toastSuccess">Success Toast</button>
+              <button class="btn btn-danger" data-testid="toast-error" id="toastError">Error Toast</button>
+              <button class="btn btn-warning" data-testid="toast-warning" id="toastWarning">Warning Toast</button>
+              <button class="btn btn-info" data-testid="toast-info" id="toastInfo">Info Toast</button>
+            </div>
+            <hr class="section-divider" id="toastDivider1" />
+            <h4 class="sub-heading" id="nativeDialogsHeading">Native Dialogs</h4>
+            <div class="btn-stack" id="nativeBtnStack">
+              <button class="btn btn-outline" data-testid="native-alert" id="nativeAlert">window.alert()</button>
+              <button class="btn btn-outline" data-testid="native-confirm" id="nativeConfirm">window.confirm()</button>
+              <button class="btn btn-outline" data-testid="native-prompt" id="nativePrompt">window.prompt()</button>
+            </div>
+            <div id="nativeResult" data-testid="native-result" class="result-display" style="margin-top: 1rem"></div>
+            <hr class="section-divider" id="toastDivider2" />
+            <h4 class="sub-heading" id="inlineAlertsHeading">Inline Alerts</h4>
+            <div class="alert alert-success" id="alertSuccess" data-testid="alert-success"><ion-icon name="checkmark-circle"></ion-icon> Success! Operation completed.</div>
+            <div class="alert alert-error" id="alertError" data-testid="alert-error"><ion-icon name="close-circle"></ion-icon> Error! Something went wrong.</div>
+            <div class="alert alert-warning" id="alertWarning" data-testid="alert-warning"><ion-icon name="warning"></ion-icon> Warning! Please check your input.</div>
+            <div class="alert alert-info" id="alertInfo" data-testid="alert-info"><ion-icon name="information-circle"></ion-icon> Info: System will restart at midnight.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TABS & ACCORDION ==================== -->
+    <section class="section" id="tabsAccordion">
+      <div class="container">
+        <div class="section-header" id="tabsAccordionHeader">
+          <span class="section-tag" id="tabsAccordionTag">07</span>
+          <h2 class="section-title" id="tabsAccordionTitle">Tabs & Accordion</h2>
+          <p class="section-desc" id="tabsAccordionDesc">Tabbed interfaces and collapsible content panels.</p>
+        </div>
+        <div class="grid-2" id="tabsAccordionGrid">
+          <!-- Tabs -->
+          <div class="card" data-testid="tabs-card">
+            <div class="card-header" id="tabsCardHeader">
+              <h3 class="card-title" id="tabsCardTitle"><ion-icon name="tab-button-outline"></ion-icon> Tabs</h3>
+            </div>
+            <div class="tabs" data-testid="tabs">
+              <div class="tab-nav" id="tabNav">
+                <button class="tab-btn active" data-tab="tab1" data-testid="tab-btn-1">Overview</button>
+                <button class="tab-btn" data-tab="tab2" data-testid="tab-btn-2">Features</button>
+                <button class="tab-btn" data-tab="tab3" data-testid="tab-btn-3">Pricing</button>
+                <button class="tab-btn" data-tab="tab4" data-testid="tab-btn-4" disabled>Disabled</button>
+              </div>
+              <div class="tab-content active" id="tab1" data-testid="tab-content-1">
+                <h4>Overview</h4>
+                <p>PlayLab is a comprehensive test automation practice website designed for learning Playwright, Selenium, Cypress, and other browser automation tools.</p>
+              </div>
+              <div class="tab-content" id="tab2" data-testid="tab-content-2">
+                <h4>Features</h4>
+                <ul>
+                  <li><ion-icon name="locate-outline"></ion-icon> 50+ interactive UI elements</li>
+                  <li><ion-icon name="sync-outline"></ion-icon> Dynamic content loading</li>
+                  <li><ion-icon name="phone-portrait-outline"></ion-icon> Responsive design testing</li>
+                  <li><ion-icon name="color-palette-outline"></ion-icon> Theme switching (dark/light)</li>
+                  <li><ion-icon name="lock-closed-outline"></ion-icon> Authentication flows</li>
+                </ul>
+              </div>
+              <div class="tab-content" id="tab3" data-testid="tab-content-3">
+                <h4>Pricing</h4>
+                <p><strong>Free!</strong> This practice site is completely open-source and free to use for learning automation testing.</p>
+              </div>
+              <div class="tab-content" id="tab4" data-testid="tab-content-4">
+                <p>This tab is disabled.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion -->
+          <div class="card" data-testid="accordion-card">
+            <div class="card-header" id="accordionCardHeader">
+              <h3 class="card-title" id="accordionCardTitle"><ion-icon name="chevron-collapse-outline"></ion-icon> Accordion</h3>
+            </div>
+            <div class="accordion" data-testid="accordion">
+              <div class="accordion-item" data-testid="accordion-item-1">
+                <button class="accordion-header active" data-testid="accordion-header-1">
+                  <span>What is Playwright?</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body open" data-testid="accordion-body-1">
+                  <p>Playwright is a modern end-to-end testing framework created by Microsoft. It supports Chromium, Firefox, and WebKit browsers with a single API.</p>
+                </div>
+              </div>
+              <div class="accordion-item" data-testid="accordion-item-2">
+                <button class="accordion-header" data-testid="accordion-header-2">
+                  <span>Why use this practice site?</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body" data-testid="accordion-body-2">
+                  <p>This site provides a safe environment to practice various automation scenarios without affecting real applications. It covers forms, tables, modals, drag & drop, and more.</p>
+                </div>
+              </div>
+              <div class="accordion-item" data-testid="accordion-item-3">
+                <button class="accordion-header" data-testid="accordion-header-3">
+                  <span>How to get started?</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body" data-testid="accordion-body-3">
+                  <p>Install Playwright with <code>npm init playwright@latest</code>, then write your tests targeting this site's elements using the provided data-testid attributes.</p>
+                </div>
+              </div>
+              <div class="accordion-item" data-testid="accordion-item-4">
+                <button class="accordion-header" data-testid="accordion-header-4">
+                  <span>Can I contribute?</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-body" data-testid="accordion-body-4">
+                  <p>Absolutely! Fork the repository, add new practice sections, and submit a pull request. All contributions are welcome.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FRAMES & SHADOW DOM ==================== -->
+    <section class="section section-alt" id="frames">
+      <div class="container">
+        <div class="section-header" id="framesHeader">
+          <span class="section-tag" id="framesTag">08</span>
+          <h2 class="section-title" id="framesTitle">Frames & Windows</h2>
+          <p class="section-desc" id="framesDesc">Practice with iframes, new windows, and cross-frame interactions.</p>
+        </div>
+
+        <div class="grid-2" id="framesGrid">
+          <div class="card" data-testid="iframe-card">
+            <div class="card-header" id="iframeCardHeader">
+              <h3 class="card-title" id="iframeCardTitle"><ion-icon name="browsers-outline"></ion-icon> iFrame</h3>
+              <span class="card-badge">Frame</span>
+            </div>
+            <iframe src="iframe-content.html" id="practiceFrame" data-testid="practice-iframe" title="Practice iFrame" class="practice-iframe"></iframe>
+          </div>
+
+          <div class="card" data-testid="window-card">
+            <div class="card-header" id="windowCardHeader">
+              <h3 class="card-title" id="windowCardTitle"><ion-icon name="open-outline"></ion-icon> Window Handling</h3>
+              <span class="card-badge">Window</span>
+            </div>
+            <div class="btn-stack" id="windowBtnStack">
+              <button class="btn btn-primary" data-testid="new-tab-btn" id="newTabBtn">Open New Tab</button>
+              <button class="btn btn-outline" data-testid="popup-btn" id="popupBtn">Open Popup Window</button>
+              <button class="btn btn-outline" data-testid="print-btn" id="printBtn">Print Dialog</button>
+            </div>
+            <div class="download-section" id="downloadSection" style="margin-top: 1.5rem">
+              <h4 class="sub-heading" id="downloadHeading">Download Testing</h4>
+              <a href="data:text/plain;charset=utf-8,Hello%20Playwright!" download="test-file.txt" class="btn btn-outline" id="downloadTxt" data-testid="download-link">Download Text File</a>
+              <a
+                href="data:text/csv;charset=utf-8,Name,Email,Age%0AJohn,john@test.com,30%0AJane,jane@test.com,25"
+                download="test-data.csv"
+                class="btn btn-outline"
+                id="downloadCsv"
+                data-testid="download-csv"
+                style="margin-top: 0.5rem"
+                >Download CSV</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SHADOW DOM ==================== -->
+    <section class="section" id="shadow">
+      <div class="container">
+        <div class="section-header" id="shadowHeader">
+          <span class="section-tag" id="shadowTag">09</span>
+          <h2 class="section-title" id="shadowTitle">Shadow DOM</h2>
+          <p class="section-desc" id="shadowDesc">Elements encapsulated within Shadow DOM for advanced testing.</p>
+        </div>
+        <div class="grid-2" id="shadowGrid">
+          <div class="card" data-testid="shadow-dom-card">
+            <div class="card-header" id="shadowDomCardHeader">
+              <h3 class="card-title" id="shadowDomTitle"><ion-icon name="prism-outline"></ion-icon> Shadow DOM Elements</h3>
+            </div>
+            <div id="shadowHost" data-testid="shadow-host"></div>
+          </div>
+          <div class="card" data-testid="web-component-card">
+            <div class="card-header" id="nestedShadowCardHeader">
+              <h3 class="card-title" id="nestedShadowTitle"><ion-icon name="extension-puzzle-outline"></ion-icon> Nested Shadow DOM</h3>
+            </div>
+            <div id="nestedShadowHost" data-testid="nested-shadow-host"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ADVANCED ==================== -->
+    <section class="section section-alt" id="advanced">
+      <div class="container">
+        <div class="section-header" id="advancedHeader">
+          <span class="section-tag" id="advancedTag">10</span>
+          <h2 class="section-title" id="advancedTitle">Advanced Scenarios</h2>
+          <p class="section-desc" id="advancedDesc">Complex patterns for advanced automation practice.</p>
+        </div>
+
+        <div class="grid-3" id="advancedGrid">
+          <!-- Infinite Scroll -->
+          <div class="card" data-testid="scroll-card">
+            <div class="card-header" id="scrollCardHeader">
+              <h3 class="card-title" id="scrollTitle"><ion-icon name="infinite-outline"></ion-icon> Infinite Scroll</h3>
+              <span class="card-badge">Scroll</span>
+            </div>
+            <div class="scroll-container" id="scrollContainer" data-testid="scroll-container"></div>
+            <div class="scroll-loader hidden" id="scrollLoader" data-testid="scroll-loader">Loading more items...</div>
+          </div>
+
+          <!-- Clipboard -->
+          <div class="card" data-testid="clipboard-card">
+            <div class="card-header" id="clipboardCardHeader">
+              <h3 class="card-title" id="clipboardTitle"><ion-icon name="attach-outline"></ion-icon> Clipboard & Keys</h3>
+              <span class="card-badge">Keyboard</span>
+            </div>
+            <div class="form-group" id="copyGroup">
+              <label class="field-label" id="copyLabel">Copy to clipboard</label>
+              <div class="copy-field" id="copyField">
+                <input type="text" id="copyInput" value="Hello Playwright!" readonly data-testid="copy-input" />
+                <button class="btn btn-sm btn-primary" id="copyBtn" data-testid="copy-btn">Copy</button>
+              </div>
+              <span id="copyStatus" data-testid="copy-status" class="result-text"></span>
+            </div>
+            <div class="form-group" id="keyboardGroup">
+              <label class="field-label" id="keyboardLabel">Keyboard Events</label>
+              <input type="text" id="keyboardInput" placeholder="Type and watch events..." data-testid="keyboard-input" autocomplete="off" />
+              <div class="key-display" id="keyDisplay" data-testid="key-display">Press any key...</div>
+            </div>
+            <div class="form-group" id="pasteGroup">
+              <label class="field-label" id="pasteLabel">Paste Area</label>
+              <textarea id="pasteArea" placeholder="Paste something here..." rows="2" data-testid="paste-area"></textarea>
+            </div>
+          </div>
+
+          <!-- Geolocation & Permissions -->
+          <div class="card" data-testid="geo-card">
+            <div class="card-header" id="geoCardHeader">
+              <h3 class="card-title" id="apiNetworkTitle"><ion-icon name="globe-outline"></ion-icon> API & Network</h3>
+              <span class="card-badge">API</span>
+            </div>
+            <button class="btn btn-primary btn-sm" id="fetchDataBtn" data-testid="fetch-data-btn">Fetch API Data</button>
+            <div id="apiResult" data-testid="api-result" class="result-display" style="margin-top: 1rem">
+              <span class="placeholder-text">Click to fetch data...</span>
+            </div>
+            <hr class="section-divider" id="apiDivider" />
+            <h4 class="sub-heading" id="localStorageHeading">Local Storage</h4>
+            <div class="form-group" id="storageGroup">
+              <div class="form-row" id="storageInputRow">
+                <input type="text" id="storageKey" placeholder="Key" data-testid="storage-key" autocomplete="off" />
+                <input type="text" id="storageValue" placeholder="Value" data-testid="storage-value" autocomplete="off" />
+              </div>
+              <div class="btn-group" id="storageBtnGroup" style="margin-top: 0.5rem">
+                <button class="btn btn-sm btn-primary" id="setStorageBtn" data-testid="set-storage-btn">Set</button>
+                <button class="btn btn-sm btn-outline" id="getStorageBtn" data-testid="get-storage-btn">Get</button>
+                <button class="btn btn-sm btn-outline" id="clearStorageBtn" data-testid="clear-storage-btn">Clear All</button>
+              </div>
+              <div id="storageResult" data-testid="storage-result" class="result-display" style="margin-top: 0.5rem"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sortable Grid -->
+        <div class="card full-width" style="margin-top: 2rem" data-testid="gallery-card">
+          <div class="card-header" id="galleryCardHeader">
+            <h3 class="card-title" id="galleryTitle"><ion-icon name="images-outline"></ion-icon> Image Gallery with Lightbox</h3>
+            <span class="card-badge">Gallery</span>
+          </div>
+          <div class="gallery-grid" id="galleryGrid" data-testid="gallery-grid">
+            <div class="gallery-item" data-testid="gallery-item-1" data-color="#6366f1">
+              <div class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop" alt="Mountains" loading="lazy" />
+              </div>
+              <p>Mountains</p>
+            </div>
+            <div class="gallery-item" data-testid="gallery-item-2" data-color="#ec4899">
+              <div class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&h=300&fit=crop" alt="Ocean" loading="lazy" />
+              </div>
+              <p>Ocean</p>
+            </div>
+            <div class="gallery-item" data-testid="gallery-item-3" data-color="#10b981">
+              <div class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=300&h=300&fit=crop" alt="Forest" loading="lazy" />
+              </div>
+              <p>Forest</p>
+            </div>
+            <div class="gallery-item" data-testid="gallery-item-4" data-color="#f59e0b">
+              <div class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=300&h=300&fit=crop" alt="Desert" loading="lazy" />
+              </div>
+              <p>Desert</p>
+            </div>
+            <div class="gallery-item" data-testid="gallery-item-5" data-color="#06b6d4">
+              <div class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1477346611705-65d1883cee1e?w=300&h=300&fit=crop" alt="Arctic" loading="lazy" />
+              </div>
+              <p>Arctic</p>
+            </div>
+            <div class="gallery-item" data-testid="gallery-item-6" data-color="#8b5cf6">
+              <div class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=300&h=300&fit=crop" alt="Spring" loading="lazy" />
+              </div>
+              <p>Spring</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MULTI-STEP WIZARD ==================== -->
+    <section class="section" id="wizard">
+      <div class="container">
+        <div class="section-header" id="wizardHeader">
+          <span class="section-tag" id="wizardTag">11</span>
+          <h2 class="section-title" id="wizardTitle">Multi-Step Wizard</h2>
+          <p class="section-desc" id="wizardDesc">Navigate through a multi-step form with validation at each step.</p>
+        </div>
+        <div class="card full-width" data-testid="wizard-card">
+          <div class="wizard-progress" data-testid="wizard-progress">
+            <div class="wizard-step active" data-testid="wizard-step-1"><span class="step-number">1</span><span class="step-label">Personal</span></div>
+            <div class="wizard-connector"></div>
+            <div class="wizard-step" data-testid="wizard-step-2"><span class="step-number">2</span><span class="step-label">Address</span></div>
+            <div class="wizard-connector"></div>
+            <div class="wizard-step" data-testid="wizard-step-3"><span class="step-number">3</span><span class="step-label">Payment</span></div>
+            <div class="wizard-connector"></div>
+            <div class="wizard-step" data-testid="wizard-step-4"><span class="step-number">4</span><span class="step-label">Review</span></div>
+          </div>
+          <div class="wizard-body" id="wizardBody">
+            <!-- Step 1 -->
+            <div class="wizard-panel active" id="wizardStep1" data-testid="wizard-panel-1">
+              <h3 class="wizard-step-heading" id="wizStep1Heading">Personal Information</h3>
+              <div class="form-row" id="wizNameRow">
+                <div class="form-group" id="wizFirstNameGroup"><label class="field-label" id="wizFirstNameLabel">First Name *</label><input type="text" id="wizFirstName" class="wiz-input" data-testid="wiz-firstname" placeholder="John" autocomplete="off" /></div>
+                <div class="form-group" id="wizLastNameGroup"><label class="field-label" id="wizLastNameLabel">Last Name *</label><input type="text" id="wizLastName" class="wiz-input" data-testid="wiz-lastname" placeholder="Doe" autocomplete="off" /></div>
+              </div>
+              <div class="form-group" id="wizEmailGroup"><label class="field-label" id="wizEmailLabel">Email *</label><input type="email" id="wizEmail" class="wiz-input" data-testid="wiz-email" placeholder="john@example.com" autocomplete="off" /></div>
+              <span class="error-msg" id="wizError1" data-testid="wiz-error-1"></span>
+            </div>
+            <!-- Step 2 -->
+            <div class="wizard-panel" id="wizardStep2" data-testid="wizard-panel-2">
+              <h3 class="wizard-step-heading" id="wizStep2Heading">Address Details</h3>
+              <div class="form-group" id="wizStreetGroup"><label class="field-label" id="wizStreetLabel">Street Address *</label><input type="text" id="wizStreet" class="wiz-input" data-testid="wiz-street" placeholder="123 Main St" autocomplete="off" /></div>
+              <div class="form-row" id="wizCityZipRow">
+                <div class="form-group" id="wizCityGroup"><label class="field-label" id="wizCityLabel">City *</label><input type="text" id="wizCity" class="wiz-input" data-testid="wiz-city" placeholder="New York" autocomplete="off" /></div>
+                <div class="form-group" id="wizZipGroup"><label class="field-label" id="wizZipLabel">ZIP Code *</label><input type="text" id="wizZip" class="wiz-input" data-testid="wiz-zip" placeholder="10001" autocomplete="off" /></div>
+              </div>
+              <span class="error-msg" id="wizError2" data-testid="wiz-error-2"></span>
+            </div>
+            <!-- Step 3 -->
+            <div class="wizard-panel" id="wizardStep3" data-testid="wizard-panel-3">
+              <h3 class="wizard-step-heading" id="wizStep3Heading">Payment Method</h3>
+              <div class="form-group" id="wizCardTypeGroup">
+                <label class="field-label" id="wizCardTypeLabel">Card Type</label>
+                <div class="radio-group" data-testid="wiz-card-type">
+                  <label class="radio-label"><input type="radio" name="cardType" value="visa" data-testid="wiz-visa" checked /> Visa</label>
+                  <label class="radio-label"><input type="radio" name="cardType" value="mastercard" data-testid="wiz-mastercard" /> Mastercard</label>
+                  <label class="radio-label"><input type="radio" name="cardType" value="amex" data-testid="wiz-amex" /> Amex</label>
+                </div>
+              </div>
+              <div class="form-group" id="wizCardNumGroup">
+                <label class="field-label" id="wizCardNumLabel">Card Number *</label><input type="text" id="wizCardNum" class="wiz-input" data-testid="wiz-cardnum" placeholder="4111 1111 1111 1111" autocomplete="off" maxlength="19" />
+              </div>
+              <div class="form-row" id="wizExpiryRow">
+                <div class="form-group" id="wizExpiryGroup"><label class="field-label" id="wizExpiryLabel">Expiry *</label><input type="text" id="wizExpiry" class="wiz-input" data-testid="wiz-expiry" placeholder="MM/YY" autocomplete="off" maxlength="5" /></div>
+                <div class="form-group" id="wizCvvGroup"><label class="field-label" id="wizCvvLabel">CVV *</label><input type="text" id="wizCvv" class="wiz-input" data-testid="wiz-cvv" placeholder="123" autocomplete="off" maxlength="4" /></div>
+              </div>
+              <span class="error-msg" id="wizError3" data-testid="wiz-error-3"></span>
+            </div>
+            <!-- Step 4 -->
+            <div class="wizard-panel" id="wizardStep4" data-testid="wizard-panel-4">
+              <h3 class="wizard-step-heading" id="wizStep4Heading">Review & Submit</h3>
+              <div class="review-summary" id="wizReview" data-testid="wiz-review"></div>
+              <div class="form-group" id="wizAgreeGroup">
+                <label class="checkbox-label" id="wizAgreeLabel"><input type="checkbox" id="wizAgree" data-testid="wiz-agree" /> I confirm the information is correct</label>
+              </div>
+              <span class="error-msg" id="wizError4" data-testid="wiz-error-4"></span>
+            </div>
+            <!-- Success -->
+            <div class="wizard-panel" id="wizardSuccessPanel" data-testid="wizard-success">
+              <div class="wizard-done" id="wizardDone">
+                <ion-icon name="checkmark-circle" style="font-size: 3rem; color: var(--success)"></ion-icon>
+                <h3>Order Submitted!</h3>
+                <p>Your order has been placed successfully.</p>
+                <button class="btn btn-outline" id="wizRestart" data-testid="wiz-restart">Start Over</button>
+              </div>
+            </div>
+          </div>
+          <div class="wizard-actions" id="wizardActions" data-testid="wizard-actions">
+            <button class="btn btn-outline" id="wizPrev" data-testid="wiz-prev" disabled>Back</button>
+            <button class="btn btn-primary" id="wizNext" data-testid="wiz-next">Next</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== COOKIE CONSENT ==================== -->
+    <div class="cookie-banner" id="cookieBanner" data-testid="cookie-banner">
+      <div class="cookie-content">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <div>
+          <strong>Cookie Consent</strong>
+          <p>We use cookies to enhance your experience. By continuing, you agree to our cookie policy.</p>
+        </div>
+      </div>
+      <div class="cookie-actions">
+        <button class="btn btn-sm btn-outline" id="cookieSettings" data-testid="cookie-settings">Settings</button>
+        <button class="btn btn-sm btn-outline" id="cookieReject" data-testid="cookie-reject">Reject All</button>
+        <button class="btn btn-sm btn-primary" id="cookieAccept" data-testid="cookie-accept">Accept All</button>
+      </div>
+    </div>
+
+    <!-- ==================== CAROUSEL ==================== -->
+    <section class="section section-alt" id="carousel">
+      <div class="container">
+        <div class="section-header" id="carouselHeader">
+          <span class="section-tag" id="carouselTag">12</span>
+          <h2 class="section-title" id="carouselTitle">Carousel / Slider</h2>
+          <p class="section-desc" id="carouselDesc">Image carousel with navigation, autoplay, and indicator dots.</p>
+        </div>
+        <div class="card full-width" data-testid="carousel-card">
+          <div class="carousel" data-testid="carousel">
+            <div class="carousel-track" id="carouselTrack" data-testid="carousel-track">
+              <div class="carousel-slide active" data-testid="carousel-slide-1" style="background: linear-gradient(135deg, #6366f1, #8b5cf6)">
+                <h2>Welcome to PlayLab</h2>
+                <p>Your ultimate Playwright practice arena</p>
+              </div>
+              <div class="carousel-slide" data-testid="carousel-slide-2" style="background: linear-gradient(135deg, #ec4899, #f43f5e)">
+                <h2>50+ UI Elements</h2>
+                <p>Forms, tables, modals, and much more</p>
+              </div>
+              <div class="carousel-slide" data-testid="carousel-slide-3" style="background: linear-gradient(135deg, #10b981, #059669)">
+                <h2>Real-World Patterns</h2>
+                <p>Practice with patterns you'll find in production</p>
+              </div>
+              <div class="carousel-slide" data-testid="carousel-slide-4" style="background: linear-gradient(135deg, #f59e0b, #d97706)">
+                <h2>Completely Free</h2>
+                <p>Open source and free to use for learning</p>
+              </div>
+            </div>
+            <button class="carousel-btn carousel-prev" id="carouselPrev" data-testid="carousel-prev"><ion-icon name="chevron-back"></ion-icon></button>
+            <button class="carousel-btn carousel-next" id="carouselNext" data-testid="carousel-next"><ion-icon name="chevron-forward"></ion-icon></button>
+            <div class="carousel-dots" id="carouselDots" data-testid="carousel-dots"></div>
+          </div>
+          <div class="carousel-controls" id="carouselControls" style="margin-top: 1rem">
+            <label class="checkbox-label"><input type="checkbox" id="carouselAutoplay" data-testid="carousel-autoplay" checked /> Autoplay</label>
+            <span class="result-text" id="carouselStatus" data-testid="carousel-status">Slide 1 of 4</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== NETWORK INTERCEPTION ==================== -->
+    <section class="section" id="network">
+      <div class="container">
+        <div class="section-header" id="networkHeader">
+          <span class="section-tag" id="networkTag">13</span>
+          <h2 class="section-title" id="networkTitle">Network & API</h2>
+          <p class="section-desc" id="networkDesc">Practice intercepting network requests, mocking APIs, and handling responses.</p>
+        </div>
+        <div class="grid-2" id="networkGrid">
+            <div class="card-header" id="apiUsersCardHeader">
+              <h3 class="card-title" id="fetchUsersTitle"><ion-icon name="cloud-download-outline"></ion-icon> Fetch Users API</h3>
+              <span class="card-badge">GET</span>
+            </div>
+            <p class="card-desc mb-1" id="fetchUsersDesc">Fetches from <code>https://jsonplaceholder.typicode.com/users</code></p>
+            <button class="btn btn-primary btn-sm" id="fetchUsersBtn" data-testid="fetch-users-btn">Fetch Users</button>
+            <div class="api-status" id="fetchUsersStatus" data-testid="fetch-users-status" style="margin-top: 0.5rem"></div>
+            <div class="result-display" id="fetchUsersResult" data-testid="fetch-users-result" style="margin-top: 0.5rem; max-height: 200px; overflow-y: auto">
+              <span class="placeholder-text">Click to fetch...</span>
+            </div>
+          </div>
+          <div class="card" data-testid="api-post-card">
+            <div class="card-header" id="apiPostCardHeader">
+              <h3 class="card-title" id="submitDataTitle"><ion-icon name="cloud-upload-outline"></ion-icon> Submit Data API</h3>
+              <span class="card-badge">POST</span>
+            </div>
+            <div class="form-group" id="postTitleGroup"><label class="field-label" id="postTitleLabel">Title</label><input type="text" id="postTitle" data-testid="post-title" placeholder="My Post Title" autocomplete="off" /></div>
+            <div class="form-group" id="postBodyGroup"><label class="field-label" id="postBodyLabel">Body</label><textarea id="postBody" data-testid="post-body" rows="2" placeholder="Post content..."></textarea></div>
+            <button class="btn btn-primary btn-sm" id="submitPostBtn" data-testid="submit-post-btn">Submit POST</button>
+            <div class="api-status" id="postStatus" data-testid="post-status" style="margin-top: 0.5rem"></div>
+            <div class="result-display" id="postResult" data-testid="post-result" style="margin-top: 0.5rem">
+              <span class="placeholder-text">Submit to see response...</span>
+            </div>
+          </div>
+          <div class="card" data-testid="api-delay-card">
+            <div class="card-header" id="apiDelayCardHeader">
+              <h3 class="card-title" id="slowApiTitle"><ion-icon name="time-outline"></ion-icon> Slow API (Timeout)</h3>
+              <span class="card-badge">Delay</span>
+            </div>
+            <p class="card-desc mb-1" id="slowApiDesc">Simulates a slow API response for testing timeouts.</p>
+            <div class="form-group" id="apiDelayGroup">
+              <label class="field-label" id="apiDelayLabel">Response Delay</label>
+              <select id="apiDelay" class="api-delay-select" data-testid="api-delay-select">
+                <option value="2" class="delay-option" id="apiDelay2s">2 seconds</option>
+                <option value="5" class="delay-option" id="apiDelay5s" selected>5 seconds</option>
+                <option value="10" class="delay-option" id="apiDelay10s">10 seconds</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-sm" id="slowApiBtn" data-testid="slow-api-btn">Call Slow API</button>
+            <div class="result-display" id="slowApiResult" data-testid="slow-api-result" style="margin-top: 0.5rem">
+              <span class="placeholder-text">Waiting...</span>
+            </div>
+          </div>
+          <div class="card" data-testid="api-error-card">
+            <div class="card-header" id="apiErrorCardHeader">
+              <h3 class="card-title" id="errorResponsesTitle"><ion-icon name="alert-circle-outline"></ion-icon> Error Responses</h3>
+              <span class="card-badge">Errors</span>
+            </div>
+            <p class="card-desc mb-1" id="errorApiDesc">Trigger different HTTP error responses:</p>
+            <div class="btn-group" id="errorBtnGroup" style="flex-wrap: wrap">
+              <button class="btn btn-sm btn-outline" data-error="400" data-testid="api-error-400">400 Bad Request</button>
+              <button class="btn btn-sm btn-outline" data-error="401" data-testid="api-error-401">401 Unauthorized</button>
+              <button class="btn btn-sm btn-outline" data-error="403" data-testid="api-error-403">403 Forbidden</button>
+              <button class="btn btn-sm btn-outline" data-error="404" data-testid="api-error-404">404 Not Found</button>
+              <button class="btn btn-sm btn-outline" data-error="500" data-testid="api-error-500">500 Server Error</button>
+            </div>
+            <div class="result-display" id="errorApiResult" data-testid="error-api-result" style="margin-top: 0.5rem">
+              <span class="placeholder-text">Click an error code...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FLAKY / RETRY ELEMENTS ==================== -->
+    <section class="section section-alt" id="flaky">
+      <div class="container">
+        <div class="section-header" id="flakyHeader">
+          <span class="section-tag" id="flakyTag">14</span>
+          <h2 class="section-title" id="flakyTitle">Flaky & Retry Elements</h2>
+          <p class="section-desc" id="flakyDesc">Elements that randomly appear, disappear, or change — great for practicing waitFor and retry logic.</p>
+        </div>
+        <div class="grid-3" id="flakyGrid">
+          <div class="card" data-testid="random-appear-card">
+            <div class="card-header" id="randomAppearCardHeader">
+              <h3 class="card-title" id="randomAppearTitle"><ion-icon name="dice-outline"></ion-icon> Random Appear</h3>
+              <span class="card-badge">Flaky</span>
+            </div>
+            <p class="card-desc mb-1" id="randomAppearDesc">This element randomly appears/disappears every 2 seconds:</p>
+            <div class="flaky-box" id="randomAppearBox" data-testid="random-appear-box">
+              <span data-testid="random-appear-text">Now you see me!</span>
+            </div>
+            <div style="margin-top: 1rem">
+              <span class="result-text" id="randomAppearLog" data-testid="random-appear-log">Visible</span>
+            </div>
+          </div>
+          <div class="card" data-testid="delayed-button-card">
+            <div class="card-header" id="delayedButtonCardHeader">
+              <h3 class="card-title" id="delayedButtonTitle"><ion-icon name="timer-outline"></ion-icon> Delayed Button</h3>
+              <span class="card-badge">Wait</span>
+            </div>
+            <p class="card-desc mb-1" id="delayedBtnDesc">Button appears after a random delay (1-5s):</p>
+            <button class="btn btn-primary btn-sm" id="spawnDelayedBtn" data-testid="spawn-delayed-btn">Spawn Button</button>
+            <div id="delayedBtnContainer" data-testid="delayed-btn-container" style="margin-top: 1rem; min-height: 50px"></div>
+          </div>
+          <div class="card" data-testid="changing-text-card">
+            <div class="card-header" id="changingTextCardHeader">
+              <h3 class="card-title" id="changingTextTitle"><ion-icon name="text-outline"></ion-icon> Changing Text</h3>
+              <span class="card-badge">Flaky</span>
+            </div>
+            <p class="card-desc mb-1" id="changingTextDesc">Text changes every 3 seconds — wait for the right one:</p>
+            <div class="changing-text-box" id="changingTextBox" data-testid="changing-text-box">Loading...</div>
+            <p class="hint" id="changingTextHint">Try waiting for: "Success! Click now"</p>
+            <button class="btn btn-outline btn-sm hidden" id="changingTextAction" data-testid="changing-text-action">Grab It!</button>
+            <span class="result-text" id="changingTextResult" data-testid="changing-text-result"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CUSTOM DATE PICKER ==================== -->
+    <section class="section" id="datepicker">
+      <div class="container">
+        <div class="section-header" id="datepickerHeader">
+          <span class="section-tag" id="datepickerTag">15</span>
+          <h2 class="section-title" id="datepickerTitle">Custom Date Picker</h2>
+          <p class="section-desc" id="datepickerDesc">A custom calendar widget — more realistic than native date inputs.</p>
+        </div>
+        <div class="grid-2" id="datepickerGrid">
+          <div class="card" data-testid="datepicker-card">
+            <div class="card-header" id="datepickerCardHeader">
+              <h3 class="card-title" id="calendarPickerTitle"><ion-icon name="calendar-outline"></ion-icon> Calendar Picker</h3>
+            </div>
+            <div class="form-group" id="dateSelectGroup">
+              <label class="field-label" id="dateSelectLabel">Select a Date</label>
+              <div class="datepicker-input-wrap" id="datepickerInputWrap">
+                <input type="text" id="datePickerInput" data-testid="datepicker-input" placeholder="Click to select date..." readonly />
+                <ion-icon name="calendar-outline" class="datepicker-icon"></ion-icon>
+              </div>
+            </div>
+            <div class="datepicker-calendar hidden" id="datePickerCal" data-testid="datepicker-calendar">
+              <div class="datepicker-header" id="datepickerNavHeader">
+                <button class="btn btn-icon btn-sm" id="dpPrevMonth" data-testid="dp-prev-month"><ion-icon name="chevron-back"></ion-icon></button>
+                <span id="dpMonthYear" data-testid="dp-month-year"></span>
+                <button class="btn btn-icon btn-sm" id="dpNextMonth" data-testid="dp-next-month"><ion-icon name="chevron-forward"></ion-icon></button>
+              </div>
+              <div class="datepicker-weekdays" id="datepickerWeekdays"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+              <div class="datepicker-days" id="dpDays" data-testid="dp-days"></div>
+              <div class="datepicker-footer" id="datepickerFooter">
+                <button class="btn btn-sm btn-outline" id="dpToday" data-testid="dp-today">Today</button>
+                <button class="btn btn-sm btn-outline" id="dpClear" data-testid="dp-clear">Clear</button>
+              </div>
+            </div>
+            <div class="result-display" id="datePickerResult" data-testid="datepicker-result" style="margin-top: 1rem"></div>
+          </div>
+          <div class="card" data-testid="daterange-card">
+            <div class="card-header" id="daterangeCardHeader">
+              <h3 class="card-title" id="dateRangeTitle"><ion-icon name="calendar-number-outline"></ion-icon> Date Range</h3>
+            </div>
+            <div class="form-row" id="dateRangeRow">
+              <div class="form-group" id="rangeStartGroup"><label class="field-label" id="rangeStartLabel">Start Date</label><input type="date" id="rangeStart" data-testid="range-start" /></div>
+              <div class="form-group" id="rangeEndGroup"><label class="field-label" id="rangeEndLabel">End Date</label><input type="date" id="rangeEnd" data-testid="range-end" /></div>
+            </div>
+            <button class="btn btn-primary btn-sm" id="calcRangeBtn" data-testid="calc-range-btn">Calculate Duration</button>
+            <div class="result-display" id="rangeResult" data-testid="range-result" style="margin-top: 1rem"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MEDIA PLAYER ==================== -->
+    <section class="section section-alt" id="media">
+      <div class="container">
+        <div class="section-header" id="mediaHeader">
+          <span class="section-tag" id="mediaTag">16</span>
+          <h2 class="section-title" id="mediaTitle">Media Player</h2>
+          <p class="section-desc" id="mediaDesc">Audio and video controls for testing media interactions.</p>
+        </div>
+        <div class="grid-2" id="mediaGrid">
+          <div class="card" data-testid="video-card">
+            <div class="card-header" id="videoCardHeader">
+              <h3 class="card-title" id="videoPlayerTitle"><ion-icon name="videocam-outline"></ion-icon> Video Player</h3>
+            </div>
+            <video id="videoPlayer" data-testid="video-player" class="media-player">
+              <source src="video/cars.mp4" type="video/mp4" />
+              Your browser does not support video.
+            </video>
+            <div class="media-controls" data-testid="video-controls">
+              <button class="btn btn-sm btn-primary" id="videoPlay" data-testid="video-play"><ion-icon name="play"></ion-icon></button>
+              <button class="btn btn-sm btn-outline" id="videoPause" data-testid="video-pause"><ion-icon name="pause"></ion-icon></button>
+              <button class="btn btn-sm btn-outline" id="videoStop" data-testid="video-stop"><ion-icon name="stop"></ion-icon></button>
+              <button class="btn btn-sm btn-outline" id="videoMute" data-testid="video-mute"><ion-icon name="volume-mute"></ion-icon></button>
+              <input type="range" id="videoVolume" data-testid="video-volume" min="0" max="1" step="0.1" value="1" style="width: 80px" />
+              <span class="result-text" id="videoTime" data-testid="video-time">0:00</span>
+            </div>
+            <div class="form-group" id="videoSeekGroup" style="margin-top: 0.5rem">
+              <label class="field-label" id="videoSeekLabel">Seek</label>
+              <input type="range" id="videoSeek" data-testid="video-seek" min="0" max="100" value="0" style="width: 100%" />
+            </div>
+          </div>
+          <div class="card" data-testid="audio-card">
+            <div class="card-header" id="audioCardHeader">
+              <h3 class="card-title" id="audioPlayerTitle"><ion-icon name="musical-notes-outline"></ion-icon> Audio Player</h3>
+            </div>
+            <div class="audio-visual" id="audioVisual" data-testid="audio-visual">
+              <div class="audio-art" id="audioArt"><ion-icon name="musical-notes" style="font-size: 3rem; color: var(--primary)"></ion-icon></div>
+              <div class="audio-info" id="audioInfo">
+                <h4 class="audio-track-title" id="audioTrackTitle">Sample Audio Track</h4>
+                <p class="audio-track-artist" id="audioTrackArtist" style="color: var(--text-muted); font-size: 0.813rem">PlayLab Demo Audio</p>
+              </div>
+            </div>
+            <audio id="audioPlayer" data-testid="audio-player">
+              <source src="audio/godmode.mp3" type="audio/mpeg" />
+            </audio>
+            <div class="media-controls" data-testid="audio-controls">
+              <button class="btn btn-sm btn-primary" id="audioPlay" data-testid="audio-play"><ion-icon name="play"></ion-icon></button>
+              <button class="btn btn-sm btn-outline" id="audioPause" data-testid="audio-pause"><ion-icon name="pause"></ion-icon></button>
+              <button class="btn btn-sm btn-outline" id="audioStop" data-testid="audio-stop"><ion-icon name="stop"></ion-icon></button>
+              <input type="range" id="audioVolume" data-testid="audio-volume" min="0" max="1" step="0.1" value="1" style="width: 80px" />
+              <span class="result-text" id="audioTime" data-testid="audio-time">0:00</span>
+            </div>
+            <input type="range" id="audioSeek" data-testid="audio-seek" min="0" max="100" value="0" style="width: 100%; margin-top: 0.5rem" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ACCESSIBILITY ==================== -->
+    <section class="section" id="a11y">
+      <div class="container">
+        <div class="section-header" id="a11yHeader">
+          <span class="section-tag" id="a11yTag">17</span>
+          <h2 class="section-title" id="a11yTitle">Accessibility (a11y)</h2>
+          <p class="section-desc" id="a11yDesc">Test ARIA attributes, keyboard navigation, focus management, and screen reader support.</p>
+        </div>
+        <div class="grid-2" id="a11yGrid">
+          <div class="card" data-testid="keyboard-nav-card">
+            <div class="card-header" id="keyboardNavCardHeader">
+              <h3 class="card-title" id="keyboardNavTitle"><ion-icon name="keypad-outline"></ion-icon> Keyboard Navigation</h3>
+            </div>
+            <p class="card-desc mb-1" id="a11yKeyNavDesc">Use Tab / Shift+Tab to navigate, Enter/Space to activate:</p>
+            <div class="a11y-buttons" data-testid="a11y-buttons">
+              <button class="btn btn-outline btn-sm" data-testid="a11y-btn-1" aria-label="First action button">Button 1</button>
+              <button class="btn btn-outline btn-sm" data-testid="a11y-btn-2" aria-label="Second action button">Button 2</button>
+              <button class="btn btn-outline btn-sm" data-testid="a11y-btn-3" aria-label="Third action button">Button 3</button>
+            </div>
+            <div class="result-display" id="a11yKeyResult" data-testid="a11y-key-result" style="margin-top: 1rem" aria-live="polite"></div>
+            <hr class="section-divider" id="skipLinkDivider" />
+            <h4 class="sub-heading" id="skipLinkHeading">Skip Link</h4>
+            <a href="#a11y-target" class="skip-link" data-testid="skip-link">Skip to content</a>
+            <div style="height: 80px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; margin-top: 0.5rem">
+              <p>Scroll content area...</p>
+              <p>More content...</p>
+              <p>Even more content...</p>
+              <div id="a11y-target" tabindex="-1" data-testid="a11y-target" style="padding: 8px; background: var(--primary-light); border-radius: var(--radius-sm)">Target content reached!</div>
+            </div>
+          </div>
+          <div class="card" data-testid="aria-card">
+            <div class="card-header" id="ariaCardHeader">
+              <h3 class="card-title" id="ariaTitle"><ion-icon name="accessibility-outline"></ion-icon> ARIA Attributes</h3>
+            </div>
+            <div class="form-group" id="ariaSearchGroup">
+              <input
+                type="search"
+                id="a11ySearch"
+                data-testid="a11y-search"
+                placeholder="Type to search..."
+                autocomplete="off"
+                role="searchbox"
+                aria-labelledby="searchLabel"
+                aria-describedby="searchHint"
+              />
+              <span id="searchHint" class="hint">Search results update as you type</span>
+            </div>
+            <div role="status" aria-live="polite" id="a11yLiveRegion" data-testid="a11y-live-region" class="result-display" style="margin-top: 0.5rem"></div>
+            <hr class="section-divider" id="ariaExpandedDivider" />
+            <h4 class="sub-heading" id="ariaExpandedHeading">ARIA Expanded / Controls</h4>
+            <button class="btn btn-outline btn-sm" id="a11yExpandBtn" data-testid="a11y-expand-btn" aria-expanded="false" aria-controls="a11yExpandContent">Toggle Panel</button>
+            <div
+              id="a11yExpandContent"
+              data-testid="a11y-expand-content"
+              class="hidden"
+              role="region"
+              aria-label="Expandable panel"
+              style="margin-top: 0.5rem; padding: 16px; background: var(--bg-alt); border-radius: var(--radius)"
+            >
+              <p>This panel is controlled by the button above. Check <code>aria-expanded</code> state.</p>
+            </div>
+            <hr class="section-divider" id="focusTrapDivider" />
+            <h4 class="sub-heading" id="focusTrapHeading">Focus Trap (Modal-like)</h4>
+            <button class="btn btn-primary btn-sm" id="focusTrapOpen" data-testid="focus-trap-open">Open Focus Trap</button>
+            <div class="focus-trap-area hidden" id="focusTrapArea" data-testid="focus-trap-area" role="dialog" aria-modal="true" aria-label="Focus trap dialog">
+              <p><strong>Focus is trapped here!</strong> Tab cycles only within this area.</p>
+              <input type="text" class="focus-trap-field" id="focusTrapInput" data-testid="focus-trap-input" placeholder="Trapped input" autocomplete="off" />
+              <button class="btn btn-outline btn-sm" id="focusTrapAction" data-testid="focus-trap-action">Action</button>
+              <button class="btn btn-primary btn-sm" id="focusTrapClose" data-testid="focus-trap-close">Close Trap</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== RESPONSIVE TESTING ==================== -->
+    <section class="section section-alt" id="responsive">
+      <div class="container">
+        <div class="section-header" id="responsiveHeader">
+          <span class="section-tag" id="responsiveTag">18</span>
+          <h2 class="section-title" id="responsiveTitle">Responsive Testing</h2>
+          <p class="section-desc" id="responsiveDesc">Elements that change behavior and visibility based on viewport size.</p>
+        </div>
+        <div class="card full-width" data-testid="responsive-card">
+          <div class="card-header">
+            <h3><ion-icon name="resize-outline"></ion-icon> Viewport-Aware Elements</h3>
+          </div>
+          <div class="responsive-grid" data-testid="responsive-grid">
+            <div class="responsive-box desktop-only" data-testid="desktop-only">
+              <ion-icon name="desktop-outline"></ion-icon>
+              <span>Desktop Only</span>
+              <small>Visible at &gt; 768px</small>
+            </div>
+            <div class="responsive-box tablet-only" data-testid="tablet-only">
+              <ion-icon name="tablet-portrait-outline"></ion-icon>
+              <span>Tablet Only</span>
+              <small>Visible at 481–768px</small>
+            </div>
+            <div class="responsive-box mobile-only" data-testid="mobile-only">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+              <span>Mobile Only</span>
+              <small>Visible at ≤ 480px</small>
+            </div>
+            <div class="responsive-box always-visible" data-testid="always-visible">
+              <ion-icon name="globe-outline"></ion-icon>
+              <span>Always Visible</span>
+              <small>Visible at all sizes</small>
+            </div>
+          </div>
+          <div class="viewport-info" data-testid="viewport-info" style="margin-top: 1.5rem">
+            <p>Current viewport: <strong id="viewportWidth" data-testid="viewport-width">—</strong> × <strong id="viewportHeight" data-testid="viewport-height">—</strong></p>
+            <p>Breakpoint: <span class="card-badge" id="breakpointLabel" data-testid="breakpoint-label">—</span></p>
+          </div>
+          <hr class="section-divider" id="responsiveLayoutDivider" />
+          <h4 class="sub-heading" id="responsiveLayoutHeading">Responsive Layout Change</h4>
+          <p class="hint" id="responsiveLayoutHint">These cards stack on mobile but display side-by-side on desktop.</p>
+          <div class="responsive-demo-grid" data-testid="responsive-demo-grid">
+            <div class="responsive-demo-item" data-testid="resp-item-1">Card A</div>
+            <div class="responsive-demo-item" data-testid="resp-item-2">Card B</div>
+            <div class="responsive-demo-item" data-testid="resp-item-3">Card C</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROTECTED ROUTE ==================== -->
+    <section class="section" id="protected">
+      <div class="container">
+        <div class="section-header" id="protectedHeader">
+          <span class="section-tag" id="protectedTag">19</span>
+          <h2 class="section-title" id="protectedTitle">Protected Content</h2>
+          <p class="section-desc" id="protectedDesc">Content that requires authentication — practice testing auth guards.</p>
+        </div>
+        <div class="card full-width" data-testid="protected-card">
+          <div class="card-header" id="protectedCardHeader">
+            <h3 class="card-title" id="protectedAreaTitle"><ion-icon name="shield-checkmark-outline"></ion-icon> Protected Area</h3>
+          </div>
+          <div id="protectedLocked" data-testid="protected-locked">
+            <div class="protected-lock" id="protectedLockContent">
+              <ion-icon name="lock-closed" style="font-size: 3rem; color: var(--text-muted)"></ion-icon>
+              <h4 class="auth-heading" id="authRequiredHeading">Authentication Required</h4>
+              <p class="auth-message" id="authRequiredMessage">You must be logged in to view this content.</p>
+              <p class="hint" id="authCredentialsHint">Login with: <code>test@playlab.com</code> / <code>Password123</code></p>
+              <a href="login.html" class="btn btn-primary" id="protectedLoginBtn" data-testid="protected-login-btn">Login to Access</a>
+            </div>
+          </div>
+          <div id="protectedContent" data-testid="protected-content" class="hidden">
+            <div class="protected-unlocked" id="protectedUnlockedContent">
+              <ion-icon name="shield-checkmark" style="font-size: 2rem; color: var(--success)"></ion-icon>
+              <h4>Welcome, <span id="protectedUser" data-testid="protected-user"></span>!</h4>
+              <p>This secret content is only visible to authenticated users.</p>
+              <div class="result-display" style="margin-top: 1rem">
+                <p><strong>Secret Data:</strong> The answer to everything is 42.</p>
+                <p><strong>API Key:</strong> pk_test_XXXX_redacted</p>
+                <p><strong>Access Level:</strong> Premium</p>
+              </div>
+              <button class="btn btn-outline btn-sm" id="protectedLogout" data-testid="protected-logout" style="margin-top: 1rem">Logout</button>
             </div>
           </div>
         </div>

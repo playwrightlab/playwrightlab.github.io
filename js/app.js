@@ -2073,7 +2073,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const productNames = {
-    lamborghini: "Lamborghini Huracán",
+    lamborghini: "Lamborghini Huracan",
     triumph: "Triumph Speed Triple 1200",
     seiko: "Seiko Presage Cocktail Time",
     rifle: "Bolt Action Sporting Rifle",
