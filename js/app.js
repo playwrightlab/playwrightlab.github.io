@@ -1830,7 +1830,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   dpInput.addEventListener("click", () => dpCal.classList.toggle("hidden"));
   document.addEventListener("click", (e) => {
-    if (!e.target.closest(".datepicker-card") && !e.target.closest("[data-testid='datepicker-card']") && !dpCal.contains(e.target) && e.target !== dpInput) {
+    const isInsideDatePicker =
+      e.target.closest("#datePickerInput") ||
+      e.target.closest("#datepickerInputWrap") ||
+      e.target.closest("#datePickerCal") ||
+      e.target.closest("#dpPrevMonth") ||
+      e.target.closest("#dpNextMonth") ||
+      e.target.closest("#dpToday") ||
+      e.target.closest("#dpClear");
+    if (!isInsideDatePicker) {
       dpCal.classList.add("hidden");
     }
   });
@@ -2012,12 +2020,13 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     const isInsideTyped =
       e.target.closest("#typedDateInput") ||
+      e.target.closest("#typedDateInputWrap") ||
       e.target.closest("#typedDateCal") ||
       e.target.closest("#typedPrevMonth") ||
       e.target.closest("#typedNextMonth") ||
       e.target.closest("#typedToday") ||
       e.target.closest("#typedClear");
-    if (!isInsideTyped && !e.target.closest("[data-testid='typed-date-card']")) {
+    if (!isInsideTyped) {
       typedDateCal.classList.add("hidden");
     }
   });
@@ -2115,12 +2124,13 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     const isInsideMonthYear =
       e.target.closest("#monthYearInput") ||
+      e.target.closest("#monthYearInputWrap") ||
       e.target.closest("#monthYearCal") ||
       e.target.closest("#monthYearMonthSelect") ||
       e.target.closest("#monthYearYearSelect") ||
       e.target.closest("#monthYearToday") ||
       e.target.closest("#monthYearClear");
-    if (!isInsideMonthYear && !e.target.closest("[data-testid='monthyear-card']")) {
+    if (!isInsideMonthYear) {
       monthYearCal.classList.add("hidden");
     }
   });
