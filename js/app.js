@@ -1897,6 +1897,234 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderCalendar();
 
+  // Typable date input with picker support
+  const typedDateInput = document.getElementById("typedDateInput");
+  const typedDateCal = document.getElementById("typedDateCal");
+  const typedDays = document.getElementById("typedDays");
+  const typedDateState = { date: new Date(), selectedDate: null };
+
+  function formatInputDate(date) {
+    return `${String(date.getDate()).padStart(2, "0")}-${String(date.getMonth() + 1).padStart(2, "0")}-${date.getFullYear()}`;
+  }
+
+  function parseDdMmYyyy(rawValue) {
+    const value = rawValue.trim();
+    const match = value.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
+    if (!match) return null;
+
+    const day = Number(match[1]);
+    const month = Number(match[2]);
+    const year = Number(match[3]);
+    const parsed = new Date(year, month - 1, day);
+
+    if (parsed.getFullYear() !== year || parsed.getMonth() !== month - 1 || parsed.getDate() !== day) {
+      return null;
+    }
+
+    return parsed;
+  }
+
+  function renderTypedDateCalendar() {
+    const year = typedDateState.date.getFullYear();
+    const month = typedDateState.date.getMonth();
+    const monthLabel = new Date(year, month).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+    document.getElementById("typedMonthYear").textContent = monthLabel;
+    typedDays.innerHTML = "";
+
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const btn = document.createElement("button");
+      btn.className = "dp-day";
+      btn.type = "button";
+      btn.textContent = d;
+      const currentDate = new Date(year, month, d);
+      if (currentDate.toDateString() === new Date().toDateString()) btn.classList.add("today");
+      if (typedDateState.selectedDate && currentDate.toDateString() === typedDateState.selectedDate.toDateString()) {
+        btn.classList.add("selected");
+      }
+      btn.addEventListener("click", () => {
+        typedDateState.date = new Date(year, month, d);
+        typedDateState.selectedDate = new Date(year, month, d);
+        typedDateInput.value = formatInputDate(typedDateState.date);
+        document.getElementById("typedDateResult").textContent = `Selected: ${typedDateState.date.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
+        renderTypedDateCalendar();
+        typedDateCal.classList.add("hidden");
+      });
+      typedDays.appendChild(btn);
+    }
+  }
+
+  typedDateInput.addEventListener("click", () => {
+    typedDateCal.classList.toggle("hidden");
+    renderTypedDateCalendar();
+  });
+
+  typedDateInput.addEventListener("input", (event) => {
+    const rawValue = event.target.value.trim();
+    if (!rawValue) {
+      typedDateState.selectedDate = null;
+      document.getElementById("typedDateResult").textContent = "";
+      return;
+    }
+
+    const parsed = parseDdMmYyyy(rawValue);
+    if (parsed) {
+      typedDateState.date = parsed;
+      typedDateState.selectedDate = parsed;
+      document.getElementById("typedDateResult").textContent = `Typed: ${parsed.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
+      renderTypedDateCalendar();
+      return;
+    }
+
+    typedDateState.selectedDate = null;
+    document.getElementById("typedDateResult").textContent = "Enter a valid date in dd-mm-yyyy format";
+  });
+
+  document.getElementById("typedPrevMonth").addEventListener("click", () => {
+    typedDateState.date.setMonth(typedDateState.date.getMonth() - 1);
+    renderTypedDateCalendar();
+  });
+
+  document.getElementById("typedNextMonth").addEventListener("click", () => {
+    typedDateState.date.setMonth(typedDateState.date.getMonth() + 1);
+    renderTypedDateCalendar();
+  });
+
+  document.getElementById("typedToday").addEventListener("click", () => {
+    typedDateState.date = new Date();
+    typedDateState.selectedDate = new Date();
+    typedDateInput.value = formatInputDate(typedDateState.date);
+    document.getElementById("typedDateResult").textContent = "Selected: Today";
+    renderTypedDateCalendar();
+    typedDateCal.classList.add("hidden");
+  });
+
+  document.getElementById("typedClear").addEventListener("click", () => {
+    typedDateState.selectedDate = null;
+    typedDateInput.value = "";
+    document.getElementById("typedDateResult").textContent = "";
+    typedDateState.date = new Date();
+    renderTypedDateCalendar();
+    typedDateCal.classList.add("hidden");
+  });
+
+  document.addEventListener("click", (e) => {
+    const isInsideTyped =
+      e.target.closest("#typedDateInput") ||
+      e.target.closest("#typedDateCal") ||
+      e.target.closest("#typedPrevMonth") ||
+      e.target.closest("#typedNextMonth") ||
+      e.target.closest("#typedToday") ||
+      e.target.closest("#typedClear");
+    if (!isInsideTyped && !e.target.closest("[data-testid='typed-date-card']")) {
+      typedDateCal.classList.add("hidden");
+    }
+  });
+
+  // Month + year dropdown picker
+  const monthYearInput = document.getElementById("monthYearInput");
+  const monthYearCal = document.getElementById("monthYearCal");
+  const monthYearMonthSelect = document.getElementById("monthYearMonthSelect");
+  const monthYearYearSelect = document.getElementById("monthYearYearSelect");
+  const monthYearDays = document.getElementById("monthYearDays");
+  const monthYearState = { date: new Date(), selectedDate: null };
+
+  function formatDisplayDate(date) {
+    return `${String(date.getDate()).padStart(2, "0")}-${String(date.getMonth() + 1).padStart(2, "0")}-${date.getFullYear()}`;
+  }
+
+  function populateMonthYearSelectors() {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    monthYearMonthSelect.innerHTML = months.map((month, index) => `<option value="${index}">${month}</option>`).join("");
+    const years = [];
+    for (let year = 2020; year <= 2035; year++) years.push(year);
+    monthYearYearSelect.innerHTML = years.map((year) => `<option value="${year}">${year}</option>`).join("");
+    monthYearMonthSelect.value = monthYearState.date.getMonth();
+    monthYearYearSelect.value = monthYearState.date.getFullYear();
+  }
+
+  function renderMonthYearCalendar() {
+    const year = Number(monthYearYearSelect.value || monthYearState.date.getFullYear());
+    const month = Number(monthYearMonthSelect.value || monthYearState.date.getMonth());
+    monthYearState.date = new Date(year, month, 1);
+    monthYearMonthSelect.value = String(month);
+    monthYearYearSelect.value = String(year);
+
+    if (monthYearState.selectedDate) {
+      const selectedDate = monthYearState.selectedDate;
+      monthYearInput.value = formatDisplayDate(selectedDate);
+    } else {
+      monthYearInput.value = "";
+    }
+
+    monthYearDays.innerHTML = "";
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const btn = document.createElement("button");
+      btn.className = "dp-day";
+      btn.type = "button";
+      btn.textContent = d;
+      const currentDate = new Date(year, month, d);
+      if (currentDate.toDateString() === new Date().toDateString()) btn.classList.add("today");
+      if (monthYearState.selectedDate && currentDate.toDateString() === monthYearState.selectedDate.toDateString()) {
+        btn.classList.add("selected");
+      }
+      btn.addEventListener("click", () => {
+        const selectedDate = new Date(year, month, d);
+        monthYearState.selectedDate = selectedDate;
+        monthYearInput.value = formatDisplayDate(selectedDate);
+        document.getElementById("monthYearResult").textContent = `Selected: ${selectedDate.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
+        monthYearCal.classList.add("hidden");
+      });
+      monthYearDays.appendChild(btn);
+    }
+  }
+
+  monthYearInput.addEventListener("click", () => {
+    monthYearCal.classList.toggle("hidden");
+    populateMonthYearSelectors();
+    renderMonthYearCalendar();
+  });
+
+  monthYearMonthSelect.addEventListener("change", renderMonthYearCalendar);
+  monthYearYearSelect.addEventListener("change", renderMonthYearCalendar);
+
+  document.getElementById("monthYearToday").addEventListener("click", () => {
+    const today = new Date();
+    monthYearState.date = new Date(today.getFullYear(), today.getMonth(), 1);
+    monthYearState.selectedDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    populateMonthYearSelectors();
+    renderMonthYearCalendar();
+    monthYearInput.value = formatDisplayDate(monthYearState.selectedDate);
+    document.getElementById("monthYearResult").textContent = "Selected: Today";
+    monthYearCal.classList.add("hidden");
+  });
+
+  document.getElementById("monthYearClear").addEventListener("click", () => {
+    monthYearState.selectedDate = null;
+    monthYearInput.value = "";
+    document.getElementById("monthYearResult").textContent = "";
+    monthYearCal.classList.add("hidden");
+    monthYearState.date = new Date();
+    populateMonthYearSelectors();
+    renderMonthYearCalendar();
+  });
+
+  document.addEventListener("click", (e) => {
+    const isInsideMonthYear =
+      e.target.closest("#monthYearInput") ||
+      e.target.closest("#monthYearCal") ||
+      e.target.closest("#monthYearMonthSelect") ||
+      e.target.closest("#monthYearYearSelect") ||
+      e.target.closest("#monthYearToday") ||
+      e.target.closest("#monthYearClear");
+    if (!isInsideMonthYear && !e.target.closest("[data-testid='monthyear-card']")) {
+      monthYearCal.classList.add("hidden");
+    }
+  });
+
   // Date range
   document.getElementById("calcRangeBtn").addEventListener("click", () => {
     const start = document.getElementById("rangeStart").value;

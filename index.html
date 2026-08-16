@@ -1656,6 +1656,57 @@
             </div>
             <div class="result-display" id="datePickerResult" data-testid="datepicker-result" style="margin-top: 1rem"></div>
           </div>
+          <div class="card" data-testid="typed-date-card">
+            <div class="card-header" id="typedDateCardHeader">
+              <h3 class="card-title" id="typedDateTitle"><ion-icon name="create-outline"></ion-icon> Typable Date</h3>
+            </div>
+            <div class="form-group" id="typedDateGroup">
+              <label class="field-label" id="typedDateLabel">A date you can type or pick</label>
+              <div class="datepicker-input-wrap" id="typedDateInputWrap">
+                <input type="text" id="typedDateInput" data-testid="typed-date-input" placeholder="DD-MM-YYYY" />
+                <ion-icon name="calendar-outline" class="datepicker-icon"></ion-icon>
+              </div>
+            </div>
+            <div class="datepicker-calendar hidden" id="typedDateCal" data-testid="typed-date-calendar">
+              <div class="datepicker-header" id="typedDateNavHeader">
+                <button class="btn btn-icon btn-sm" id="typedPrevMonth" data-testid="typed-prev-month"><ion-icon name="chevron-back"></ion-icon></button>
+                <span id="typedMonthYear" data-testid="typed-month-year"></span>
+                <button class="btn btn-icon btn-sm" id="typedNextMonth" data-testid="typed-next-month"><ion-icon name="chevron-forward"></ion-icon></button>
+              </div>
+              <div class="datepicker-weekdays" id="typedWeekdays"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+              <div class="datepicker-days" id="typedDays" data-testid="typed-days"></div>
+              <div class="datepicker-footer" id="typedDateFooter">
+                <button class="btn btn-sm btn-outline" id="typedToday" data-testid="typed-today">Today</button>
+                <button class="btn btn-sm btn-outline" id="typedClear" data-testid="typed-clear">Clear</button>
+              </div>
+            </div>
+            <div class="result-display" id="typedDateResult" data-testid="typed-date-result" style="margin-top: 1rem"></div>
+          </div>
+          <div class="card" data-testid="monthyear-card">
+            <div class="card-header" id="monthYearCardHeader">
+              <h3 class="card-title" id="monthYearTitle"><ion-icon name="calendar-sharp"></ion-icon> Month / Year Picker</h3>
+            </div>
+            <div class="form-group" id="monthYearGroup">
+              <label class="field-label" id="monthYearLabel">Choose a month and year</label>
+              <div class="datepicker-input-wrap" id="monthYearInputWrap">
+                <input type="text" id="monthYearInput" data-testid="month-year-input" placeholder="Select month/year" readonly />
+                <ion-icon name="calendar-outline" class="datepicker-icon"></ion-icon>
+              </div>
+            </div>
+            <div class="datepicker-calendar hidden" id="monthYearCal" data-testid="month-year-calendar">
+              <div class="datepicker-header month-year-header" id="monthYearNavHeader">
+                <select id="monthYearMonthSelect" data-testid="month-year-month-select" aria-label="Select month"></select>
+                <select id="monthYearYearSelect" data-testid="month-year-year-select" aria-label="Select year"></select>
+              </div>
+              <div class="datepicker-weekdays" id="monthYearWeekdays"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>
+              <div class="datepicker-days" id="monthYearDays" data-testid="month-year-days"></div>
+              <div class="datepicker-footer" id="monthYearFooter">
+                <button class="btn btn-sm btn-outline" id="monthYearToday" data-testid="month-year-today">Today</button>
+                <button class="btn btn-sm btn-outline" id="monthYearClear" data-testid="month-year-clear">Clear</button>
+              </div>
+            </div>
+            <div class="result-display" id="monthYearResult" data-testid="month-year-result" style="margin-top: 1rem"></div>
+          </div>
           <div class="card" data-testid="daterange-card">
             <div class="card-header" id="daterangeCardHeader">
               <h3 class="card-title" id="dateRangeTitle"><ion-icon name="calendar-number-outline"></ion-icon> Date Range</h3>

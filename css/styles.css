@@ -3901,6 +3901,23 @@ code {
   justify-content: flex-end;
 }
 
+.month-year-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.month-year-header select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-family: var(--font);
+}
+
 /* ===== MEDIA PLAYER ===== */
 .media-player {
   width: 100%;
