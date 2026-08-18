@@ -52,7 +52,10 @@
               <li><a href="#responsive" data-testid="nav-responsive">Responsive</a></li>
             </ul>
           </li>
-          <li><a href="login.html" data-testid="nav-login" class="nav-btn">Login</a></li>
+          <li id="navAuthContainer">
+            <a href="login.html" id="navLoginBtn" data-testid="nav-login" class="nav-btn">Login</a>
+            <button class="btn btn-outline btn-sm hidden" id="navLogoutBtn" data-testid="nav-logout" style="margin-left: 8px;">Logout</button>
+          </li>
         </ul>
         <button class="theme-toggle" id="themeToggle" data-testid="theme-toggle" aria-label="Toggle theme">
           <span class="theme-icon"><ion-icon name="moon-outline"></ion-icon></span>

@@ -2273,8 +2273,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== PROTECTED CONTENT =====
   function checkAuth() {
-    const isAuth = sessionStorage.getItem("playlab-auth") === "true";
-    const user = sessionStorage.getItem("playlab-user");
+    const isAuth = localStorage.getItem("playlab-auth") === "true";
+    const user = localStorage.getItem("playlab-user");
     if (isAuth) {
       document.getElementById("protectedLocked").classList.add("hidden");
       document.getElementById("protectedContent").classList.remove("hidden");
@@ -2285,13 +2285,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function updateNavbarAuth() {
+    const isAuth = localStorage.getItem("playlab-auth") === "true";
+    const navLoginBtn = document.getElementById("navLoginBtn");
+    const navLogoutBtn = document.getElementById("navLogoutBtn");
+
+    if (isAuth) {
+      navLoginBtn.classList.add("hidden");
+      navLogoutBtn.classList.remove("hidden");
+    } else {
+      navLoginBtn.classList.remove("hidden");
+      navLogoutBtn.classList.add("hidden");
+    }
+  }
+
   document.getElementById("protectedLogout").addEventListener("click", () => {
+    localStorage.removeItem("playlab-auth");
+    localStorage.removeItem("playlab-user");
     sessionStorage.removeItem("playlab-auth");
     sessionStorage.removeItem("playlab-user");
     checkAuth();
+    updateNavbarAuth();
+  });
+
+  document.getElementById("navLogoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("playlab-auth");
+    localStorage.removeItem("playlab-user");
+    sessionStorage.removeItem("playlab-auth");
+    sessionStorage.removeItem("playlab-user");
+    checkAuth();
+    updateNavbarAuth();
+    // If on login page, refresh to reset the form
+    if (window.location.pathname.includes("login")) {
+      location.reload();
+    }
   });
 
   checkAuth();
+  updateNavbarAuth();
 
   // ===== UTILITY =====
   function sanitize(str) {

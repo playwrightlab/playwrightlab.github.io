@@ -236,13 +236,10 @@
         <h1 class="login-title" data-testid="login-title">Welcome back</h1>
         <p class="login-subtitle" data-testid="login-subtitle">Sign in to your account to continue</p>
 
-        <div class="social-btns" id="socialBtns">
-          <button class="social-btn" id="googleLoginBtn" data-testid="social-google"><ion-icon name="logo-google"></ion-icon> Google</button>
-          <button class="social-btn" id="githubLoginBtn" data-testid="social-github"><ion-icon name="logo-github"></ion-icon> GitHub</button>
-          <button class="social-btn" id="twitterLoginBtn" data-testid="social-twitter"><ion-icon name="logo-twitter"></ion-icon> Twitter</button>
+        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; margin-bottom: 20px; text-align: center; font-size: 0.75rem">
+          <p style="color: var(--text-muted); margin: 0">Email: <strong style="color: var(--text)">test@playlab.com</strong></p>
+          <p style="color: var(--text-muted); margin: 0">Password: <strong style="color: var(--text)">Password123</strong></p>
         </div>
-
-        <div class="divider" id="loginDivider">or continue with email</div>
 
         <form id="loginForm" data-testid="login-form" novalidate>
           <div class="form-group" id="loginEmailGroup">
@@ -259,15 +256,8 @@
             <span class="error-msg" data-testid="login-password-error"></span>
           </div>
 
-          <div class="remember-row" id="rememberRow">
-            <label class="checkbox-label" style="padding: 0"> <input type="checkbox" id="remember" data-testid="remember-checkbox" /> Remember me </label>
-            <a href="#" id="forgotPasswordLink" class="forgot-link" data-testid="forgot-password">Forgot password?</a>
-          </div>
-
           <button type="submit" class="btn btn-primary login-btn" data-testid="login-submit">Sign In</button>
         </form>
-
-        <p class="login-footer" id="loginFooterText">Don't have an account? <a href="#" id="registerLink" class="register-link" data-testid="register-link">Sign up</a></p>
       </div>
 
       <!-- Success State -->
@@ -288,6 +278,17 @@
         const pwd = document.getElementById("loginPassword");
         pwd.type = pwd.type === "password" ? "text" : "password";
       });
+
+      // Check if user is already authenticated on page load
+      function checkExistingAuth() {
+        const isAuth = localStorage.getItem("playlab-auth") === "true";
+        if (isAuth) {
+          const user = localStorage.getItem("playlab-user");
+          document.getElementById("loginCard").classList.add("hidden");
+          document.getElementById("loginSuccess").classList.remove("hidden");
+          document.getElementById("welcomeName").textContent = `Signed in as ${user}`;
+        }
+      }
 
       // Valid credentials for testing
       const VALID_EMAIL = "test@playlab.com";
@@ -337,6 +338,10 @@
           document.getElementById("loginCard").classList.add("hidden");
           document.getElementById("loginSuccess").classList.remove("hidden");
           document.getElementById("welcomeName").textContent = `Signed in as ${email.value}`;
+          // Store auth state in localStorage (persists across page loads)
+          localStorage.setItem("playlab-auth", "true");
+          localStorage.setItem("playlab-user", email.value);
+          // Also update sessionStorage for use within this session
           sessionStorage.setItem("playlab-auth", "true");
           sessionStorage.setItem("playlab-user", email.value);
         } else {
@@ -348,11 +353,15 @@
 
       // Logout
       document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("playlab-auth");
+        localStorage.removeItem("playlab-user");
         sessionStorage.removeItem("playlab-auth");
         sessionStorage.removeItem("playlab-user");
         document.getElementById("loginSuccess").classList.add("hidden");
         document.getElementById("loginCard").classList.remove("hidden");
         document.getElementById("loginForm").reset();
+        // Refresh auth state
+        checkExistingAuth();
       });
 
       // Social buttons (mock)
@@ -365,6 +374,9 @@
       // Check theme
       const savedTheme = localStorage.getItem("playlab-theme") || "light";
       document.documentElement.setAttribute("data-theme", savedTheme);
+
+      // Check existing authentication on page load
+      checkExistingAuth();
     </script>
   </body>
 </html>
