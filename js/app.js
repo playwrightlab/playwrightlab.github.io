@@ -1935,8 +1935,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderTypedDateCalendar() {
     const year = typedDateState.date.getFullYear();
     const month = typedDateState.date.getMonth();
-    const monthLabel = new Date(year, month).toLocaleDateString("en-US", { month: "long", year: "numeric" });
-    document.getElementById("typedMonthYear").textContent = monthLabel;
+    const monthDate = new Date(year, month);
+    document.getElementById("typedMonth").textContent = monthDate.toLocaleDateString("en-US", { month: "long" });
+    document.getElementById("typedYear").textContent = String(year);
     typedDays.innerHTML = "";
 
     const daysInMonth = new Date(year, month + 1, 0).getDate();

@@ -1672,7 +1672,10 @@
             <div class="datepicker-calendar hidden" id="typedDateCal" data-testid="typed-date-calendar">
               <div class="datepicker-header" id="typedDateNavHeader">
                 <button class="btn btn-icon btn-sm" id="typedPrevMonth" data-testid="typed-prev-month"><ion-icon name="chevron-back"></ion-icon></button>
-                <span id="typedMonthYear" data-testid="typed-month-year"></span>
+                <span class="typed-date-month-year" id="typedMonthYear" data-testid="typed-month-year">
+                  <span class="typed-date-month" id="typedMonth" data-testid="typed-month"></span>
+                  <span class="typed-date-year" id="typedYear" data-testid="typed-year"></span>
+                </span>
                 <button class="btn btn-icon btn-sm" id="typedNextMonth" data-testid="typed-next-month"><ion-icon name="chevron-forward"></ion-icon></button>
               </div>
               <div class="datepicker-weekdays" id="typedWeekdays"><span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span></div>

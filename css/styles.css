@@ -3845,6 +3845,11 @@ code {
   font-size: 1rem;
 }
 
+.typed-date-month-year {
+  display: flex;
+  gap: 6px;
+}
+
 .datepicker-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
