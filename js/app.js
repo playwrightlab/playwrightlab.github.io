@@ -1828,6 +1828,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let dpDate = new Date();
   let dpSelected = null;
 
+  function formatSelectedDate(date) {
+    return date.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  }
+
   dpInput.addEventListener("click", () => dpCal.classList.toggle("hidden"));
   document.addEventListener("click", (e) => {
     const isInsideDatePicker =
@@ -1872,7 +1876,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", () => {
         dpSelected = new Date(year, month, d);
         dpInput.value = dpSelected.toLocaleDateString("en-US");
-        document.getElementById("datePickerResult").textContent = `Selected: ${dpSelected.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
+        document.getElementById("datePickerResult").textContent = `Selected: ${formatSelectedDate(dpSelected)}`;
         renderCalendar();
         dpCal.classList.add("hidden");
       });
@@ -1892,7 +1896,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dpDate = new Date();
     dpSelected = new Date();
     dpInput.value = dpSelected.toLocaleDateString("en-US");
-    document.getElementById("datePickerResult").textContent = `Selected: Today`;
+    document.getElementById("datePickerResult").textContent = `Selected: ${formatSelectedDate(dpSelected)}`;
     renderCalendar();
     dpCal.classList.add("hidden");
   });
@@ -1940,7 +1944,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("typedYear").textContent = String(year);
     typedDays.innerHTML = "";
 
+    const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+      const spacer = document.createElement("span");
+      spacer.className = "dp-day calendar-spacer";
+      typedDays.appendChild(spacer);
+    }
 
     for (let d = 1; d <= daysInMonth; d++) {
       const btn = document.createElement("button");
@@ -1956,7 +1967,7 @@ document.addEventListener("DOMContentLoaded", () => {
         typedDateState.date = new Date(year, month, d);
         typedDateState.selectedDate = new Date(year, month, d);
         typedDateInput.value = formatInputDate(typedDateState.date);
-        document.getElementById("typedDateResult").textContent = `Selected: ${typedDateState.date.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
+        document.getElementById("typedDateResult").textContent = `Selected: ${formatSelectedDate(typedDateState.date)}`;
         renderTypedDateCalendar();
         typedDateCal.classList.add("hidden");
       });
@@ -1981,7 +1992,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (parsed) {
       typedDateState.date = parsed;
       typedDateState.selectedDate = parsed;
-      document.getElementById("typedDateResult").textContent = `Typed: ${parsed.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
+      document.getElementById("typedDateResult").textContent = `Typed: ${formatSelectedDate(parsed)}`;
       renderTypedDateCalendar();
       return;
     }
@@ -2004,7 +2015,7 @@ document.addEventListener("DOMContentLoaded", () => {
     typedDateState.date = new Date();
     typedDateState.selectedDate = new Date();
     typedDateInput.value = formatInputDate(typedDateState.date);
-    document.getElementById("typedDateResult").textContent = "Selected: Today";
+    document.getElementById("typedDateResult").textContent = `Selected: ${formatSelectedDate(typedDateState.selectedDate)}`;
     renderTypedDateCalendar();
     typedDateCal.classList.add("hidden");
   });
@@ -2056,7 +2067,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderMonthYearCalendar() {
     const year = Number(monthYearYearSelect.value || monthYearState.date.getFullYear());
-    const month = Number(monthYearMonthSelect.value || monthYearState.date.getMonth());
+    const month = monthYearMonthSelect.value === "" ? monthYearState.date.getMonth() : Number(monthYearMonthSelect.value);
     monthYearState.date = new Date(year, month, 1);
     monthYearMonthSelect.value = String(month);
     monthYearYearSelect.value = String(year);
@@ -2069,7 +2080,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     monthYearDays.innerHTML = "";
+    const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+      const spacer = document.createElement("span");
+      spacer.className = "dp-day calendar-spacer";
+      monthYearDays.appendChild(spacer);
+    }
 
     for (let d = 1; d <= daysInMonth; d++) {
       const btn = document.createElement("button");
@@ -2085,7 +2103,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const selectedDate = new Date(year, month, d);
         monthYearState.selectedDate = selectedDate;
         monthYearInput.value = formatDisplayDate(selectedDate);
-        document.getElementById("monthYearResult").textContent = `Selected: ${selectedDate.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
+        document.getElementById("monthYearResult").textContent = `Selected: ${formatSelectedDate(selectedDate)}`;
         monthYearCal.classList.add("hidden");
       });
       monthYearDays.appendChild(btn);
@@ -2108,7 +2126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     populateMonthYearSelectors();
     renderMonthYearCalendar();
     monthYearInput.value = formatDisplayDate(monthYearState.selectedDate);
-    document.getElementById("monthYearResult").textContent = "Selected: Today";
+    document.getElementById("monthYearResult").textContent = `Selected: ${formatSelectedDate(monthYearState.selectedDate)}`;
     monthYearCal.classList.add("hidden");
   });
 
