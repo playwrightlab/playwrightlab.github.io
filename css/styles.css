@@ -2805,6 +2805,14 @@ input[type="color"] {
   background: white;
 }
 
+.nested-frames-iframe {
+  height: 390px;
+}
+
+.external-iframe {
+  height: 350px;
+}
+
 /* ===== SHADOW DOM ===== */
 #shadowHost,
 #nestedShadowHost {
