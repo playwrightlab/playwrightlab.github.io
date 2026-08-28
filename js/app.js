@@ -2364,7 +2364,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lamborghini: "Lamborghini Huracan",
     triumph: "Triumph Speed Triple 1200",
     seiko: "Seiko Presage Cocktail Time",
-    rifle: "Bolt Action Sporting Rifle",
+    yacht: "Oceanis Luxury Yacht",
   };
 
   function formatINR(num) {
