@@ -212,6 +212,11 @@ ion-icon {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+}
+
+.nav-links {
+  margin-left: auto;
 }
 
 .nav-logo {
@@ -267,6 +272,15 @@ ion-icon {
   color: white !important;
   border-radius: var(--radius-full) !important;
   padding: 8px 20px !important;
+}
+
+.nav-auth {
+  display: flex;
+  align-items: center;
+}
+
+.nav-auth a {
+  text-decoration: none;
 }
 
 .nav-btn:hover {
@@ -392,6 +406,22 @@ ion-icon {
     flex-shrink: 0;
     order: 3;
   }
+  .nav-auth {
+    order: 1;
+    flex-shrink: 0;
+  }
+  .nav-auth .nav-btn {
+    width: auto !important;
+    padding: 8px 14px !important;
+    margin: 0 !important;
+    font-size: 0.813rem !important;
+    border-radius: var(--radius-full) !important;
+  }
+  .nav-auth .btn-sm {
+    margin: 0 !important;
+    padding: 8px 14px !important;
+    font-size: 0.813rem !important;
+  }
   .nav-links {
     position: absolute;
     top: var(--nav-height);
@@ -459,15 +489,8 @@ ion-icon {
     border-bottom: none;
     min-width: 0;
   }
-  .dropdown-trigger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 8px !important;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: var(--radius) !important;
-    white-space: normal;
+  .nav-links > li > a.dropdown-trigger {
+    display: none;
   }
   .dropdown-menu {
     position: static;
