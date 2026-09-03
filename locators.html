@@ -1,0 +1,1784 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Locators | PlayLab — Playwright Practice Arena</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="libs/icons-loader.js"></script>
+    <style>
+      /* ============================================================
+         Locators page — themed to match the PlayLab main site
+         ============================================================ */
+
+      /* ---- Hero ---- */
+      .loc-hero {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        padding: calc(var(--nav-height) + 72px) 24px 72px;
+      }
+      .loc-hero .container {
+        position: relative;
+        z-index: 1;
+      }
+      .loc-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 20px;
+        background: var(--primary-light);
+        color: var(--primary);
+        border: 1px solid var(--primary-glow);
+        border-radius: var(--radius-full);
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+      }
+      .loc-hero h1 {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        font-weight: 900;
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+        margin-bottom: 18px;
+      }
+      /* method names in section titles: big & bold like the main page */
+      .section-title code {
+        font-family: var(--font-mono);
+        font-size: inherit;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: none;
+        padding: 0;
+        border-radius: 0;
+        color: inherit;
+      }
+      .loc-hero-sub {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        max-width: 640px;
+        margin: 0 auto 36px;
+        line-height: 1.7;
+      }
+      .loc-hero-stats {
+        display: flex;
+        gap: 48px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+      .loc-hero-stats .num {
+        font-size: 2.25rem;
+        font-weight: 800;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.2;
+      }
+      .loc-hero-stats .lbl {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      /* ---- Table of contents chips ---- */
+      .loc-toc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .loc-toc a {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: var(--text-secondary);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 8px 16px;
+        border-radius: var(--radius-full);
+        transition: var(--transition);
+        box-shadow: var(--shadow-sm);
+      }
+      .loc-toc a:hover {
+        color: #fff;
+        background: var(--primary);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+      }
+
+      /* right-align the desktop dropdown so it stays on screen */
+      @media (min-width: 769px) {
+        .navbar .dropdown-menu {
+          left: auto;
+          right: 0;
+          transform: translateX(0) translateY(8px);
+        }
+        .navbar .nav-dropdown:hover .dropdown-menu {
+          transform: translateX(0) translateY(0);
+        }
+      }
+
+      /* ---- Example cards ---- */
+      .loc-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      @media (max-width: 900px) {
+        .loc-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .loc-example {
+        display: flex;
+        flex-direction: column;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        transition:
+          box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+          border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .loc-example:hover {
+        box-shadow: var(--shadow-md);
+        border-color: var(--border-hover);
+        transform: translateY(-3px);
+      }
+      .loc-example-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 18px 12px;
+      }
+      .loc-example-head h4 {
+        font-size: 0.98rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .loc-chip {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--primary);
+        background: var(--primary-light);
+        border: 1px solid var(--primary-glow);
+        padding: 4px 10px;
+        border-radius: var(--radius-full);
+        white-space: nowrap;
+      }
+
+      /* ---- Code panel (editor look) ---- */
+      .loc-code {
+        position: relative;
+        margin: 0 18px;
+        background: #0d1117;
+        border: 1px solid #1f2733;
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .loc-code-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 12px;
+        background: #161b22;
+        border-bottom: 1px solid #1f2733;
+      }
+      .loc-code-bar .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .dot.r {
+        background: #ff5f56;
+      }
+      .dot.y {
+        background: #ffbd2e;
+      }
+      .dot.g {
+        background: #27c93f;
+      }
+      .loc-code-bar .fname {
+        margin-left: 8px;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: #8b949e;
+      }
+      .loc-code pre {
+        margin: 0;
+        padding: 16px 52px 16px 16px;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        line-height: 1.65;
+        color: #e6edf3;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      /* override the site-wide code{} chip styling inside the panel */
+      .loc-code code {
+        font-family: var(--font-mono);
+        white-space: pre-wrap;
+        word-break: break-word;
+        background: none;
+        padding: 0;
+        border-radius: 0;
+        color: inherit;
+        font-size: inherit;
+      }
+      /* lightweight token coloring */
+      .tok-fn {
+        color: #d2a8ff;
+      }
+      .tok-str {
+        color: #a5d6ff;
+      }
+      .tok-kw {
+        color: #ff7b72;
+      }
+      .tok-prop {
+        color: #79c0ff;
+      }
+      .tok-com {
+        color: #8b949e;
+        font-style: italic;
+      }
+      .loc-copy {
+        position: absolute;
+        top: 44px;
+        right: 10px;
+        border: 1px solid #30363d;
+        background: #21262d;
+        color: #8b949e;
+        border-radius: var(--radius-sm);
+        padding: 5px 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        line-height: 1;
+        transition: var(--transition);
+        z-index: 2;
+      }
+      .loc-copy:hover {
+        color: #fff;
+        border-color: var(--primary);
+        background: var(--primary);
+      }
+
+      /* ---- Live demo area ---- */
+      .loc-demo {
+        margin-top: 14px;
+        padding: 16px 18px 20px;
+        border-top: 1px dashed var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+      }
+      .loc-demo-label {
+        width: 100%;
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .loc-demo-label::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 0 3px var(--success-light);
+      }
+
+      /* small form controls inside demos */
+      .loc-input {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        border: 2px solid var(--border);
+        border-radius: var(--radius);
+        outline: none;
+        max-width: 260px;
+        transition: var(--transition);
+      }
+      .loc-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--primary-glow);
+      }
+      .loc-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+      .loc-img {
+        border-radius: var(--radius);
+        object-fit: cover;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+      }
+
+      /* switch */
+      .loc-switch {
+        position: relative;
+        width: 48px;
+        height: 26px;
+        border-radius: var(--radius-full);
+        border: none;
+        background: var(--border);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .loc-switch::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        transition: var(--transition);
+      }
+      .loc-switch[aria-checked="true"] {
+        background: var(--primary);
+      }
+      .loc-switch[aria-checked="true"]::after {
+        transform: translateX(22px);
+      }
+
+      /* tabs */
+      .loc-tabs {
+        width: 100%;
+      }
+      .loc-tablist {
+        display: flex;
+        gap: 4px;
+        border-bottom: 1px solid var(--border);
+      }
+      .loc-tab {
+        border: none;
+        background: none;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: var(--transition);
+      }
+      .loc-tab[aria-selected="true"] {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+      .loc-tabpanel {
+        padding: 14px 2px 0;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      /* menu */
+      .loc-menu {
+        list-style: none;
+        margin: 0;
+        padding: 6px;
+        min-width: 180px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+      }
+      .loc-menu [role="menuitem"] {
+        display: block;
+        padding: 8px 12px;
+        border-radius: var(--radius-sm);
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .loc-menu [role="menuitem"]:hover {
+        background: var(--primary-light);
+        color: var(--primary);
+      }
+
+      /* alert */
+      .loc-alert {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: var(--radius);
+        font-size: 0.9rem;
+        font-weight: 500;
+        background: var(--success-light);
+        color: var(--success);
+        border: 1px solid var(--success);
+      }
+
+      /* dialog */
+      .loc-dialog {
+        width: 100%;
+        max-width: 340px;
+        padding: 20px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        background: var(--surface);
+        box-shadow: var(--shadow-lg);
+      }
+      .loc-dialog h5 {
+        font-size: 1.05rem;
+        margin-bottom: 6px;
+      }
+      .loc-dialog p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        margin-bottom: 14px;
+      }
+
+      /* ---- Reference table ---- */
+      .ref-card {
+        padding: 0;
+        overflow: hidden;
+      }
+      .ref-table-wrap {
+        overflow-x: auto;
+      }
+      .ref-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+      }
+      .ref-table th,
+      .ref-table td {
+        text-align: left;
+        padding: 12px 18px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+      .ref-table thead th {
+        background: var(--bg-alt);
+        font-weight: 700;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-secondary);
+      }
+      .ref-cat td {
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .ref-table tbody tr:hover:not(.ref-cat) {
+        background: var(--surface-hover);
+      }
+      .ref-table code {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--primary);
+        background: var(--primary-light);
+        padding: 2px 7px;
+        border-radius: 5px;
+        white-space: nowrap;
+      }
+      .ref-table td.notes {
+        color: var(--text-secondary);
+        font-size: 0.82rem;
+      }
+      .ref-none {
+        color: var(--text-muted);
+        font-style: italic;
+      }
+
+      /* ---- Footer ---- */
+      .loc-footer {
+        background: var(--bg-alt);
+        border-top: 1px solid var(--border);
+        text-align: center;
+        padding: 40px 24px;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+      .loc-footer a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo" data-testid="logo"> <img src="images/logo.svg" alt="PlayLab" class="logo-img" /> Play<span class="logo-accent">Lab</span> </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links" id="navLinks">
+          <li class="nav-dropdown">
+            <a href="#" class="dropdown-trigger" data-testid="nav-menu">Menu ▾</a>
+            <ul class="dropdown-menu" data-testid="dropdown-menu">
+              <li><a href="#get-by-role" data-testid="nav-role">getByRole()</a></li>
+              <li><a href="#get-by-text" data-testid="nav-text">getByText()</a></li>
+              <li><a href="#get-by-label" data-testid="nav-label">getByLabel()</a></li>
+              <li><a href="#get-by-placeholder" data-testid="nav-placeholder">getByPlaceholder()</a></li>
+              <li><a href="#get-by-alttext" data-testid="nav-alttext">getByAltText()</a></li>
+              <li><a href="#get-by-title" data-testid="nav-title">getByTitle()</a></li>
+              <li><a href="#get-by-testid" data-testid="nav-testid">getByTestId()</a></li>
+              <li><a href="#reference" data-testid="nav-reference">Element ↔ Role Map</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="nav-auth">
+          <a href="index.html" class="nav-btn" data-testid="nav-home">Home</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" data-testid="theme-toggle" aria-label="Toggle theme">
+          <span class="theme-icon"><ion-icon name="moon-outline"></ion-icon></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <header class="loc-hero">
+      <div class="hero-bg-shapes" aria-hidden="true">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      <div class="container">
+        <span class="loc-hero-badge" data-testid="loc-badge"><ion-icon name="locate-outline"></ion-icon> Playwright Locators</span>
+        <h1 data-testid="loc-title">Master the <span class="gradient-text">Built-in Locators</span></h1>
+        <p class="loc-hero-sub" data-testid="loc-subtitle">
+          A hands-on reference for every recommended Playwright locator. Each method includes multiple real-world examples with the exact HTML you can target from your tests.
+        </p>
+        <div class="loc-hero-stats" data-testid="loc-stats">
+          <div class="stat"><span class="num">7</span><span class="lbl">Locator methods</span></div>
+          <div class="stat"><span class="num">30+</span><span class="lbl">Live examples</span></div>
+          <div class="stat"><span class="num">1</span><span class="lbl">Element ↔ role map</span></div>
+        </div>
+        <nav class="loc-toc" aria-label="Locator sections" data-testid="loc-toc">
+          <a href="#get-by-role">getByRole()</a>
+          <a href="#get-by-text">getByText()</a>
+          <a href="#get-by-label">getByLabel()</a>
+          <a href="#get-by-placeholder">getByPlaceholder()</a>
+          <a href="#get-by-alttext">getByAltText()</a>
+          <a href="#get-by-title">getByTitle()</a>
+          <a href="#get-by-testid">getByTestId()</a>
+          <a href="#reference">Element ↔ Role Map</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ==================== getByRole ==================== -->
+    <section class="section" id="get-by-role">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">01</span>
+          <h2 class="section-title"><code>page.getByRole()</code></h2>
+          <p class="section-desc">Locate elements by their ARIA role and accessible name — the most resilient and strongly recommended locator.</p>
+        </div>
+
+        <div class="loc-grid">
+          <!-- button -->
+          <div class="loc-example" data-testid="role-button">
+            <div class="loc-example-head">
+              <h4>Button by name</h4>
+              <span class="loc-chip">button</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'button'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Submit order'</span> }).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <button class="btn btn-primary" type="button">Submit order</button>
+            </div>
+          </div>
+
+          <!-- link -->
+          <div class="loc-example" data-testid="role-link">
+            <div class="loc-example-head">
+              <h4>Link (exact name)</h4>
+              <span class="loc-chip">link</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'link'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Documentation'</span>, <span class="tok-prop">exact</span>: <span class="tok-kw">true</span> }).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <a href="https://playwright.dev" target="_blank" rel="noopener">Documentation</a>
+            </div>
+          </div>
+
+          <!-- heading -->
+          <div class="loc-example" data-testid="role-heading">
+            <div class="loc-example-head">
+              <h4>Heading by level</h4>
+              <span class="loc-chip">heading</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'heading'</span>, { <span class="tok-prop">level</span>: <span class="tok-kw">3</span>, <span class="tok-prop">name</span>: <span class="tok-str">'Account settings'</span> })).<span class="tok-fn">toBeVisible</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <h3 style="margin: 0">Account settings</h3>
+            </div>
+          </div>
+
+          <!-- textbox -->
+          <div class="loc-example" data-testid="role-textbox">
+            <div class="loc-example-head">
+              <h4>Textbox by name</h4>
+              <span class="loc-chip">textbox</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'textbox'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Full name'</span> }).<span class="tok-fn">fill</span>(<span class="tok-str">'Ada Lovelace'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <input class="loc-input" type="text" aria-label="Full name" placeholder="Full name" />
+            </div>
+          </div>
+
+          <!-- searchbox -->
+          <div class="loc-example" data-testid="role-searchbox">
+            <div class="loc-example-head">
+              <h4>Searchbox</h4>
+              <span class="loc-chip">searchbox</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'searchbox'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Search site'</span> }).<span class="tok-fn">fill</span>(<span class="tok-str">'locators'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <input class="loc-input" type="search" aria-label="Search site" placeholder="Search…" />
+            </div>
+          </div>
+
+          <!-- checkbox -->
+          <div class="loc-example" data-testid="role-checkbox">
+            <div class="loc-example-head">
+              <h4>Checkbox by state</h4>
+              <span class="loc-chip">checkbox</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'checkbox'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Subscribe'</span>, <span class="tok-prop">checked</span>: <span class="tok-kw">false</span> }).<span class="tok-fn">check</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <label class="loc-check"><input type="checkbox" aria-label="Subscribe" /> Subscribe to newsletter</label>
+            </div>
+          </div>
+
+          <!-- radio -->
+          <div class="loc-example" data-testid="role-radio">
+            <div class="loc-example-head">
+              <h4>Radio in a group</h4>
+              <span class="loc-chip">radio</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'radio'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Express shipping'</span> }).<span class="tok-fn">check</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <fieldset style="border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; display: flex; gap: 16px">
+                <legend style="padding: 0 6px; font-size: 0.8rem; color: var(--text-muted)">Shipping</legend>
+                <label class="loc-check"><input type="radio" name="ship" aria-label="Standard shipping" checked /> Standard</label>
+                <label class="loc-check"><input type="radio" name="ship" aria-label="Express shipping" /> Express</label>
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- switch -->
+          <div class="loc-example" data-testid="role-switch">
+            <div class="loc-example-head">
+              <h4>Switch (toggle)</h4>
+              <span class="loc-chip">switch</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'switch'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Dark mode'</span> }).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <label class="loc-check">Dark mode <button class="loc-switch" role="switch" aria-checked="false" aria-label="Dark mode" type="button"></button></label>
+            </div>
+          </div>
+
+          <!-- combobox -->
+          <div class="loc-example" data-testid="role-combobox">
+            <div class="loc-example-head">
+              <h4>Combobox (select)</h4>
+              <span class="loc-chip">combobox</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'combobox'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Country'</span> }).<span class="tok-fn">selectOption</span>(<span class="tok-str">'India'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <select class="loc-input" aria-label="Country">
+                <option>United States</option>
+                <option>India</option>
+                <option>Germany</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- spinbutton -->
+          <div class="loc-example" data-testid="role-spinbutton">
+            <div class="loc-example-head">
+              <h4>Spinbutton (number)</h4>
+              <span class="loc-chip">spinbutton</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'spinbutton'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Quantity'</span> }).<span class="tok-fn">fill</span>(<span class="tok-str">'3'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <input class="loc-input" type="number" aria-label="Quantity" value="1" min="1" style="max-width: 120px" />
+            </div>
+          </div>
+
+          <!-- slider -->
+          <div class="loc-example" data-testid="role-slider">
+            <div class="loc-example-head">
+              <h4>Slider (range)</h4>
+              <span class="loc-chip">slider</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'slider'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Volume'</span> }).<span class="tok-fn">fill</span>(<span class="tok-str">'70'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <input type="range" aria-label="Volume" min="0" max="100" value="40" style="max-width: 220px" />
+            </div>
+          </div>
+
+          <!-- tab -->
+          <div class="loc-example" data-testid="role-tab">
+            <div class="loc-example-head">
+              <h4>Tab in a tablist</h4>
+              <span class="loc-chip">tab</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'tab'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Billing'</span> }).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <div class="loc-tabs" data-testid="demo-tabs">
+                <div class="loc-tablist" role="tablist" aria-label="Settings">
+                  <button class="loc-tab" role="tab" aria-selected="true" type="button">Profile</button>
+                  <button class="loc-tab" role="tab" aria-selected="false" type="button">Billing</button>
+                  <button class="loc-tab" role="tab" aria-selected="false" type="button">Security</button>
+                </div>
+                <div class="loc-tabpanel" role="tabpanel">Profile settings panel.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- menuitem -->
+          <div class="loc-example" data-testid="role-menuitem">
+            <div class="loc-example-head">
+              <h4>Menu item</h4>
+              <span class="loc-chip">menuitem</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'menuitem'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Log out'</span> }).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <ul class="loc-menu" role="menu" aria-label="Account">
+                <li role="none"><a role="menuitem" href="#get-by-role">Profile</a></li>
+                <li role="none"><a role="menuitem" href="#get-by-role">Settings</a></li>
+                <li role="none"><a role="menuitem" href="#get-by-role">Log out</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- progressbar -->
+          <div class="loc-example" data-testid="role-progressbar">
+            <div class="loc-example-head">
+              <h4>Progress bar</h4>
+              <span class="loc-chip">progressbar</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'progressbar'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Upload'</span> })).<span class="tok-fn">toHaveAttribute</span>(<span class="tok-str">'value'</span>, <span class="tok-str">'65'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <progress aria-label="Upload" value="65" max="100" style="width: 220px"></progress>
+            </div>
+          </div>
+
+          <!-- alert -->
+          <div class="loc-example" data-testid="role-alert">
+            <div class="loc-example-head">
+              <h4>Alert (live region)</h4>
+              <span class="loc-chip">alert</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'alert'</span>)).<span class="tok-fn">toHaveText</span>(<span class="tok-str">'Saved successfully'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <div class="loc-alert" role="alert"><ion-icon name="checkmark-circle"></ion-icon> Saved successfully</div>
+            </div>
+          </div>
+
+          <!-- dialog -->
+          <div class="loc-example" data-testid="role-dialog">
+            <div class="loc-example-head">
+              <h4>Dialog + scoped query</h4>
+              <span class="loc-chip">dialog</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">const</span> dialog = page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'dialog'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Delete item'</span> });
+<span class="tok-kw">await</span> dialog.<span class="tok-fn">getByRole</span>(<span class="tok-str">'button'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Confirm'</span> }).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <div class="loc-dialog" role="dialog" aria-label="Delete item">
+                <h5>Delete item</h5>
+                <p>This action cannot be undone. Are you sure?</p>
+                <div style="display: flex; gap: 8px">
+                  <button class="btn btn-sm btn-danger" type="button">Confirm</button>
+                  <button class="btn btn-sm btn-outline" type="button">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- img -->
+          <div class="loc-example" data-testid="role-img">
+            <div class="loc-example-head">
+              <h4>Image by name</h4>
+              <span class="loc-chip">img</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'img'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Team photo'</span> })).<span class="tok-fn">toBeVisible</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <img class="loc-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=240&amp;h=140&amp;fit=crop&amp;q=80" alt="Team photo" width="240" height="140" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== getByText ==================== -->
+    <section class="section section-alt" id="get-by-text">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">02</span>
+          <h2 class="section-title"><code>page.getByText()</code></h2>
+          <p class="section-desc">Find elements by their text content — substring, exact, or regular expression.</p>
+        </div>
+
+        <div class="loc-grid">
+          <div class="loc-example" data-testid="text-substring">
+            <div class="loc-example-head">
+              <h4>Substring (default)</h4>
+              <span class="loc-chip">contains</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">text.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByText</span>(<span class="tok-str">'Welcome back'</span>)).<span class="tok-fn">toBeVisible</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <p style="margin: 0">Welcome back, Sagar! You have 3 new messages.</p>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="text-exact">
+            <div class="loc-example-head">
+              <h4>Exact match</h4>
+              <span class="loc-chip">exact: true</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">text.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByText</span>(<span class="tok-str">'Delete'</span>, { <span class="tok-prop">exact</span>: <span class="tok-kw">true</span> }).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <span>Delete</span>
+              <span style="color: var(--text-muted)">Delete all items (won't match)</span>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="text-regex">
+            <div class="loc-example-head">
+              <h4>Regular expression</h4>
+              <span class="loc-chip">regex</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">text.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByText</span>(<span class="tok-str">/\$\d+\.\d{2}/</span>)).<span class="tok-fn">toHaveText</span>(<span class="tok-str">'$49.99'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <span style="font-weight: 700">$49.99</span>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="text-chained">
+            <div class="loc-example-head">
+              <h4>Filter a list by text</h4>
+              <span class="loc-chip">filter</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">text.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'listitem'</span>)
+  .<span class="tok-fn">filter</span>({ <span class="tok-prop">hasText</span>: <span class="tok-str">'Premium'</span> })
+  .<span class="tok-fn">getByRole</span>(<span class="tok-str">'button'</span>).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <ul style="list-style: none; display: flex; gap: 12px; flex-wrap: wrap; margin: 0">
+                <li style="display: flex; gap: 8px; align-items: center">Premium plan <button class="btn btn-sm btn-outline" type="button">Choose</button></li>
+                <li style="display: flex; gap: 8px; align-items: center">Basic plan <button class="btn btn-sm btn-outline" type="button">Choose</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== getByLabel ==================== -->
+    <section class="section" id="get-by-label">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">03</span>
+          <h2 class="section-title"><code>page.getByLabel()</code></h2>
+          <p class="section-desc">Target form controls by their associated <code>&lt;label&gt;</code> or <code>aria-label</code> — the best way to fill forms.</p>
+        </div>
+
+        <div class="loc-grid">
+          <div class="loc-example" data-testid="label-for">
+            <div class="loc-example-head">
+              <h4>Label linked with <code>for</code></h4>
+              <span class="loc-chip">&lt;label for&gt;</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">label.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByLabel</span>(<span class="tok-str">'Email address'</span>).<span class="tok-fn">fill</span>(<span class="tok-str">'user@example.com'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <div class="form-group" style="width: 100%; margin: 0">
+                <label for="locEmail">Email address</label>
+                <input class="loc-input" type="email" id="locEmail" placeholder="you@example.com" style="max-width: none; width: 100%" />
+              </div>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="label-wrapped">
+            <div class="loc-example-head">
+              <h4>Input wrapped by label</h4>
+              <span class="loc-chip">implicit</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">label.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByLabel</span>(<span class="tok-str">'Remember me'</span>).<span class="tok-fn">check</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <label class="loc-check"><input type="checkbox" /> Remember me</label>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="label-aria">
+            <div class="loc-example-head">
+              <h4>Via <code>aria-label</code></h4>
+              <span class="loc-chip">aria-label</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">label.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByLabel</span>(<span class="tok-str">'Card number'</span>).<span class="tok-fn">fill</span>(<span class="tok-str">'4242 4242 4242 4242'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <input class="loc-input" type="text" aria-label="Card number" placeholder="•••• •••• •••• ••••" />
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="label-exact">
+            <div class="loc-example-head">
+              <h4>Exact label match</h4>
+              <span class="loc-chip">exact: true</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">label.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByLabel</span>(<span class="tok-str">'Password'</span>, { <span class="tok-prop">exact</span>: <span class="tok-kw">true</span> }).<span class="tok-fn">fill</span>(<span class="tok-str">'S3cr3t!'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <div class="form-group" style="width: 100%; margin: 0">
+                <label for="locPass">Password</label>
+                <input class="loc-input" type="password" id="locPass" placeholder="Enter password" style="max-width: none; width: 100%" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== getByPlaceholder ==================== -->
+    <section class="section section-alt" id="get-by-placeholder">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">04</span>
+          <h2 class="section-title"><code>page.getByPlaceholder()</code></h2>
+          <p class="section-desc">Locate inputs and textareas that expose a <code>placeholder</code> attribute.</p>
+        </div>
+
+        <div class="loc-grid">
+          <div class="loc-example" data-testid="placeholder-basic">
+            <div class="loc-example-head">
+              <h4>Input by placeholder</h4>
+              <span class="loc-chip">input</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">placeholder.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByPlaceholder</span>(<span class="tok-str">'Search the docs'</span>).<span class="tok-fn">fill</span>(<span class="tok-str">'locators'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <input class="loc-input" type="search" placeholder="Search the docs" />
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="placeholder-textarea">
+            <div class="loc-example-head">
+              <h4>Textarea by placeholder</h4>
+              <span class="loc-chip">textarea</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">placeholder.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByPlaceholder</span>(<span class="tok-str">'Leave a comment…'</span>).<span class="tok-fn">fill</span>(<span class="tok-str">'Great work!'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <textarea class="loc-input" placeholder="Leave a comment…" rows="2" style="max-width: none; width: 100%"></textarea>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="placeholder-exact">
+            <div class="loc-example-head">
+              <h4>Exact placeholder</h4>
+              <span class="loc-chip">exact: true</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">placeholder.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByPlaceholder</span>(<span class="tok-str">'name@work-email.com'</span>, { <span class="tok-prop">exact</span>: <span class="tok-kw">true</span> }).<span class="tok-fn">fill</span>(<span class="tok-str">'a@b.com'</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <input class="loc-input" type="email" placeholder="name@work-email.com" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== getByAltText ==================== -->
+    <section class="section" id="get-by-alttext">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">05</span>
+          <h2 class="section-title"><code>page.getByAltText()</code></h2>
+          <p class="section-desc">Find images (and other elements with <code>alt</code>) by their alternative text.</p>
+        </div>
+
+        <div class="loc-grid">
+          <div class="loc-example" data-testid="alt-image">
+            <div class="loc-example-head">
+              <h4>Image by alt text</h4>
+              <span class="loc-chip">&lt;img alt&gt;</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">alt.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByAltText</span>(<span class="tok-str">'Mountain landscape'</span>)).<span class="tok-fn">toBeVisible</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <img
+                class="loc-img"
+                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=240&amp;h=150&amp;fit=crop&amp;q=80"
+                alt="Mountain landscape"
+                width="240"
+                height="150"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="alt-click">
+            <div class="loc-example-head">
+              <h4>Clickable image by alt</h4>
+              <span class="loc-chip">clickable</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">alt.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByAltText</span>(<span class="tok-str">'Product thumbnail'</span>).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <button type="button" style="background: none; border: none; cursor: pointer; padding: 0">
+                <img
+                  class="loc-img"
+                  src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=120&amp;h=120&amp;fit=crop&amp;q=80"
+                  alt="Product thumbnail"
+                  width="120"
+                  height="120"
+                  loading="lazy"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="alt-regex">
+            <div class="loc-example-head">
+              <h4>Alt text with regex</h4>
+              <span class="loc-chip">regex</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">alt.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByAltText</span>(<span class="tok-str">/avatar/i</span>)).<span class="tok-fn">toHaveCount</span>(<span class="tok-kw">1</span>);</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <img
+                class="loc-img"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&amp;h=96&amp;fit=crop&amp;q=80"
+                alt="User Avatar"
+                width="96"
+                height="96"
+                style="border-radius: 50%"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== getByTitle ==================== -->
+    <section class="section section-alt" id="get-by-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">06</span>
+          <h2 class="section-title"><code>page.getByTitle()</code></h2>
+          <p class="section-desc">Locate elements by their <code>title</code> attribute (shown as a native tooltip on hover).</p>
+        </div>
+
+        <div class="loc-grid">
+          <div class="loc-example" data-testid="title-button">
+            <div class="loc-example-head">
+              <h4>Icon button by title</h4>
+              <span class="loc-chip">title</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">title.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByTitle</span>(<span class="tok-str">'Close dialog'</span>).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element — hover for tooltip</span>
+              <button type="button" class="btn btn-outline btn-sm" title="Close dialog"><ion-icon name="close-outline"></ion-icon></button>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="title-span">
+            <div class="loc-example-head">
+              <h4>Text with title tooltip</h4>
+              <span class="loc-chip">span</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">title.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByTitle</span>(<span class="tok-str">'Verified account'</span>)).<span class="tok-fn">toBeVisible</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element — hover for tooltip</span>
+              <span title="Verified account" style="display: inline-flex; align-items: center; gap: 4px; color: var(--success)"><ion-icon name="checkmark-circle"></ion-icon> Verified</span>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="title-link">
+            <div class="loc-example-head">
+              <h4>Link by exact title</h4>
+              <span class="loc-chip">exact: true</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">title.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByTitle</span>(<span class="tok-str">'Open settings'</span>, { <span class="tok-prop">exact</span>: <span class="tok-kw">true</span> }).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element — hover for tooltip</span>
+              <a href="#get-by-title" title="Open settings">Settings</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== getByTestId ==================== -->
+    <section class="section" id="get-by-testid">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">07</span>
+          <h2 class="section-title"><code>page.getByTestId()</code></h2>
+          <p class="section-desc">Locate elements by their <code>data-testid</code> — stable IDs that never change with copy or styling.</p>
+        </div>
+
+        <div class="loc-grid">
+          <div class="loc-example" data-testid="testid-basic">
+            <div class="loc-example-head">
+              <h4>Element by test id</h4>
+              <span class="loc-chip">data-testid</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">testid.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByTestId</span>(<span class="tok-str">'checkout-button'</span>).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <button type="button" class="btn btn-primary" data-testid="checkout-button">Checkout</button>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="testid-scoped">
+            <div class="loc-example-head">
+              <h4>Scoped inside a container</h4>
+              <span class="loc-chip">chained</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">testid.spec.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByTestId</span>(<span class="tok-str">'product-card'</span>)
+  .<span class="tok-fn">getByRole</span>(<span class="tok-str">'button'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Add'</span> }).<span class="tok-fn">click</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <div data-testid="product-card" style="border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: flex; align-items: center; gap: 12px">
+                <span>Wireless mouse — $19</span>
+                <button type="button" class="btn btn-sm btn-success">Add</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="loc-example" data-testid="testid-custom">
+            <div class="loc-example-head">
+              <h4>Custom test-id attribute</h4>
+              <span class="loc-chip">config</span>
+            </div>
+            <div class="loc-code">
+              <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">playwright.config.ts</span></div>
+              <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
+              <pre><code><span class="tok-com">// playwright.config.ts</span>
+<span class="tok-kw">export default</span> <span class="tok-fn">defineConfig</span>({
+  <span class="tok-prop">use</span>: { <span class="tok-prop">testIdAttribute</span>: <span class="tok-str">'data-qa'</span> },
+});
+<span class="tok-com">// test</span>
+<span class="tok-kw">await</span> page.<span class="tok-fn">getByTestId</span>(<span class="tok-str">'login-form'</span>).<span class="tok-fn">isVisible</span>();</code></pre>
+            </div>
+            <div class="loc-demo">
+              <span class="loc-demo-label">Live element</span>
+              <form data-qa="login-form" style="display: flex; gap: 8px; flex-wrap: wrap">
+                <input class="loc-input" type="text" placeholder="Username" />
+                <button type="button" class="btn btn-sm btn-primary">Sign in</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ELEMENT ↔ ROLE MAP ==================== -->
+    <section class="section section-alt" id="reference">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">08</span>
+          <h2 class="section-title">HTML Element ↔ ARIA Role Map</h2>
+          <p class="section-desc">The definitive cheat-sheet: each HTML element, its correct implicit ARIA role, and how to reach it with <code>getByRole()</code>.</p>
+        </div>
+
+        <div class="card ref-card full-width">
+          <div class="ref-table-wrap">
+            <table class="ref-table" data-testid="element-role-map">
+              <thead>
+                <tr>
+                  <th style="width: 24%">HTML element</th>
+                  <th style="width: 22%">Implicit ARIA role</th>
+                  <th style="width: 54%">getByRole() usage &amp; notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Landmarks -->
+                <tr class="ref-cat">
+                  <td colspan="3">Landmarks &amp; sectioning</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;header&gt;</code></td>
+                  <td><code>banner</code></td>
+                  <td class="notes">Top-level page header. <code>getByRole('banner')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;nav&gt;</code></td>
+                  <td><code>navigation</code></td>
+                  <td class="notes"><code>getByRole('navigation', { name: 'Primary' })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;main&gt;</code></td>
+                  <td><code>main</code></td>
+                  <td class="notes">One per page. <code>getByRole('main')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;aside&gt;</code></td>
+                  <td><code>complementary</code></td>
+                  <td class="notes"><code>getByRole('complementary')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;footer&gt;</code></td>
+                  <td><code>contentinfo</code></td>
+                  <td class="notes">Top-level footer. <code>getByRole('contentinfo')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;section&gt;</code></td>
+                  <td><code>region</code>*</td>
+                  <td class="notes">Only when it has an accessible name (<code>aria-label</code>). <code>getByRole('region', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;article&gt;</code></td>
+                  <td><code>article</code></td>
+                  <td class="notes"><code>getByRole('article')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;form&gt;</code></td>
+                  <td><code>form</code>*</td>
+                  <td class="notes">Role <code>form</code> only when named. <code>getByRole('form', { name })</code>.</td>
+                </tr>
+
+                <!-- Headings & text -->
+                <tr class="ref-cat">
+                  <td colspan="3">Headings &amp; text content</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code></td>
+                  <td><code>heading</code></td>
+                  <td class="notes"><code>getByRole('heading', { level: 1, name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;p&gt;</code></td>
+                  <td><code>paragraph</code></td>
+                  <td class="notes">Usually targeted with <code>getByText()</code> instead.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;blockquote&gt;</code></td>
+                  <td><code>blockquote</code></td>
+                  <td class="notes"><code>getByRole('blockquote')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code></td>
+                  <td><code>list</code></td>
+                  <td class="notes"><code>getByRole('list')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;li&gt;</code></td>
+                  <td><code>listitem</code></td>
+                  <td class="notes"><code>getByRole('listitem')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;dl&gt;</code> / <code>&lt;dt&gt;</code> / <code>&lt;dd&gt;</code></td>
+                  <td><code>term</code> / <code>definition</code></td>
+                  <td class="notes"><code>&lt;dl&gt;</code> itself has no role; <code>&lt;dt&gt;</code>→<code>term</code>, <code>&lt;dd&gt;</code>→<code>definition</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;a href&gt;</code></td>
+                  <td><code>link</code></td>
+                  <td class="notes"><code>getByRole('link', { name })</code>. An <code>&lt;a&gt;</code> with no <code>href</code> has <span class="ref-none">no role</span>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;strong&gt;</code></td>
+                  <td><code>strong</code></td>
+                  <td class="notes">Rarely queried by role.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;em&gt;</code></td>
+                  <td><code>emphasis</code></td>
+                  <td class="notes">Rarely queried by role.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;code&gt;</code></td>
+                  <td><code>code</code></td>
+                  <td class="notes"><code>getByRole('code')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;img alt&gt;</code></td>
+                  <td><code>img</code></td>
+                  <td class="notes"><code>getByRole('img', { name })</code> or <code>getByAltText()</code>. Empty <code>alt=""</code> → <code>presentation</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;figure&gt;</code></td>
+                  <td><code>figure</code></td>
+                  <td class="notes"><code>getByRole('figure')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;hr&gt;</code></td>
+                  <td><code>separator</code></td>
+                  <td class="notes"><code>getByRole('separator')</code>.</td>
+                </tr>
+
+                <!-- Forms & widgets -->
+                <tr class="ref-cat">
+                  <td colspan="3">Forms &amp; interactive controls</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;button&gt;</code></td>
+                  <td><code>button</code></td>
+                  <td class="notes"><code>getByRole('button', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;input type="text"&gt;</code></td>
+                  <td><code>textbox</code></td>
+                  <td class="notes">Also <code>email</code>, <code>tel</code>, <code>url</code> map here — except password.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;input type="search"&gt;</code></td>
+                  <td><code>searchbox</code></td>
+                  <td class="notes"><code>getByRole('searchbox', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;input type="password"&gt;</code></td>
+                  <td><span class="ref-none">no role</span></td>
+                  <td class="notes">Not exposed as textbox. Use <code>getByLabel('Password')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;input type="number"&gt;</code></td>
+                  <td><code>spinbutton</code></td>
+                  <td class="notes"><code>getByRole('spinbutton', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;input type="checkbox"&gt;</code></td>
+                  <td><code>checkbox</code></td>
+                  <td class="notes"><code>getByRole('checkbox', { name, checked })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;input type="radio"&gt;</code></td>
+                  <td><code>radio</code></td>
+                  <td class="notes"><code>getByRole('radio', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;input type="range"&gt;</code></td>
+                  <td><code>slider</code></td>
+                  <td class="notes"><code>getByRole('slider', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;input type="file"&gt;</code></td>
+                  <td><span class="ref-none">no role</span></td>
+                  <td class="notes">Use <code>setInputFiles()</code> via <code>getByLabel()</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;textarea&gt;</code></td>
+                  <td><code>textbox</code></td>
+                  <td class="notes"><code>getByRole('textbox', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;select&gt;</code></td>
+                  <td><code>combobox</code></td>
+                  <td class="notes"><code>listbox</code> when <code>multiple</code> or <code>size&gt;1</code>. <code>getByRole('combobox', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;option&gt;</code></td>
+                  <td><code>option</code></td>
+                  <td class="notes"><code>getByRole('option', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;optgroup&gt;</code></td>
+                  <td><code>group</code></td>
+                  <td class="notes"><code>getByRole('group')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;fieldset&gt;</code></td>
+                  <td><code>group</code></td>
+                  <td class="notes">Named by its <code>&lt;legend&gt;</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;label&gt;</code>, <code>&lt;legend&gt;</code></td>
+                  <td><span class="ref-none">no role</span></td>
+                  <td class="notes">Provide accessible names for other controls.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;output&gt;</code></td>
+                  <td><code>status</code></td>
+                  <td class="notes">Live region. <code>getByRole('status')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;progress&gt;</code></td>
+                  <td><code>progressbar</code></td>
+                  <td class="notes"><code>getByRole('progressbar', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;meter&gt;</code></td>
+                  <td><code>meter</code></td>
+                  <td class="notes"><code>getByRole('meter', { name })</code>.</td>
+                </tr>
+
+                <!-- Tables -->
+                <tr class="ref-cat">
+                  <td colspan="3">Tables</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;table&gt;</code></td>
+                  <td><code>table</code></td>
+                  <td class="notes"><code>grid</code> when interactive. <code>getByRole('table')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;caption&gt;</code></td>
+                  <td><code>caption</code></td>
+                  <td class="notes">Names the table.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code></td>
+                  <td><code>rowgroup</code></td>
+                  <td class="notes"><code>getByRole('rowgroup')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;tr&gt;</code></td>
+                  <td><code>row</code></td>
+                  <td class="notes"><code>getByRole('row', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;th scope="col"&gt;</code></td>
+                  <td><code>columnheader</code></td>
+                  <td class="notes"><code>getByRole('columnheader', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;th scope="row"&gt;</code></td>
+                  <td><code>rowheader</code></td>
+                  <td class="notes"><code>getByRole('rowheader', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;td&gt;</code></td>
+                  <td><code>cell</code></td>
+                  <td class="notes"><code>gridcell</code> inside a grid. <code>getByRole('cell')</code>.</td>
+                </tr>
+
+                <!-- Disclosure & dialog -->
+                <tr class="ref-cat">
+                  <td colspan="3">Disclosure &amp; dialog</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;details&gt;</code></td>
+                  <td><code>group</code></td>
+                  <td class="notes">Expandable container.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;summary&gt;</code></td>
+                  <td><code>button</code></td>
+                  <td class="notes"><code>getByRole('button', { name, expanded })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>&lt;dialog&gt;</code></td>
+                  <td><code>dialog</code></td>
+                  <td class="notes"><code>getByRole('dialog', { name })</code>.</td>
+                </tr>
+
+                <!-- ARIA-only roles -->
+                <tr class="ref-cat">
+                  <td colspan="3">ARIA-only roles (no native element — set with <code>role="…"</code>)</td>
+                </tr>
+                <tr>
+                  <td><code>role="tablist / tab / tabpanel"</code></td>
+                  <td><code>tab</code>, <code>tablist</code>, <code>tabpanel</code></td>
+                  <td class="notes"><code>getByRole('tab', { name, selected })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>role="switch"</code></td>
+                  <td><code>switch</code></td>
+                  <td class="notes"><code>getByRole('switch', { name, checked })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>role="menu / menubar / menuitem"</code></td>
+                  <td><code>menu</code>, <code>menuitem</code></td>
+                  <td class="notes"><code>getByRole('menuitem', { name })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>role="alert / status / log"</code></td>
+                  <td><code>alert</code>, <code>status</code>, <code>log</code></td>
+                  <td class="notes">Live regions. <code>getByRole('alert')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>role="tooltip"</code></td>
+                  <td><code>tooltip</code></td>
+                  <td class="notes"><code>getByRole('tooltip')</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>role="tree / treeitem"</code></td>
+                  <td><code>tree</code>, <code>treeitem</code></td>
+                  <td class="notes"><code>getByRole('treeitem', { name, expanded })</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>role="grid / gridcell"</code></td>
+                  <td><code>grid</code>, <code>gridcell</code></td>
+                  <td class="notes">Interactive data grids.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p style="margin-top: 20px; text-align: center; color: var(--text-secondary); font-size: 0.9rem">
+          *Conditional role — applies only when the element is named or configured as noted. Common <code>getByRole()</code> options: <code>name</code>, <code>exact</code>, <code>checked</code>,
+          <code>pressed</code>, <code>selected</code>, <code>expanded</code>, <code>level</code>, <code>disabled</code>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="loc-footer" data-testid="footer">
+      <p>PlayLab — Playwright locators practice.</p>
+    </footer>
+
+    <script>
+      // ===== THEME TOGGLE =====
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = themeToggle.querySelector(".theme-icon");
+      const savedTheme = localStorage.getItem("playlab-theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      themeIcon.innerHTML = savedTheme === "dark" ? '<ion-icon name="sunny-outline"></ion-icon>' : '<ion-icon name="moon-outline"></ion-icon>';
+      themeToggle.addEventListener("click", () => {
+        const current = document.documentElement.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("playlab-theme", next);
+        themeIcon.innerHTML = next === "dark" ? '<ion-icon name="sunny-outline"></ion-icon>' : '<ion-icon name="moon-outline"></ion-icon>';
+      });
+
+      // ===== MOBILE MENU =====
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("navLinks");
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        hamburger.classList.toggle("active");
+      });
+
+      // Close the mobile menu after picking a section
+      document.querySelectorAll('.dropdown-menu a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          hamburger.classList.remove("active");
+        });
+      });
+
+      // ===== NAVBAR SHADOW ON SCROLL =====
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 20);
+      });
+
+      // ===== COPY CODE BUTTONS =====
+      document.querySelectorAll(".loc-copy").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const code = btn.parentElement.querySelector("code").innerText;
+          try {
+            await navigator.clipboard.writeText(code);
+            const original = btn.innerHTML;
+            btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon>';
+            setTimeout(() => (btn.innerHTML = original), 1200);
+          } catch (e) {
+            /* clipboard unavailable */
+          }
+        });
+      });
+
+      // ===== SWITCH DEMO =====
+      document.querySelectorAll('.loc-switch[role="switch"]').forEach((sw) => {
+        sw.addEventListener("click", () => {
+          sw.setAttribute("aria-checked", sw.getAttribute("aria-checked") === "true" ? "false" : "true");
+        });
+      });
+
+      // ===== TABS DEMO =====
+      document.querySelectorAll('[data-testid="demo-tabs"]').forEach((group) => {
+        const tabs = group.querySelectorAll('[role="tab"]');
+        const panel = group.querySelector('[role="tabpanel"]');
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            tabs.forEach((t) => t.setAttribute("aria-selected", "false"));
+            tab.setAttribute("aria-selected", "true");
+            panel.textContent = tab.textContent + " settings panel.";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
