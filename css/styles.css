@@ -4316,3 +4316,28 @@ code {
     font-size: 1.1rem;
   }
 }
+
+/* ===== RESPONSIVE BANNER AD SLOTS ===== */
+.ad-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 28px 16px;
+  overflow: hidden;
+}
+.ad-slot-scaler {
+  margin: 0 auto;
+  /* width/height are set by JS to the scaled banner size to avoid extra gaps */
+}
+.ad-slot-inner {
+  width: 468px;
+  height: 60px;
+  transform-origin: top left;
+  flex: 0 0 auto;
+}
+.ad-frame {
+  width: 468px;
+  height: 60px;
+  border: 0;
+  display: block;
+}

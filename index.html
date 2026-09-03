@@ -888,6 +888,15 @@
       </div>
     </section>
 
+    <!-- ==================== AD SLOT ==================== -->
+    <div class="ad-slot" data-testid="ad-slot" aria-label="Advertisement">
+      <div class="ad-slot-scaler">
+        <div class="ad-slot-inner">
+          <iframe class="ad-frame" title="Advertisement" scrolling="no" loading="lazy" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+
     <!-- ==================== DYNAMIC CONTENT ==================== -->
     <section class="section" id="dynamic">
       <div class="container">
@@ -2073,6 +2082,54 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer" data-testid="toast-container"></div>
 
+    <script>
+      // Responsive, lazy-loaded banner ads: injected only when scrolled near the
+      // viewport so they never block initial load. No inline srcdoc in the static
+      // HTML keeps this compatible with Live Server.
+      (function () {
+        var AD_HTML =
+          '<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:0;overflow:hidden}body{display:flex;align-items:center;justify-content:center}</style></head><body><script>atOptions={"key":"6fe6c4a9f4fb6c679659f9b6d1aaff95","format":"iframe","height":60,"width":468,"params":{}};<\/script><script src="https://www.highrevenueformat.com/6fe6c4a9f4fb6c679659f9b6d1aaff95/invoke.js"><\/script>';
+        function scaleAdSlots() {
+          document.querySelectorAll(".ad-slot").forEach(function (slot) {
+            var scaler = slot.querySelector(".ad-slot-scaler");
+            var inner = slot.querySelector(".ad-slot-inner");
+            if (!scaler || !inner) return;
+            var s = getComputedStyle(slot);
+            var avail = slot.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
+            var scale = Math.min(1, avail / 468);
+            inner.style.transform = "scale(" + scale + ")";
+            scaler.style.width = 468 * scale + "px";
+            scaler.style.height = 60 * scale + "px";
+          });
+        }
+        function loadAd(slot) {
+          var frame = slot.querySelector(".ad-frame");
+          if (!frame || frame.dataset.loaded) return;
+          frame.dataset.loaded = "1";
+          frame.srcdoc = AD_HTML;
+          scaleAdSlots();
+        }
+        function checkAds() {
+          document.querySelectorAll(".ad-slot").forEach(function (slot) {
+            var frame = slot.querySelector(".ad-frame");
+            if (!frame || frame.dataset.loaded) return;
+            var r = slot.getBoundingClientRect();
+            if (r.top < window.innerHeight + 300 && r.bottom > -300) loadAd(slot);
+          });
+        }
+        scaleAdSlots();
+        // Start loading ads only after the page has fully loaded.
+        window.addEventListener("load", function () {
+          scaleAdSlots();
+          checkAds();
+        });
+        window.addEventListener("scroll", checkAds, { passive: true });
+        window.addEventListener("resize", function () {
+          scaleAdSlots();
+          checkAds();
+        });
+      })();
+    </script>
     <script src="js/app.js"></script>
   </body>
 </html>
