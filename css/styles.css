@@ -509,6 +509,9 @@ ion-icon {
     grid-template-columns: 1fr 1fr;
     gap: 6px;
   }
+  .nav-dropdown:hover .dropdown-menu {
+    transform: none;
+  }
   .dropdown-menu li {
     border-bottom: none;
     min-width: 0;
