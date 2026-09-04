@@ -722,19 +722,19 @@
           </div>
 
           <!-- switch -->
-          <div class="loc-example" data-testid="role-switch">
+          <div class="loc-example" data-testid="role-meter">
             <div class="loc-example-head">
-              <h4>Switch (toggle)</h4>
-              <span class="loc-chip">switch</span>
+              <h4>Meter (&lt;meter&gt;)</h4>
+              <span class="loc-chip">meter</span>
             </div>
             <div class="loc-code">
               <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
               <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
-              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'switch'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Dark mode'</span> }).<span class="tok-fn">click</span>();</code></pre>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'meter'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Disk usage'</span> })).<span class="tok-fn">toHaveAttribute</span>(<span class="tok-str">'value'</span>, <span class="tok-str">'6'</span>);</code></pre>
             </div>
             <div class="loc-demo">
               <span class="loc-demo-label">Live element</span>
-              <label class="loc-check">Dark mode <button class="loc-switch" role="switch" aria-checked="false" aria-label="Dark mode" type="button"></button></label>
+              <meter aria-label="Disk usage" min="0" max="10" value="6" style="width: 200px"></meter>
             </div>
           </div>
 
@@ -793,47 +793,58 @@
             </div>
           </div>
 
-          <!-- tab -->
-          <div class="loc-example" data-testid="role-tab">
+          <!-- table row & cell -->
+          <div class="loc-example" data-testid="role-row">
             <div class="loc-example-head">
-              <h4>Tab in a tablist</h4>
-              <span class="loc-chip">tab</span>
+              <h4>Table row &amp; cell</h4>
+              <span class="loc-chip">row · cell</span>
             </div>
             <div class="loc-code">
               <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
               <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
-              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'tab'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Billing'</span> }).<span class="tok-fn">click</span>();</code></pre>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'row'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Ada Lovelace Admin'</span> })
+  .<span class="tok-fn">getByRole</span>(<span class="tok-str">'cell'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Admin'</span> }).<span class="tok-fn">click</span>();</code></pre>
             </div>
             <div class="loc-demo">
               <span class="loc-demo-label">Live element</span>
-              <div class="loc-tabs" data-testid="demo-tabs">
-                <div class="loc-tablist" role="tablist" aria-label="Settings">
-                  <button class="loc-tab" role="tab" aria-selected="true" type="button">Profile</button>
-                  <button class="loc-tab" role="tab" aria-selected="false" type="button">Billing</button>
-                  <button class="loc-tab" role="tab" aria-selected="false" type="button">Security</button>
-                </div>
-                <div class="loc-tabpanel" role="tabpanel">Profile settings panel.</div>
-              </div>
+              <table style="border-collapse: collapse; width: 100%; font-size: 0.9rem">
+                <thead>
+                  <tr>
+                    <th scope="col" style="text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border)">Name</th>
+                    <th scope="col" style="text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border)">Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="padding: 6px 10px">Ada Lovelace</td>
+                    <td style="padding: 6px 10px">Admin</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 10px">Alan Turing</td>
+                    <td style="padding: 6px 10px">Editor</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
-          <!-- menuitem -->
-          <div class="loc-example" data-testid="role-menuitem">
+          <!-- list / listitem -->
+          <div class="loc-example" data-testid="role-listitem">
             <div class="loc-example-head">
-              <h4>Menu item</h4>
-              <span class="loc-chip">menuitem</span>
+              <h4>List &amp; list items</h4>
+              <span class="loc-chip">list · listitem</span>
             </div>
             <div class="loc-code">
               <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
               <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
-              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'menuitem'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Log out'</span> }).<span class="tok-fn">click</span>();</code></pre>
+              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'listitem'</span>)).<span class="tok-fn">toHaveCount</span>(<span class="tok-kw">3</span>);</code></pre>
             </div>
             <div class="loc-demo">
               <span class="loc-demo-label">Live element</span>
-              <ul class="loc-menu" role="menu" aria-label="Account">
-                <li role="none"><a role="menuitem" href="#get-by-role">Profile</a></li>
-                <li role="none"><a role="menuitem" href="#get-by-role">Settings</a></li>
-                <li role="none"><a role="menuitem" href="#get-by-role">Log out</a></li>
+              <ul style="margin: 0; padding-left: 20px">
+                <li>Playwright</li>
+                <li>Cypress</li>
+                <li>Selenium</li>
               </ul>
             </div>
           </div>
@@ -855,20 +866,23 @@
             </div>
           </div>
 
-          <!-- alert -->
-          <div class="loc-example" data-testid="role-alert">
+          <!-- disclosure (details / summary) -->
+          <div class="loc-example" data-testid="role-summary">
             <div class="loc-example-head">
-              <h4>Alert (live region)</h4>
-              <span class="loc-chip">alert</span>
+              <h4>Disclosure (&lt;summary&gt;)</h4>
+              <span class="loc-chip">button</span>
             </div>
             <div class="loc-code">
               <div class="loc-code-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">role.spec.ts</span></div>
               <button class="loc-copy" aria-label="Copy code"><ion-icon name="copy-outline"></ion-icon></button>
-              <pre><code><span class="tok-kw">await</span> <span class="tok-fn">expect</span>(page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'alert'</span>)).<span class="tok-fn">toHaveText</span>(<span class="tok-str">'Saved successfully'</span>);</code></pre>
+              <pre><code><span class="tok-kw">await</span> page.<span class="tok-fn">getByRole</span>(<span class="tok-str">'button'</span>, { <span class="tok-prop">name</span>: <span class="tok-str">'Shipping details'</span> }).<span class="tok-fn">click</span>();</code></pre>
             </div>
             <div class="loc-demo">
               <span class="loc-demo-label">Live element</span>
-              <div class="loc-alert" role="alert"><ion-icon name="checkmark-circle"></ion-icon> Saved successfully</div>
+              <details style="width: 100%">
+                <summary style="cursor: pointer; font-weight: 600">Shipping details</summary>
+                <p style="margin: 8px 0 0; color: var(--text-secondary)">Ships in 2–3 business days via standard courier.</p>
+              </details>
             </div>
           </div>
 
@@ -886,14 +900,14 @@
             </div>
             <div class="loc-demo">
               <span class="loc-demo-label">Live element</span>
-              <div class="loc-dialog" role="dialog" aria-label="Delete item">
+              <dialog class="loc-dialog" open aria-label="Delete item" style="position: static; margin: 0">
                 <h5>Delete item</h5>
                 <p>This action cannot be undone. Are you sure?</p>
                 <div style="display: flex; gap: 8px">
                   <button class="btn btn-sm btn-danger" type="button">Confirm</button>
                   <button class="btn btn-sm btn-outline" type="button">Cancel</button>
                 </div>
-              </div>
+              </dialog>
             </div>
           </div>
 
@@ -1757,26 +1771,6 @@
           } catch (e) {
             /* clipboard unavailable */
           }
-        });
-      });
-
-      // ===== SWITCH DEMO =====
-      document.querySelectorAll('.loc-switch[role="switch"]').forEach((sw) => {
-        sw.addEventListener("click", () => {
-          sw.setAttribute("aria-checked", sw.getAttribute("aria-checked") === "true" ? "false" : "true");
-        });
-      });
-
-      // ===== TABS DEMO =====
-      document.querySelectorAll('[data-testid="demo-tabs"]').forEach((group) => {
-        const tabs = group.querySelectorAll('[role="tab"]');
-        const panel = group.querySelector('[role="tabpanel"]');
-        tabs.forEach((tab) => {
-          tab.addEventListener("click", () => {
-            tabs.forEach((t) => t.setAttribute("aria-selected", "false"));
-            tab.setAttribute("aria-selected", "true");
-            panel.textContent = tab.textContent + " settings panel.";
-          });
         });
       });
     </script>
