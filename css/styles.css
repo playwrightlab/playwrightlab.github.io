@@ -2697,6 +2697,41 @@ input[type="color"] {
   border-color: var(--info);
 }
 
+/* ===== HTTP BASIC AUTH POPUP ===== */
+.sub-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.credentials-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg-alt);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  font-size: 0.813rem;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+
+.credentials-hint ion-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  color: var(--primary);
+}
+
+.credentials-hint code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  font-weight: 600;
+  color: var(--text);
+}
+
 /* ===== TABS ===== */
 .tab-nav {
   display: flex;

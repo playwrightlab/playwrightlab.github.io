@@ -1,0 +1,8 @@
+{
+  "name": "playwright-demo-site",
+  "version": "1.0.0",
+  "description": "Static practice site with a real HTTP Basic Auth route.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

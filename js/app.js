@@ -1274,6 +1274,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("nativeResult").textContent = `Prompt result: "${result}"`;
   });
 
+  // ===== HTTP BASIC AUTH =====
+  // Use the local Node /basic-auth route when served by server.js; otherwise
+  // (e.g. GitHub Pages) fall back to a public endpoint that returns a real 401.
+  const basicAuthLink = document.getElementById("basicAuthBtn");
+  if (basicAuthLink) {
+    const isLocalServer = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname) && location.protocol.startsWith("http");
+    const href = isLocalServer ? basicAuthLink.dataset.localHref : basicAuthLink.dataset.remoteHref;
+    if (href) basicAuthLink.setAttribute("href", href);
+  }
+
   // ===== TABS =====
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
