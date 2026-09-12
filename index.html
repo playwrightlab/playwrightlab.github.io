@@ -1075,11 +1075,17 @@
             <div id="dialogResult" data-testid="dialog-result" class="result-display" style="margin-top: 1rem"></div>
 
             <hr class="section-divider" id="basicAuthDivider" />
-            <h4 class="sub-heading" id="basicAuthTitle"><ion-icon name="lock-closed-outline"></ion-icon> HTTP Basic Auth</h4>
+            <div class="sub-header">
+              <h4 class="sub-heading" id="basicAuthTitle"><ion-icon name="lock-closed-outline"></ion-icon> HTTP Basic Auth</h4>
+              <span class="sub-badge">Auth</span>
+            </div>
             <p class="sub-desc" id="basicAuthDesc">Opens the <strong>real</strong> native HTTP Basic Authentication popup (server returns <code>401</code>). Handle it in Playwright via <code>httpCredentials</code>.</p>
             <div class="credentials-hint" id="basicAuthCreds" data-testid="basic-auth-credentials">
               <ion-icon name="key-outline"></ion-icon>
-              <span>Username: <code data-testid="basic-auth-username">admin</code> &nbsp;·&nbsp; Password: <code data-testid="basic-auth-password">password123</code></span>
+              <div class="cred-items">
+                <span class="cred-item">Username: <code data-testid="basic-auth-username">admin</code></span>
+                <span class="cred-item">Password: <code data-testid="basic-auth-password">password123</code></span>
+              </div>
             </div>
             <div class="btn-stack" id="basicAuthBtnStack">
               <a class="btn btn-primary" href="/basic-auth" data-local-href="/basic-auth" data-remote-href="https://httpbin.org/basic-auth/admin/password123" target="_blank" rel="noopener" data-testid="basic-auth-btn" id="basicAuthBtn">Open Basic Auth Popup</a>
@@ -1099,7 +1105,10 @@
               <button class="btn btn-info" data-testid="toast-info" id="toastInfo">Info Toast</button>
             </div>
             <hr class="section-divider" id="toastDivider1" />
-            <h4 class="sub-heading" id="nativeDialogsHeading">Native Dialogs</h4>
+            <div class="sub-header">
+              <h4 class="sub-heading" id="nativeDialogsHeading"><ion-icon name="browsers-outline"></ion-icon> Native Dialogs</h4>
+              <span class="sub-badge">Native</span>
+            </div>
             <div class="btn-stack" id="nativeBtnStack">
               <button class="btn btn-outline" data-testid="native-alert" id="nativeAlert">window.alert()</button>
               <button class="btn btn-outline" data-testid="native-confirm" id="nativeConfirm">window.confirm()</button>
@@ -1107,7 +1116,10 @@
             </div>
             <div id="nativeResult" data-testid="native-result" class="result-display" style="margin-top: 1rem"></div>
             <hr class="section-divider" id="toastDivider2" />
-            <h4 class="sub-heading" id="inlineAlertsHeading">Inline Alerts</h4>
+            <div class="sub-header">
+              <h4 class="sub-heading" id="inlineAlertsHeading"><ion-icon name="alert-circle-outline"></ion-icon> Inline Alerts</h4>
+              <span class="sub-badge">Alert</span>
+            </div>
             <div class="alert alert-success" id="alertSuccess" data-testid="alert-success"><ion-icon name="checkmark-circle"></ion-icon> Success! Operation completed.</div>
             <div class="alert alert-error" id="alertError" data-testid="alert-error"><ion-icon name="close-circle"></ion-icon> Error! Something went wrong.</div>
             <div class="alert alert-warning" id="alertWarning" data-testid="alert-warning"><ion-icon name="warning"></ion-icon> Warning! Please check your input.</div>

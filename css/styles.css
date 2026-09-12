@@ -2698,10 +2698,52 @@ input[type="color"] {
 }
 
 /* ===== HTTP BASIC AUTH POPUP ===== */
+.sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.sub-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.sub-heading ion-icon {
+  font-size: 1.2em;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.sub-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
 .sub-desc {
   font-size: 0.875rem;
   color: var(--text-secondary);
   margin-bottom: 12px;
+}
+
+.sub-desc code {
+  font-size: inherit;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .credentials-hint {
@@ -2712,7 +2754,7 @@ input[type="color"] {
   background: var(--bg-alt);
   border: 1px dashed var(--border);
   border-radius: var(--radius);
-  font-size: 0.813rem;
+  font-size: 0.875rem;
   color: var(--text-secondary);
   margin-bottom: 14px;
 }
@@ -2723,6 +2765,17 @@ input[type="color"] {
   color: var(--primary);
 }
 
+.credentials-hint .cred-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  min-width: 0;
+}
+
+.credentials-hint .cred-item {
+  white-space: nowrap;
+}
+
 .credentials-hint code {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -2730,6 +2783,9 @@ input[type="color"] {
   padding: 2px 6px;
   font-weight: 600;
   color: var(--text);
+  font-size: inherit;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 /* ===== TABS ===== */
