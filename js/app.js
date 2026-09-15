@@ -1325,6 +1325,127 @@ document.addEventListener("DOMContentLoaded", () => {
     window.print();
   });
 
+  // ===== UPLOAD & DOWNLOAD =====
+  // Files are only read in-memory for display; nothing is ever sent to a server or persisted (GitHub Pages has no backend).
+  function renderFileItem(file, container) {
+    const item = document.createElement("div");
+    item.className = "file-item";
+    item.setAttribute("data-testid", `file-item-${file.name}`);
+    const sizeKB = (file.size / 1024).toFixed(1);
+    item.innerHTML = `
+                <span><ion-icon name="document-outline"></ion-icon> ${sanitize(file.name)} (${sizeKB} KB)</span>
+                <button class="file-remove" data-testid="remove-${file.name}" aria-label="Remove file">&times;</button>
+            `;
+    item.querySelector(".file-remove").addEventListener("click", () => item.remove());
+    container.appendChild(item);
+  }
+
+  function setupUploadZone({ zoneId, inputId, listId, replace }) {
+    const zone = document.getElementById(zoneId);
+    const input = document.getElementById(inputId);
+    const list = document.getElementById(listId);
+
+    const addFiles = (files) => {
+      if (replace) list.innerHTML = "";
+      const toAdd = replace ? Array.from(files).slice(0, 1) : Array.from(files);
+      toAdd.forEach((file) => renderFileItem(file, list));
+    };
+
+    zone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      zone.classList.add("dragover");
+    });
+    zone.addEventListener("dragleave", () => zone.classList.remove("dragover"));
+    zone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      zone.classList.remove("dragover");
+      addFiles(e.dataTransfer.files);
+    });
+    input.addEventListener("change", (e) => addFiles(e.target.files));
+  }
+
+  setupUploadZone({ zoneId: "singleUploadZone", inputId: "singleFileInput", listId: "singleFileList", replace: true });
+  setupUploadZone({ zoneId: "multiUploadZone", inputId: "multiFileInput", listId: "multiFileList", replace: false });
+
+  function setupUploadButton(btnId, listId, statusId) {
+    document.getElementById(btnId).addEventListener("click", () => {
+      const status = document.getElementById(statusId);
+      const hasFiles = document.getElementById(listId).children.length > 0;
+      status.textContent = hasFiles ? "Uploaded successfully!" : "Please select a file first.";
+      status.style.color = hasFiles ? "var(--success, #16a34a)" : "var(--danger)";
+    });
+  }
+
+  setupUploadButton("singleUploadBtn", "singleFileList", "singleUploadStatus");
+  setupUploadButton("multiUploadBtn", "multiFileList", "multiUploadStatus");
+
+  // Builds a minimal valid PDF client-side (no external library, no network/storage required)
+  function createPdfBlob(lines) {
+    const escapePdf = (s) => s.replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
+    const streamParts = ["BT", "/F1 14 Tf", "14 TL", "50 740 Td"];
+    lines.forEach((line, idx) => {
+      streamParts.push(idx === 0 ? `(${escapePdf(line)}) Tj` : `T* (${escapePdf(line)}) Tj`);
+    });
+    streamParts.push("ET");
+    const content = streamParts.join("\n");
+
+    const objects = [
+      "1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj",
+      "2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj",
+      "3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>\nendobj",
+      `4 0 obj\n<< /Length ${content.length} >>\nstream\n${content}\nendstream\nendobj`,
+      "5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj",
+    ];
+
+    let pdf = "%PDF-1.4\n";
+    const offsets = [];
+    objects.forEach((obj) => {
+      offsets.push(pdf.length);
+      pdf += obj + "\n";
+    });
+    const xrefStart = pdf.length;
+    pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+    offsets.forEach((offset) => {
+      pdf += `${String(offset).padStart(10, "0")} 00000 n \n`;
+    });
+    pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF`;
+
+    return new Blob([pdf], { type: "application/pdf" });
+  }
+
+  function samplePdfBlob() {
+    return createPdfBlob([
+      "Playwright Practice Site",
+      "",
+      "Sample PDF generated for download testing.",
+      `Generated: ${new Date().toLocaleString()}`,
+      "",
+      "Created entirely in your browser - not stored on any server.",
+    ]);
+  }
+
+  document.getElementById("downloadPdfBtn").addEventListener("click", () => {
+    const url = URL.createObjectURL(samplePdfBlob());
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "sample-download.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById("openPdfBtn").addEventListener("click", () => {
+    const url = URL.createObjectURL(samplePdfBlob());
+    // open a blank tab first, then navigate it - opening the blob URL directly can get stuck loading in some browsers
+    const pdfWindow = window.open("", "_blank");
+    if (pdfWindow) {
+      pdfWindow.location.href = url;
+    } else {
+      window.location.href = url;
+    }
+  });
+
   // ===== SHADOW DOM =====
   // Shadow DOM host
   const shadowHost = document.getElementById("shadowHost");

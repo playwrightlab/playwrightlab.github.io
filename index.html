@@ -1266,19 +1266,49 @@
               <button class="btn btn-outline" data-testid="popup-btn" id="popupBtn">Open Popup Window</button>
               <button class="btn btn-outline" data-testid="print-btn" id="printBtn">Print Dialog</button>
             </div>
-            <div class="download-section" id="downloadSection" style="margin-top: 1.5rem">
-              <h4 class="sub-heading" id="downloadHeading">Download Testing</h4>
-              <a href="data:text/plain;charset=utf-8,Hello%20Playwright!" download="test-file.txt" class="btn btn-outline" id="downloadTxt" data-testid="download-link">Download Text File</a>
-              <a
-                href="data:text/csv;charset=utf-8,Name,Email,Age%0AJohn,john@test.com,30%0AJane,jane@test.com,25"
-                download="test-data.csv"
-                class="btn btn-outline"
-                id="downloadCsv"
-                data-testid="download-csv"
-                style="margin-top: 0.5rem"
-                >Download CSV</a
-              >
+          </div>
+        </div>
+
+        <!-- Upload & Download -->
+        <div class="card full-width" style="margin-top: 2rem" data-testid="upload-download-card">
+          <div class="card-header" id="uploadDownloadCardHeader">
+            <h3 class="card-title" id="uploadDownloadCardTitle"><ion-icon name="swap-vertical-outline"></ion-icon> Upload & Download</h3>
+            <span class="card-badge">Upload / Download</span>
+          </div>
+          <div class="grid-2" id="uploadDownloadGrid">
+            <!-- Single Upload -->
+            <div id="singleUploadCard">
+              <h4 class="sub-heading" id="singleUploadHeading">Single File Upload</h4>
+              <div class="upload-zone" id="singleUploadZone" data-testid="single-upload-zone">
+                <div class="upload-icon" id="singleUploadIcon"><ion-icon name="cloud-upload-outline"></ion-icon></div>
+                <p class="upload-text" id="singleUploadText">Drag & drop a file here or <label for="singleFileInput" class="upload-link" id="singleUploadBrowseLabel">browse</label></p>
+                <input type="file" id="singleFileInput" accept="image/*,.pdf,.doc,.docx" data-testid="single-file-input" hidden />
+                <span class="upload-hint">One file only (Max 5MB)</span>
+              </div>
+              <div id="singleFileList" class="file-list" data-testid="single-file-list"></div>
+              <button class="btn btn-primary btn-sm" id="singleUploadBtn" data-testid="single-upload-btn" style="margin-top: 0.75rem">Upload</button>
+              <span id="singleUploadStatus" class="result-text" data-testid="single-upload-status" style="margin-left: 0.5rem"></span>
             </div>
+
+            <!-- Multiple Upload -->
+            <div id="multiUploadCard">
+              <h4 class="sub-heading" id="multiUploadHeading">Multiple File Upload</h4>
+              <div class="upload-zone" id="multiUploadZone" data-testid="multi-upload-zone">
+                <div class="upload-icon" id="multiUploadIcon"><ion-icon name="cloud-upload-outline"></ion-icon></div>
+                <p class="upload-text" id="multiUploadText">Drag & drop files here or <label for="multiFileInput" class="upload-link" id="multiUploadBrowseLabel">browse</label></p>
+                <input type="file" id="multiFileInput" multiple accept="image/*,.pdf,.doc,.docx" data-testid="multi-file-input" hidden />
+                <span class="upload-hint">Multiple files allowed (Max 5MB each)</span>
+              </div>
+              <div id="multiFileList" class="file-list" data-testid="multi-file-list"></div>
+              <button class="btn btn-primary btn-sm" id="multiUploadBtn" data-testid="multi-upload-btn" style="margin-top: 0.75rem">Upload</button>
+              <span id="multiUploadStatus" class="result-text" data-testid="multi-upload-status" style="margin-left: 0.5rem"></span>
+            </div>
+          </div>
+          <hr class="section-divider" id="uploadDownloadDivider" style="margin: 1.5rem 0" />
+          <h4 class="sub-heading" id="pdfDownloadHeading">PDF Download</h4>
+          <div class="btn-group" id="pdfBtnGroup">
+            <button class="btn btn-outline" id="downloadPdfBtn" data-testid="download-pdf-btn"><ion-icon name="document-text-outline"></ion-icon> Download PDF</button>
+            <button class="btn btn-outline" id="openPdfBtn" data-testid="open-pdf-btn"><ion-icon name="eye-outline"></ion-icon> Open PDF</button>
           </div>
         </div>
       </div>
