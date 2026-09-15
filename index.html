@@ -40,6 +40,7 @@
               <li><a href="#dynamic" data-testid="nav-dynamic">Dynamic Content</a></li>
               <li><a href="#modals" data-testid="nav-modals">Modals & Alerts</a></li>
               <li><a href="#frames" data-testid="nav-frames">Frames</a></li>
+              <li><a href="#uploads-downloads" data-testid="nav-uploads-downloads">Uploads & Downloads</a></li>
               <li><a href="#shadow" data-testid="nav-shadow">Shadow DOM</a></li>
               <li><a href="#advanced" data-testid="nav-advanced">Advanced</a></li>
               <li><a href="#wizard" data-testid="nav-wizard">Wizard</a></li>
@@ -1268,46 +1269,62 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Upload & Download -->
-        <div class="card full-width" style="margin-top: 2rem" data-testid="upload-download-card">
-          <div class="card-header" id="uploadDownloadCardHeader">
-            <h3 class="card-title" id="uploadDownloadCardTitle"><ion-icon name="swap-vertical-outline"></ion-icon> Upload & Download</h3>
-            <span class="card-badge">Upload / Download</span>
-          </div>
-          <div class="grid-2" id="uploadDownloadGrid">
-            <!-- Single Upload -->
-            <div id="singleUploadCard">
-              <h4 class="sub-heading" id="singleUploadHeading">Single File Upload</h4>
-              <div class="upload-zone" id="singleUploadZone" data-testid="single-upload-zone">
-                <div class="upload-icon" id="singleUploadIcon"><ion-icon name="cloud-upload-outline"></ion-icon></div>
-                <p class="upload-text" id="singleUploadText">Drag & drop a file here or <label for="singleFileInput" class="upload-link" id="singleUploadBrowseLabel">browse</label></p>
-                <input type="file" id="singleFileInput" accept="image/*,.pdf,.doc,.docx" data-testid="single-file-input" hidden />
-                <span class="upload-hint">One file only (Max 5MB)</span>
-              </div>
-              <div id="singleFileList" class="file-list" data-testid="single-file-list"></div>
-              <button class="btn btn-primary btn-sm" id="singleUploadBtn" data-testid="single-upload-btn" style="margin-top: 0.75rem">Upload</button>
-              <span id="singleUploadStatus" class="result-text" data-testid="single-upload-status" style="margin-left: 0.5rem"></span>
-            </div>
+    <!-- ==================== UPLOADS & DOWNLOADS ==================== -->
+    <section class="section" id="uploads-downloads">
+      <div class="container">
+        <div class="section-header" id="uploadsDownloadsHeader">
+          <span class="section-tag" id="uploadsDownloadsTag">09</span>
+          <h2 class="section-title" id="uploadsDownloadsTitle">Uploads & Downloads</h2>
+          <p class="section-desc" id="uploadsDownloadsDesc">Single/multiple file upload flows plus a real PDF to test browser download/viewer behavior.</p>
+        </div>
 
-            <!-- Multiple Upload -->
-            <div id="multiUploadCard">
-              <h4 class="sub-heading" id="multiUploadHeading">Multiple File Upload</h4>
-              <div class="upload-zone" id="multiUploadZone" data-testid="multi-upload-zone">
-                <div class="upload-icon" id="multiUploadIcon"><ion-icon name="cloud-upload-outline"></ion-icon></div>
-                <p class="upload-text" id="multiUploadText">Drag & drop files here or <label for="multiFileInput" class="upload-link" id="multiUploadBrowseLabel">browse</label></p>
-                <input type="file" id="multiFileInput" multiple accept="image/*,.pdf,.doc,.docx" data-testid="multi-file-input" hidden />
-                <span class="upload-hint">Multiple files allowed (Max 5MB each)</span>
-              </div>
-              <div id="multiFileList" class="file-list" data-testid="multi-file-list"></div>
-              <button class="btn btn-primary btn-sm" id="multiUploadBtn" data-testid="multi-upload-btn" style="margin-top: 0.75rem">Upload</button>
-              <span id="multiUploadStatus" class="result-text" data-testid="multi-upload-status" style="margin-left: 0.5rem"></span>
+        <div class="grid-2" id="uploadsGrid">
+          <!-- Single Upload -->
+          <div class="card" data-testid="single-upload-card">
+            <div class="card-header" id="singleUploadCardHeader">
+              <h3 class="card-title" id="singleUploadHeading"><ion-icon name="cloud-upload-outline"></ion-icon> Single File Upload</h3>
+              <span class="card-badge">Single</span>
             </div>
+            <div class="upload-zone" id="singleUploadZone" data-testid="single-upload-zone">
+              <div class="upload-icon" id="singleUploadIcon"><ion-icon name="cloud-upload-outline"></ion-icon></div>
+              <p class="upload-text" id="singleUploadText">Drag & drop a file here or <label for="singleFileInput" class="upload-link" id="singleUploadBrowseLabel">browse</label></p>
+              <input type="file" id="singleFileInput" accept="image/*,.pdf,.doc,.docx" data-testid="single-file-input" hidden />
+              <span class="upload-hint">One file only (Max 5MB)</span>
+            </div>
+            <div id="singleFileList" class="file-list" data-testid="single-file-list"></div>
+            <button class="btn btn-primary btn-sm" id="singleUploadBtn" data-testid="single-upload-btn" style="margin-top: 0.75rem">Upload</button>
+            <span id="singleUploadStatus" class="result-text" data-testid="single-upload-status" style="margin-left: 0.5rem"></span>
           </div>
-          <hr class="section-divider" id="uploadDownloadDivider" style="margin: 1.5rem 0" />
-          <h4 class="sub-heading" id="pdfDownloadHeading">PDF Download</h4>
+
+          <!-- Multiple Upload -->
+          <div class="card" data-testid="multi-upload-card">
+            <div class="card-header" id="multiUploadCardHeader">
+              <h3 class="card-title" id="multiUploadHeading"><ion-icon name="cloud-upload-outline"></ion-icon> Multiple File Upload</h3>
+              <span class="card-badge">Multiple</span>
+            </div>
+            <div class="upload-zone" id="multiUploadZone" data-testid="multi-upload-zone">
+              <div class="upload-icon" id="multiUploadIcon"><ion-icon name="cloud-upload-outline"></ion-icon></div>
+              <p class="upload-text" id="multiUploadText">Drag & drop files here or <label for="multiFileInput" class="upload-link" id="multiUploadBrowseLabel">browse</label></p>
+              <input type="file" id="multiFileInput" multiple accept="image/*,.pdf,.doc,.docx" data-testid="multi-file-input" hidden />
+              <span class="upload-hint">Multiple files allowed (Max 5MB each)</span>
+            </div>
+            <div id="multiFileList" class="file-list" data-testid="multi-file-list"></div>
+            <button class="btn btn-primary btn-sm" id="multiUploadBtn" data-testid="multi-upload-btn" style="margin-top: 0.75rem">Upload</button>
+            <span id="multiUploadStatus" class="result-text" data-testid="multi-upload-status" style="margin-left: 0.5rem"></span>
+          </div>
+        </div>
+
+        <!-- PDF Download -->
+        <div class="card full-width" style="margin-top: 2rem" data-testid="pdf-download-card">
+          <div class="card-header" id="pdfDownloadCardHeader">
+            <h3 class="card-title" id="pdfDownloadHeading"><ion-icon name="document-text-outline"></ion-icon> Playwright Cheat Sheet (PDF)</h3>
+            <span class="card-badge">PDF</span>
+          </div>
           <div class="btn-group" id="pdfBtnGroup">
-            <button class="btn btn-outline" id="downloadPdfBtn" data-testid="download-pdf-btn"><ion-icon name="document-text-outline"></ion-icon> Download PDF</button>
+            <a class="btn btn-outline" id="downloadPdfBtn" data-testid="download-pdf-btn" href="pdf/Playwright-Cheat-Sheet.pdf" download="Playwright-Cheat-Sheet.pdf"><ion-icon name="document-text-outline"></ion-icon> Download PDF</a>
             <button class="btn btn-outline" id="openPdfBtn" data-testid="open-pdf-btn"><ion-icon name="eye-outline"></ion-icon> Open PDF</button>
           </div>
         </div>
@@ -1318,7 +1335,7 @@
     <section class="section" id="shadow">
       <div class="container">
         <div class="section-header" id="shadowHeader">
-          <span class="section-tag" id="shadowTag">09</span>
+          <span class="section-tag" id="shadowTag">10</span>
           <h2 class="section-title" id="shadowTitle">Shadow DOM</h2>
           <p class="section-desc" id="shadowDesc">Elements encapsulated within Shadow DOM for advanced testing.</p>
         </div>
@@ -1352,7 +1369,7 @@
     <section class="section section-alt" id="advanced">
       <div class="container">
         <div class="section-header" id="advancedHeader">
-          <span class="section-tag" id="advancedTag">10</span>
+          <span class="section-tag" id="advancedTag">11</span>
           <h2 class="section-title" id="advancedTitle">Advanced Scenarios</h2>
           <p class="section-desc" id="advancedDesc">Complex patterns for advanced automation practice.</p>
         </div>
@@ -1472,7 +1489,7 @@
     <section class="section" id="wizard">
       <div class="container">
         <div class="section-header" id="wizardHeader">
-          <span class="section-tag" id="wizardTag">11</span>
+          <span class="section-tag" id="wizardTag">12</span>
           <h2 class="section-title" id="wizardTitle">Multi-Step Wizard</h2>
           <p class="section-desc" id="wizardDesc">Navigate through a multi-step form with validation at each step.</p>
         </div>
@@ -1574,7 +1591,7 @@
     <section class="section section-alt" id="carousel">
       <div class="container">
         <div class="section-header" id="carouselHeader">
-          <span class="section-tag" id="carouselTag">12</span>
+          <span class="section-tag" id="carouselTag">13</span>
           <h2 class="section-title" id="carouselTitle">Carousel / Slider</h2>
           <p class="section-desc" id="carouselDesc">Image carousel with navigation, autoplay, and indicator dots.</p>
         </div>
@@ -1623,7 +1640,7 @@
     <section class="section" id="network">
       <div class="container">
         <div class="section-header" id="networkHeader">
-          <span class="section-tag" id="networkTag">13</span>
+          <span class="section-tag" id="networkTag">14</span>
           <h2 class="section-title" id="networkTitle">Network & API</h2>
           <p class="section-desc" id="networkDesc">Practice intercepting network requests, mocking APIs, and handling responses.</p>
         </div>
@@ -1696,7 +1713,7 @@
     <section class="section section-alt" id="flaky">
       <div class="container">
         <div class="section-header" id="flakyHeader">
-          <span class="section-tag" id="flakyTag">14</span>
+          <span class="section-tag" id="flakyTag">15</span>
           <h2 class="section-title" id="flakyTitle">Flaky & Retry Elements</h2>
           <p class="section-desc" id="flakyDesc">Elements that randomly appear, disappear, or change — great for practicing waitFor and retry logic.</p>
         </div>
@@ -1742,7 +1759,7 @@
     <section class="section" id="datepicker">
       <div class="container">
         <div class="section-header" id="datepickerHeader">
-          <span class="section-tag" id="datepickerTag">15</span>
+          <span class="section-tag" id="datepickerTag">16</span>
           <h2 class="section-title" id="datepickerTitle">Custom Date Picker</h2>
           <p class="section-desc" id="datepickerDesc">A custom calendar widget — more realistic than native date inputs.</p>
         </div>
@@ -1855,7 +1872,7 @@
     <section class="section section-alt" id="media">
       <div class="container">
         <div class="section-header" id="mediaHeader">
-          <span class="section-tag" id="mediaTag">16</span>
+          <span class="section-tag" id="mediaTag">17</span>
           <h2 class="section-title" id="mediaTitle">Media Player</h2>
           <p class="section-desc" id="mediaDesc">Audio and video controls for testing media interactions.</p>
         </div>
@@ -1912,7 +1929,7 @@
     <section class="section" id="a11y">
       <div class="container">
         <div class="section-header" id="a11yHeader">
-          <span class="section-tag" id="a11yTag">17</span>
+          <span class="section-tag" id="a11yTag">18</span>
           <h2 class="section-title" id="a11yTitle">Accessibility (a11y)</h2>
           <p class="section-desc" id="a11yDesc">Test ARIA attributes, keyboard navigation, focus management, and screen reader support.</p>
         </div>
@@ -1987,7 +2004,7 @@
     <section class="section section-alt" id="responsive">
       <div class="container">
         <div class="section-header" id="responsiveHeader">
-          <span class="section-tag" id="responsiveTag">18</span>
+          <span class="section-tag" id="responsiveTag">19</span>
           <h2 class="section-title" id="responsiveTitle">Responsive Testing</h2>
           <p class="section-desc" id="responsiveDesc">Elements that change behavior and visibility based on viewport size.</p>
         </div>
@@ -2046,7 +2063,7 @@
     <section class="section" id="protected">
       <div class="container">
         <div class="section-header" id="protectedHeader">
-          <span class="section-tag" id="protectedTag">19</span>
+          <span class="section-tag" id="protectedTag">20</span>
           <h2 class="section-title" id="protectedTitle">Protected Content</h2>
           <p class="section-desc" id="protectedDesc">Content that requires authentication — practice testing auth guards.</p>
         </div>
