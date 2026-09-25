@@ -2360,9 +2360,23 @@ document.addEventListener("DOMContentLoaded", () => {
   updateViewport();
 
   // ===== PROTECTED CONTENT =====
+  function getAuthCookie(name) {
+    const match = document.cookie.split("; ").find((c) => c.startsWith(name + "="));
+    return match ? decodeURIComponent(match.slice(name.length + 1)) : null;
+  }
+
+  function isAuthenticated() {
+    return localStorage.getItem("playlab-auth") === "true" || sessionStorage.getItem("playlab-auth") === "true" || getAuthCookie("playlab-auth") === "true";
+  }
+
+  function clearAuthCookies() {
+    document.cookie = "playlab-auth=; path=/; max-age=0";
+    document.cookie = "playlab-user=; path=/; max-age=0";
+  }
+
   function checkAuth() {
-    const isAuth = localStorage.getItem("playlab-auth") === "true";
-    const user = localStorage.getItem("playlab-user");
+    const isAuth = isAuthenticated();
+    const user = localStorage.getItem("playlab-user") || sessionStorage.getItem("playlab-user") || getAuthCookie("playlab-user");
     if (isAuth) {
       document.getElementById("protectedLocked").classList.add("hidden");
       document.getElementById("protectedContent").classList.remove("hidden");
@@ -2374,7 +2388,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateNavbarAuth() {
-    const isAuth = localStorage.getItem("playlab-auth") === "true";
+    const isAuth = isAuthenticated();
     const navLoginBtn = document.getElementById("navLoginBtn");
     const navLogoutBtn = document.getElementById("navLogoutBtn");
 
@@ -2392,6 +2406,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("playlab-user");
     sessionStorage.removeItem("playlab-auth");
     sessionStorage.removeItem("playlab-user");
+    clearAuthCookies();
     checkAuth();
     updateNavbarAuth();
   });
@@ -2401,6 +2416,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("playlab-user");
     sessionStorage.removeItem("playlab-auth");
     sessionStorage.removeItem("playlab-user");
+    clearAuthCookies();
     checkAuth();
     updateNavbarAuth();
     // If on login page, refresh to reset the form

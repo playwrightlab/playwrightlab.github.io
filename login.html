@@ -278,11 +278,27 @@
         pwd.type = pwd.type === "password" ? "text" : "password";
       });
 
+      function getCookie(name) {
+        const match = document.cookie.split("; ").find((c) => c.startsWith(name + "="));
+        return match ? decodeURIComponent(match.slice(name.length + 1)) : null;
+      }
+
+      function setAuthCookies(user) {
+        const opts = "; path=/; max-age=604800; SameSite=Lax" + (location.protocol === "https:" ? "; Secure" : "");
+        document.cookie = "playlab-auth=true" + opts;
+        document.cookie = "playlab-user=" + encodeURIComponent(user) + opts;
+      }
+
+      function clearAuthCookies() {
+        document.cookie = "playlab-auth=; path=/; max-age=0";
+        document.cookie = "playlab-user=; path=/; max-age=0";
+      }
+
       // Check if user is already authenticated on page load
       function checkExistingAuth() {
-        const isAuth = localStorage.getItem("playlab-auth") === "true";
+        const isAuth = localStorage.getItem("playlab-auth") === "true" || sessionStorage.getItem("playlab-auth") === "true" || getCookie("playlab-auth") === "true";
         if (isAuth) {
-          const user = localStorage.getItem("playlab-user");
+          const user = localStorage.getItem("playlab-user") || sessionStorage.getItem("playlab-user") || getCookie("playlab-user");
           document.getElementById("loginCard").classList.add("hidden");
           document.getElementById("loginSuccess").classList.remove("hidden");
           document.getElementById("welcomeName").textContent = `Signed in as ${user}`;
@@ -343,6 +359,7 @@
           // Also update sessionStorage for use within this session
           sessionStorage.setItem("playlab-auth", "true");
           sessionStorage.setItem("playlab-user", email.value);
+          setAuthCookies(email.value);
         } else {
           emailError.textContent = "Invalid credentials. Try: test@playlab.com / Password123";
           email.classList.add("error");
@@ -356,6 +373,7 @@
         localStorage.removeItem("playlab-user");
         sessionStorage.removeItem("playlab-auth");
         sessionStorage.removeItem("playlab-user");
+        clearAuthCookies();
         document.getElementById("loginSuccess").classList.add("hidden");
         document.getElementById("loginCard").classList.remove("hidden");
         document.getElementById("loginForm").reset();
