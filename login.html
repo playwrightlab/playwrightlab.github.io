@@ -8,6 +8,15 @@
       function gtag() {
         dataLayer.push(arguments);
       }
+      (function () {
+        var m = document.cookie.match(/(?:^|; )playlab-consent=([^;]*)/);
+        var c = {};
+        try {
+          c = m ? JSON.parse(decodeURIComponent(m[1])) : {};
+        } catch (e) {}
+        var ads = c.marketing ? "granted" : "denied";
+        gtag("consent", "default", { analytics_storage: c.analytics ? "granted" : "denied", ad_storage: ads, ad_user_data: ads, ad_personalization: ads });
+      })();
       gtag("js", new Date());
       gtag("config", "G-8EJV81PTFW");
     </script>

@@ -1706,32 +1706,72 @@ document.addEventListener("DOMContentLoaded", () => {
   updateWizard();
 
   // ===== COOKIE CONSENT =====
+  const CONSENT_COOKIE = "playlab-consent";
   const cookieBanner = document.getElementById("cookieBanner");
-  if (sessionStorage.getItem("playlab-cookies")) {
+
+  function readConsent() {
+    const match = document.cookie.split("; ").find((c) => c.startsWith(CONSENT_COOKIE + "="));
+    if (!match) return null;
+    try {
+      return JSON.parse(decodeURIComponent(match.slice(CONSENT_COOKIE.length + 1)));
+    } catch {
+      return null;
+    }
+  }
+
+  function deleteCookie(name) {
+    ["", `; domain=${location.hostname}`, `; domain=.${location.hostname}`].forEach((domain) => {
+      document.cookie = `${name}=; path=/; max-age=0${domain}`;
+    });
+  }
+
+  function removeCookies(test) {
+    document.cookie
+      .split("; ")
+      .map((c) => c.split("=")[0])
+      .filter(test)
+      .forEach(deleteCookie);
+  }
+
+  function saveConsent(analytics, marketing) {
+    const consent = { necessary: true, analytics, marketing, updated: new Date().toISOString() };
+    const secure = location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = `${CONSENT_COOKIE}=${encodeURIComponent(JSON.stringify(consent))}; path=/; max-age=31536000; SameSite=Lax${secure}`;
+
+    if (typeof gtag === "function") {
+      const ads = marketing ? "granted" : "denied";
+      gtag("consent", "update", {
+        analytics_storage: analytics ? "granted" : "denied",
+        ad_storage: ads,
+        ad_user_data: ads,
+        ad_personalization: ads,
+      });
+    }
+    if (!analytics) removeCookies((n) => n === "_ga" || n.startsWith("_ga_") || n === "_gid" || n === "_gat");
+    if (!marketing) removeCookies((n) => ["__gads", "__gpi", "__eoi"].includes(n));
+
     cookieBanner.classList.add("hidden");
   }
 
-  document.getElementById("cookieAccept").addEventListener("click", () => {
-    sessionStorage.setItem("playlab-cookies", "accepted");
+  if (readConsent()) {
     cookieBanner.classList.add("hidden");
-  });
+  }
 
-  document.getElementById("cookieReject").addEventListener("click", () => {
-    sessionStorage.setItem("playlab-cookies", "rejected");
-    cookieBanner.classList.add("hidden");
-  });
+  document.getElementById("cookieAccept").addEventListener("click", () => saveConsent(true, true));
+
+  document.getElementById("cookieReject").addEventListener("click", () => saveConsent(false, false));
 
   document.getElementById("cookieSettings").addEventListener("click", () => {
+    const current = readConsent() || {};
     openModal(
       "Cookie Settings",
       `
       <div class="form-group"><label class="checkbox-label"><input type="checkbox" checked disabled /> Essential Cookies (Required)</label></div>
-      <div class="form-group"><label class="checkbox-label"><input type="checkbox" data-testid="cookie-analytics" /> Analytics Cookies</label></div>
-      <div class="form-group"><label class="checkbox-label"><input type="checkbox" data-testid="cookie-marketing" /> Marketing Cookies</label></div>
+      <div class="form-group"><label class="checkbox-label"><input type="checkbox" data-testid="cookie-analytics" ${current.analytics ? "checked" : ""} /> Analytics Cookies</label></div>
+      <div class="form-group"><label class="checkbox-label"><input type="checkbox" data-testid="cookie-marketing" ${current.marketing ? "checked" : ""} /> Marketing Cookies</label></div>
     `,
       () => {
-        sessionStorage.setItem("playlab-cookies", "custom");
-        cookieBanner.classList.add("hidden");
+        saveConsent(document.querySelector('[data-testid="cookie-analytics"]').checked, document.querySelector('[data-testid="cookie-marketing"]').checked);
         closeModal();
       },
     );
