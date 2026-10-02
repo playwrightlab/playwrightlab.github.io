@@ -1,6 +1,25 @@
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y119X03KVV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      (function () {
+        var m = document.cookie.match(/(?:^|; )playlab-consent=([^;]*)/);
+        var c = {};
+        try {
+          c = m ? JSON.parse(decodeURIComponent(m[1])) : {};
+        } catch (e) {}
+        var ads = c.marketing ? "granted" : "denied";
+        gtag("consent", "default", { analytics_storage: c.analytics ? "granted" : "denied", ad_storage: ads, ad_user_data: ads, ad_personalization: ads });
+      })();
+      gtag("js", new Date());
+      gtag("config", "G-Y119X03KVV");
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Privacy Policy | PlayLab</title>
