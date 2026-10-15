@@ -1,23 +1,6 @@
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y119X03KVV"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      (function () {
-        var m = document.cookie.match(/(?:^|; )playlab-consent=([^;]*)/);
-        var c = {};
-        try { c = m ? JSON.parse(decodeURIComponent(m[1])) : {}; } catch (e) {}
-        var ads = c.marketing ? "granted" : "denied";
-        gtag("consent", "default", { analytics_storage: c.analytics ? "granted" : "denied", ad_storage: ads, ad_user_data: ads, ad_personalization: ads });
-      })();
-      gtag("js", new Date());
-      gtag("config", "G-Y119X03KVV");
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PlayLab — Playwright Practice Arena</title>
@@ -25,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="libs/icons-loader.js"></script>
+    <script src="libs/icons-loader.js" defer></script>
   </head>
   <body>
     <!-- ==================== NAVBAR ==================== -->
@@ -92,15 +75,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ==================== AD SLOT ==================== -->
-    <div class="ad-slot" data-testid="ad-slot" aria-label="Advertisement">
-      <div class="ad-slot-scaler">
-        <div class="ad-slot-inner">
-          <iframe class="ad-frame" title="Advertisement" scrolling="no" loading="lazy" frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
 
     <!-- ==================== FORMS SECTION ==================== -->
     <section class="section" id="forms">
@@ -601,15 +575,6 @@
       </div>
     </section>
 
-    <!-- ==================== AD SLOT ==================== -->
-    <div class="ad-slot" data-testid="ad-slot" aria-label="Advertisement">
-      <div class="ad-slot-scaler">
-        <div class="ad-slot-inner">
-          <iframe class="ad-frame" title="Advertisement" scrolling="no" loading="lazy" frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
-
     <!-- ==================== INTERACTIONS SECTION ==================== -->
     <section class="section" id="interactions">
       <div class="container">
@@ -725,7 +690,7 @@
         <div class="shop-products" id="shopProducts" data-testid="shop-products">
           <div class="shop-card" data-testid="product-lamborghini">
             <div class="shop-card-img">
-              <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&h=300&fit=crop" alt="Lamborghini Huracan" />
+              <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&h=300&fit=crop" alt="Lamborghini Huracan" loading="lazy" decoding="async" />
               <span class="shop-badge">Luxury</span>
             </div>
             <div class="shop-card-body">
@@ -741,7 +706,7 @@
 
           <div class="shop-card" data-testid="product-triumph">
             <div class="shop-card-img">
-              <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400&h=300&fit=crop" alt="Triumph Speed Triple" />
+              <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400&h=300&fit=crop" alt="Triumph Speed Triple" loading="lazy" decoding="async" />
               <span class="shop-badge">Sport</span>
             </div>
             <div class="shop-card-body">
@@ -757,7 +722,7 @@
 
           <div class="shop-card" data-testid="product-seiko">
             <div class="shop-card-img">
-              <img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=400&h=300&fit=crop" alt="Seiko Presage" />
+              <img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=400&h=300&fit=crop" alt="Seiko Presage" loading="lazy" decoding="async" />
               <span class="shop-badge">Classic</span>
             </div>
             <div class="shop-card-body">
@@ -773,7 +738,7 @@
 
           <div class="shop-card" data-testid="product-yacht">
             <div class="shop-card-img">
-              <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=400&h=300&fit=crop" alt="Luxury Yacht" />
+              <img src="https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=400&h=300&fit=crop" alt="Luxury Yacht" loading="lazy" decoding="async" />
               <span class="shop-badge">Luxury</span>
             </div>
             <div class="shop-card-body">
@@ -911,15 +876,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ==================== AD SLOT ==================== -->
-    <div class="ad-slot" data-testid="ad-slot" aria-label="Advertisement">
-      <div class="ad-slot-scaler">
-        <div class="ad-slot-inner">
-          <iframe class="ad-frame" title="Advertisement" scrolling="no" loading="lazy" frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
 
     <!-- ==================== DYNAMIC CONTENT ==================== -->
     <section class="section" id="dynamic">
@@ -1243,7 +1199,7 @@
               <h3 class="card-title" id="iframeCardTitle"><ion-icon name="browsers-outline"></ion-icon> iFrame</h3>
               <span class="card-badge">Frame</span>
             </div>
-            <iframe src="iframe-content.html" id="practiceFrame" data-testid="practice-iframe" title="Practice iFrame" class="practice-iframe"></iframe>
+            <iframe src="iframe-content.html" id="practiceFrame" data-testid="practice-iframe" title="Practice iFrame" class="practice-iframe" loading="lazy"></iframe>
           </div>
 
           <div class="card" data-testid="nested-frames-card">
@@ -1251,7 +1207,7 @@
               <h3 class="card-title" id="nestedFramesCardTitle"><ion-icon name="layers-outline"></ion-icon> Nested Frames</h3>
               <span class="card-badge">Nested</span>
             </div>
-            <iframe src="nested-frames.html" id="nestedFramesFrame" data-testid="nested-frames-iframe" title="Nested frames practice" class="practice-iframe nested-frames-iframe"></iframe>
+            <iframe src="nested-frames.html" id="nestedFramesFrame" data-testid="nested-frames-iframe" title="Nested frames practice" class="practice-iframe nested-frames-iframe" loading="lazy"></iframe>
           </div>
 
           <div class="card" data-testid="external-iframe-card">
@@ -1259,7 +1215,7 @@
               <h3 class="card-title" id="externalIframeCardTitle"><ion-icon name="globe-outline"></ion-icon> External iFrame</h3>
               <span class="card-badge">External</span>
             </div>
-            <iframe src="https://playwright.dev/" id="externalFrame" data-testid="external-iframe" title="External website iFrame" class="practice-iframe external-iframe"></iframe>
+            <iframe src="https://playwright.dev/" id="externalFrame" data-testid="external-iframe" title="External website iFrame" class="practice-iframe external-iframe" loading="lazy"></iframe>
           </div>
 
           <div class="card" data-testid="window-card">
@@ -1360,15 +1316,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ==================== AD SLOT ==================== -->
-    <div class="ad-slot" data-testid="ad-slot" aria-label="Advertisement">
-      <div class="ad-slot-scaler">
-        <div class="ad-slot-inner">
-          <iframe class="ad-frame" title="Advertisement" scrolling="no" loading="lazy" frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
 
     <!-- ==================== ADVANCED ==================== -->
     <section class="section section-alt" id="advanced">
@@ -1632,15 +1579,6 @@
       </div>
     </section>
 
-    <!-- ==================== AD SLOT ==================== -->
-    <div class="ad-slot" data-testid="ad-slot" aria-label="Advertisement">
-      <div class="ad-slot-scaler">
-        <div class="ad-slot-inner">
-          <iframe class="ad-frame" title="Advertisement" scrolling="no" loading="lazy" frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
-
     <!-- ==================== NETWORK INTERCEPTION ==================== -->
     <section class="section" id="network">
       <div class="container">
@@ -1864,15 +1802,6 @@
       </div>
     </section>
 
-    <!-- ==================== AD SLOT ==================== -->
-    <div class="ad-slot" data-testid="ad-slot" aria-label="Advertisement">
-      <div class="ad-slot-scaler">
-        <div class="ad-slot-inner">
-          <iframe class="ad-frame" title="Advertisement" scrolling="no" loading="lazy" frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
-
     <!-- ==================== MEDIA PLAYER ==================== -->
     <section class="section section-alt" id="media">
       <div class="container">
@@ -1886,7 +1815,7 @@
             <div class="card-header" id="videoCardHeader">
               <h3 class="card-title" id="videoPlayerTitle"><ion-icon name="videocam-outline"></ion-icon> Video Player</h3>
             </div>
-            <video id="videoPlayer" data-testid="video-player" class="media-player">
+            <video id="videoPlayer" data-testid="video-player" class="media-player" preload="none">
               <source src="video/cars.mp4" type="video/mp4" />
               Your browser does not support video.
             </video>
@@ -1914,7 +1843,7 @@
                 <p class="audio-track-artist" id="audioTrackArtist" style="color: var(--text-muted); font-size: 0.813rem">PlayLab Demo Audio</p>
               </div>
             </div>
-            <audio id="audioPlayer" data-testid="audio-player">
+            <audio id="audioPlayer" data-testid="audio-player" preload="none">
               <source src="audio/godmode.mp3" type="audio/mpeg" />
             </audio>
             <div class="media-controls" data-testid="audio-controls">
@@ -2054,15 +1983,6 @@
         </div>
       </div>
     </section>
-
-    <!-- ==================== AD SLOT ==================== -->
-    <div class="ad-slot" data-testid="ad-slot" aria-label="Advertisement">
-      <div class="ad-slot-scaler">
-        <div class="ad-slot-inner">
-          <iframe class="ad-frame" title="Advertisement" scrolling="no" loading="lazy" frameborder="0"></iframe>
-        </div>
-      </div>
-    </div>
 
     <!-- ==================== PROTECTED ROUTE ==================== -->
     <section class="section" id="protected">
@@ -2211,54 +2131,6 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer" data-testid="toast-container"></div>
 
-    <script>
-      // Responsive, lazy-loaded banner ads: injected only when scrolled near the
-      // viewport so they never block initial load. No inline srcdoc in the static
-      // HTML keeps this compatible with Live Server.
-      (function () {
-        var AD_HTML =
-          '<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;padding:0;overflow:hidden}body{display:flex;align-items:center;justify-content:center}</style></head><body><script>atOptions={"key":"6fe6c4a9f4fb6c679659f9b6d1aaff95","format":"iframe","height":60,"width":468,"params":{}};<\/script><script src="https://www.highrevenueformat.com/6fe6c4a9f4fb6c679659f9b6d1aaff95/invoke.js"><\/script>';
-        function scaleAdSlots() {
-          document.querySelectorAll(".ad-slot").forEach(function (slot) {
-            var scaler = slot.querySelector(".ad-slot-scaler");
-            var inner = slot.querySelector(".ad-slot-inner");
-            if (!scaler || !inner) return;
-            var s = getComputedStyle(slot);
-            var avail = slot.clientWidth - parseFloat(s.paddingLeft) - parseFloat(s.paddingRight);
-            var scale = Math.min(1, avail / 468);
-            inner.style.transform = "scale(" + scale + ")";
-            scaler.style.width = 468 * scale + "px";
-            scaler.style.height = 60 * scale + "px";
-          });
-        }
-        function loadAd(slot) {
-          var frame = slot.querySelector(".ad-frame");
-          if (!frame || frame.dataset.loaded) return;
-          frame.dataset.loaded = "1";
-          frame.srcdoc = AD_HTML;
-          scaleAdSlots();
-        }
-        function checkAds() {
-          document.querySelectorAll(".ad-slot").forEach(function (slot) {
-            var frame = slot.querySelector(".ad-frame");
-            if (!frame || frame.dataset.loaded) return;
-            var r = slot.getBoundingClientRect();
-            if (r.top < window.innerHeight + 300 && r.bottom > -300) loadAd(slot);
-          });
-        }
-        scaleAdSlots();
-        // Start loading ads only after the page has fully loaded.
-        window.addEventListener("load", function () {
-          scaleAdSlots();
-          checkAds();
-        });
-        window.addEventListener("scroll", checkAds, { passive: true });
-        window.addEventListener("resize", function () {
-          scaleAdSlots();
-          checkAds();
-        });
-      })();
-    </script>
-    <script src="js/app.js"></script>
+    <script src="js/app.js" defer></script>
   </body>
 </html>

@@ -1733,22 +1733,12 @@ document.addEventListener("DOMContentLoaded", () => {
       .forEach(deleteCookie);
   }
 
-  function saveConsent(analytics, marketing) {
-    const consent = { necessary: true, analytics, marketing, updated: new Date().toISOString() };
+  function saveConsent(analytics) {
+    const consent = { necessary: true, analytics, updated: new Date().toISOString() };
     const secure = location.protocol === "https:" ? "; Secure" : "";
     document.cookie = `${CONSENT_COOKIE}=${encodeURIComponent(JSON.stringify(consent))}; path=/; max-age=31536000; SameSite=Lax${secure}`;
 
-    if (typeof gtag === "function") {
-      const ads = marketing ? "granted" : "denied";
-      gtag("consent", "update", {
-        analytics_storage: analytics ? "granted" : "denied",
-        ad_storage: ads,
-        ad_user_data: ads,
-        ad_personalization: ads,
-      });
-    }
     if (!analytics) removeCookies((n) => n === "_ga" || n.startsWith("_ga_") || n === "_gid" || n === "_gat");
-    if (!marketing) removeCookies((n) => ["__gads", "__gpi", "__eoi"].includes(n));
 
     cookieBanner.classList.add("hidden");
   }
@@ -1757,9 +1747,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cookieBanner.classList.add("hidden");
   }
 
-  document.getElementById("cookieAccept").addEventListener("click", () => saveConsent(true, true));
+  document.getElementById("cookieAccept").addEventListener("click", () => saveConsent(true));
 
-  document.getElementById("cookieReject").addEventListener("click", () => saveConsent(false, false));
+  document.getElementById("cookieReject").addEventListener("click", () => saveConsent(false));
 
   document.getElementById("cookieSettings").addEventListener("click", () => {
     const current = readConsent() || {};
@@ -1768,10 +1758,9 @@ document.addEventListener("DOMContentLoaded", () => {
       `
       <div class="form-group"><label class="checkbox-label"><input type="checkbox" checked disabled /> Essential Cookies (Required)</label></div>
       <div class="form-group"><label class="checkbox-label"><input type="checkbox" data-testid="cookie-analytics" ${current.analytics ? "checked" : ""} /> Analytics Cookies</label></div>
-      <div class="form-group"><label class="checkbox-label"><input type="checkbox" data-testid="cookie-marketing" ${current.marketing ? "checked" : ""} /> Marketing Cookies</label></div>
     `,
       () => {
-        saveConsent(document.querySelector('[data-testid="cookie-analytics"]').checked, document.querySelector('[data-testid="cookie-marketing"]').checked);
+        saveConsent(document.querySelector('[data-testid="cookie-analytics"]').checked);
         closeModal();
       },
     );
